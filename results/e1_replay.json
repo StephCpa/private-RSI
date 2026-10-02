@@ -1,0 +1,69 @@
+{
+  "config": {
+    "candidates": 60,
+    "delta": 1e-06,
+    "epsilon": 2.0,
+    "n_users": 600,
+    "seed": 20261002,
+    "selection_events": 10,
+    "svt_cutoff": 5,
+    "trials": 1000
+  },
+  "experiment": "E1 utility-matrix mechanism replay",
+  "notes": [
+    "Synthetic utility matrix; no LLM calls and no private-data claim.",
+    "Mechanism noise uses the calibration module's stated accounting approximations.",
+    "Use this replay to prioritize implementation; confirm all conclusions with E1 matrices from actual agents."
+  ],
+  "rows": [
+    {
+      "false_promotion_rate": 0.0,
+      "final_G": 0.22409776039015153,
+      "mechanism": "release_all",
+      "q": 20,
+      "ranking_accuracy": 0.815,
+      "regret": 0.00577574356105501
+    },
+    {
+      "false_promotion_rate": 0.0,
+      "final_G": 0.09488824388221996,
+      "mechanism": "svt",
+      "q": 20,
+      "ranking_accuracy": 0.001,
+      "regret": 0.1349852600689866
+    },
+    {
+      "false_promotion_rate": 0.0,
+      "final_G": 0.22987350395120654,
+      "mechanism": "private_selection",
+      "q": 20,
+      "ranking_accuracy": 1.0,
+      "regret": 0.0
+    },
+    {
+      "false_promotion_rate": 0.0,
+      "final_G": 0.21737784587762393,
+      "mechanism": "release_all",
+      "q": 60,
+      "ranking_accuracy": 0.228,
+      "regret": 0.01249565807358258
+    },
+    {
+      "false_promotion_rate": 0.0,
+      "final_G": 0.09524722382629662,
+      "mechanism": "svt",
+      "q": 60,
+      "ranking_accuracy": 0.003,
+      "regret": 0.1346262801249099
+    },
+    {
+      "false_promotion_rate": 0.0,
+      "final_G": 0.22975649154124736,
+      "mechanism": "private_selection",
+      "q": 60,
+      "ranking_accuracy": 0.972,
+      "regret": 0.00011701240995917895
+    }
+  ],
+  "utility_matrix_sha256": "060534c4606f1d2e706d75792cc017dc254c3cfb30b0ec43bdd9ff169e29bed0"
+}
