@@ -60,3 +60,5 @@
 G0 在 `overlap=0` 下通过：oracle 查询成功率 1.000，public-only 为 0.000，差值 1.000，超过 0.15 门槛。overlap 扫描中 public-only 成功率从 0.000（0.00）单调上升到 0.485（1.00）；这证明公共/私有重叠旋钮生效，但不构成 DP-RAE 或 LLM 效果证据。MT-Ops 测试 5/5 通过，原有校准测试 16/16 通过。
 
 随后完成 E1 的零 LLM 成本 utility-matrix replay：60 个候选 × 600 个合成租户、1,000 次 replay，比较 release-all、简化 SVT 和 private-selection。默认矩阵下，`Q=60` 的 ranking accuracy 分别为 0.228、0.003、0.972；这些结果只用于机制实现优先级，不能替代真实 agent utility matrix。输出见 `results/e1_replay.md` 和 `results/e1_replay.json`。
+
+已补上 DP kernel 最小闭环 `dprae/kernel/`：当前仅包含 gamma=1、add/remove、有界求和、basic composition 下的 Gaussian release-all 与 exponential winner-only。5/5 kernel 测试通过；审计边界见 `results/kernel_minimal_audit.md`。这一步不等同于 G2，也没有实现 SVT、Poisson 放大、生产级 RDP/PLD accountant、sandbox 隔离或信息流红队。
