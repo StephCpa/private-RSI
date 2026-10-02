@@ -72,3 +72,7 @@ G0 在 `overlap=0` 下通过：oracle 查询成功率 1.000，public-only 为 0.
 已修正评估协议并完成交互式 n=12 先导：遇到 `POLICY_CHECK_REQUIRED` 时允许同一查询进行一次纠正步骤。private strategy 为 38/48，public strategy 为 30/48，差值 +16.67 pp；配对 bootstrap 95% 区间为 [0, 37.5] pp，仍不足以通过 G1。n=48 的同协议复验正在 gpu-gfkd 的 GPU4 上运行。结果见 `results/real_agent_calibration_interactive_n12.json`。
 
 交互式 n=48 复验已完成：private strategy 为 157/192，public strategy 为 151/192，差值 +3.125 pp；48 个租户配对 bootstrap 95% 区间为 [+0.52, +6.25] pp。方向为正且区间不含 0，但点估计低于 G1 要求的 5 pp，因此仍不能进入完整 DP-RAE 主实验。下一步应固定策略候选并运行多 seed，再判断非 DP meta-gain 是否稳定达到门槛。
+
+多 seed 的第二个 n=48 结果（seed=20261003）为 private 133/192、public 137/192，差值 -2.083 pp，配对 bootstrap 95% 区间 [-5.73, +1.04] pp。与 seed=20261002 的 +3.125 pp 相比方向反转，当前 free-form strategy distillation 仍不能作为稳定的 G1 估计；seed=20261004 正在同一交互式协议下运行。
+
+第三个 seed（20261004）为 private 144/192、public 145/192，差值 -0.521 pp，区间 [-3.65, +3.13] pp。三 seed 合并为 private 434/576、public 433/576，租户配对均值 +0.17 pp，bootstrap 95% 区间 [-1.74, +2.08] pp。非 DP meta-gain 没有达到 5 pp，G1 保持未通过；应先修正候选策略/任务定义，再考虑 DP 主实验。汇总见 `results/real_agent_calibration_interactive_3seed_summary.md`。

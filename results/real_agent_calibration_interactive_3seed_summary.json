@@ -1,0 +1,60 @@
+{
+  "bootstrap": {
+    "median": 0.001736111111111111,
+    "percentile_2_5": -0.017361111111111112,
+    "percentile_97_5": 0.020833333333333332,
+    "seed": 20261002,
+    "trials": 200000
+  },
+  "experiment": "three-seed interactive Mode L calibration summary",
+  "inputs": [
+    {
+      "file": "E:\\\u79d1\u7814\u5de5\u4f5c\u6d41\\\u9879\u76eeG-private-RSI\\results\\real_agent_calibration_interactive_n48.json",
+      "losses": 0,
+      "paired_difference": 0.03125,
+      "private_successes": 157,
+      "public_successes": 151,
+      "queries_per_condition": 192,
+      "seed": 20261002,
+      "tenant_count": 48,
+      "ties": 43,
+      "wins": 5
+    },
+    {
+      "file": "E:\\\u79d1\u7814\u5de5\u4f5c\u6d41\\\u9879\u76eeG-private-RSI\\results\\real_agent_calibration_interactive_seed20261003.json",
+      "losses": 6,
+      "paired_difference": -0.020833333333333332,
+      "private_successes": 133,
+      "public_successes": 137,
+      "queries_per_condition": 192,
+      "seed": 20261003,
+      "tenant_count": 48,
+      "ties": 39,
+      "wins": 3
+    },
+    {
+      "file": "E:\\\u79d1\u7814\u5de5\u4f5c\u6d41\\\u9879\u76eeG-private-RSI\\results\\real_agent_calibration_interactive_seed20261004.json",
+      "losses": 5,
+      "paired_difference": -0.005208333333333333,
+      "private_successes": 144,
+      "public_successes": 145,
+      "queries_per_condition": 192,
+      "seed": 20261004,
+      "tenant_count": 48,
+      "ties": 40,
+      "wins": 3
+    }
+  ],
+  "notes": [
+    "Pooled bootstrap treats tenant-level paired differences as the resampling unit.",
+    "This is a descriptive calibration summary, not a G1 pass and not a DP result."
+  ],
+  "pooled_losses": 11,
+  "pooled_paired_difference": 0.001736111111111111,
+  "pooled_private_successes": 434,
+  "pooled_public_successes": 433,
+  "pooled_queries_per_condition": 576,
+  "pooled_tenants": 144,
+  "pooled_ties": 122,
+  "pooled_wins": 11
+}
