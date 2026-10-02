@@ -1,0 +1,210 @@
+{
+  "experiment": "MT-Ops v0 validity sweep",
+  "notes": [
+    "No LLM calls; this checks benchmark validity and the public/private overlap knob.",
+    "The G0 criterion is evaluated at overlap=0 and requires an oracle gap of at least 15 percentage points."
+  ],
+  "rows": [
+    {
+      "family": "all",
+      "gap": 1.0,
+      "oracle": 1.0,
+      "overlap": 0.0,
+      "public_only": 0.0,
+      "tasks": 2000
+    },
+    {
+      "family": "billing_refunds",
+      "gap": 1.0,
+      "oracle": 1.0,
+      "overlap": 0.0,
+      "public_only": 0.0,
+      "tasks": 500
+    },
+    {
+      "family": "account_management",
+      "gap": 1.0,
+      "oracle": 1.0,
+      "overlap": 0.0,
+      "public_only": 0.0,
+      "tasks": 500
+    },
+    {
+      "family": "inventory_scheduling",
+      "gap": 1.0,
+      "oracle": 1.0,
+      "overlap": 0.0,
+      "public_only": 0.0,
+      "tasks": 500
+    },
+    {
+      "family": "incident_tickets",
+      "gap": 1.0,
+      "oracle": 1.0,
+      "overlap": 0.0,
+      "public_only": 0.0,
+      "tasks": 500
+    },
+    {
+      "family": "all",
+      "gap": 0.871,
+      "oracle": 1.0,
+      "overlap": 0.25,
+      "public_only": 0.129,
+      "tasks": 2000
+    },
+    {
+      "family": "billing_refunds",
+      "gap": 1.0,
+      "oracle": 1.0,
+      "overlap": 0.25,
+      "public_only": 0.0,
+      "tasks": 500
+    },
+    {
+      "family": "account_management",
+      "gap": 0.838,
+      "oracle": 1.0,
+      "overlap": 0.25,
+      "public_only": 0.162,
+      "tasks": 500
+    },
+    {
+      "family": "inventory_scheduling",
+      "gap": 0.8260000000000001,
+      "oracle": 1.0,
+      "overlap": 0.25,
+      "public_only": 0.174,
+      "tasks": 500
+    },
+    {
+      "family": "incident_tickets",
+      "gap": 0.8200000000000001,
+      "oracle": 1.0,
+      "overlap": 0.25,
+      "public_only": 0.18,
+      "tasks": 500
+    },
+    {
+      "family": "all",
+      "gap": 0.7505,
+      "oracle": 1.0,
+      "overlap": 0.5,
+      "public_only": 0.2495,
+      "tasks": 2000
+    },
+    {
+      "family": "billing_refunds",
+      "gap": 1.0,
+      "oracle": 1.0,
+      "overlap": 0.5,
+      "public_only": 0.0,
+      "tasks": 500
+    },
+    {
+      "family": "account_management",
+      "gap": 0.688,
+      "oracle": 1.0,
+      "overlap": 0.5,
+      "public_only": 0.312,
+      "tasks": 500
+    },
+    {
+      "family": "inventory_scheduling",
+      "gap": 0.652,
+      "oracle": 1.0,
+      "overlap": 0.5,
+      "public_only": 0.348,
+      "tasks": 500
+    },
+    {
+      "family": "incident_tickets",
+      "gap": 0.6619999999999999,
+      "oracle": 1.0,
+      "overlap": 0.5,
+      "public_only": 0.338,
+      "tasks": 500
+    },
+    {
+      "family": "all",
+      "gap": 0.6174999999999999,
+      "oracle": 1.0,
+      "overlap": 0.75,
+      "public_only": 0.3825,
+      "tasks": 2000
+    },
+    {
+      "family": "billing_refunds",
+      "gap": 1.0,
+      "oracle": 1.0,
+      "overlap": 0.75,
+      "public_only": 0.0,
+      "tasks": 500
+    },
+    {
+      "family": "account_management",
+      "gap": 0.494,
+      "oracle": 1.0,
+      "overlap": 0.75,
+      "public_only": 0.506,
+      "tasks": 500
+    },
+    {
+      "family": "inventory_scheduling",
+      "gap": 0.508,
+      "oracle": 1.0,
+      "overlap": 0.75,
+      "public_only": 0.492,
+      "tasks": 500
+    },
+    {
+      "family": "incident_tickets",
+      "gap": 0.46799999999999997,
+      "oracle": 1.0,
+      "overlap": 0.75,
+      "public_only": 0.532,
+      "tasks": 500
+    },
+    {
+      "family": "all",
+      "gap": 0.5145,
+      "oracle": 1.0,
+      "overlap": 1.0,
+      "public_only": 0.4855,
+      "tasks": 2000
+    },
+    {
+      "family": "billing_refunds",
+      "gap": 1.0,
+      "oracle": 1.0,
+      "overlap": 1.0,
+      "public_only": 0.0,
+      "tasks": 500
+    },
+    {
+      "family": "account_management",
+      "gap": 0.36,
+      "oracle": 1.0,
+      "overlap": 1.0,
+      "public_only": 0.64,
+      "tasks": 500
+    },
+    {
+      "family": "inventory_scheduling",
+      "gap": 0.358,
+      "oracle": 1.0,
+      "overlap": 1.0,
+      "public_only": 0.642,
+      "tasks": 500
+    },
+    {
+      "family": "incident_tickets",
+      "gap": 0.33999999999999997,
+      "oracle": 1.0,
+      "overlap": 1.0,
+      "public_only": 0.66,
+      "tasks": 500
+    }
+  ],
+  "status": "PASS"
+}

@@ -52,3 +52,9 @@
 ## 研究边界
 
 当前不能把仓库里的“约 3% oracle gain”“需要 1,000–3,000 用户”“定理 1/2”写成已被实验确认的系统性能；前两者是校准分析，定理依赖实现满足规范中的不变量。下一阶段的第一项可审查成果应是 E0 + MT-Ops G0，而不是直接运行 E3 主实验。
+
+## WP0 已完成进展（2026-10-02）
+
+已实现 `benchmarks/mtops/` 的 MT-Ops v0 确定性模拟器，并生成 `results/mtops_g0.json`、`results/mtops_g0.md` 和 `results/mtops_validity_sweep.json`。默认配置为 300 个 public、2,000 个 private、500 个 test 租户，四类任务、40 条共享规则和每租户一条专属规则。
+
+G0 在 `overlap=0` 下通过：oracle 查询成功率 1.000，public-only 为 0.000，差值 1.000，超过 0.15 门槛。overlap 扫描中 public-only 成功率从 0.000（0.00）单调上升到 0.485（1.00）；这证明公共/私有重叠旋钮生效，但不构成 DP-RAE 或 LLM 效果证据。MT-Ops 测试 5/5 通过，原有校准测试 16/16 通过。
