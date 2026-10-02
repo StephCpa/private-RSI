@@ -62,3 +62,5 @@ G0 在 `overlap=0` 下通过：oracle 查询成功率 1.000，public-only 为 0.
 随后完成 E1 的零 LLM 成本 utility-matrix replay：60 个候选 × 600 个合成租户、1,000 次 replay，比较 release-all、简化 SVT 和 private-selection。默认矩阵下，`Q=60` 的 ranking accuracy 分别为 0.228、0.003、0.972；这些结果只用于机制实现优先级，不能替代真实 agent utility matrix。输出见 `results/e1_replay.md` 和 `results/e1_replay.json`。
 
 已补上 DP kernel 最小闭环 `dprae/kernel/`：当前仅包含 gamma=1、add/remove、有界求和、basic composition 下的 Gaussian release-all 与 exponential winner-only。5/5 kernel 测试通过；审计边界见 `results/kernel_minimal_audit.md`。这一步不等同于 G2，也没有实现 SVT、Poisson 放大、生产级 RDP/PLD accountant、sandbox 隔离或信息流红队。
+
+已完成 `experiments/kernel_mtops_smoke.py`：将 MT-Ops v0 的 public-only 与 local-adaptation 合成基线接入 kernel，Gaussian release-all 和 winner-only 均成功写入独立 ledger；结果见 `results/kernel_mtops_smoke.json`。该 smoke 只证明数据流和账本闭环，不是 LLM 或 DP-RAE utility 结果。

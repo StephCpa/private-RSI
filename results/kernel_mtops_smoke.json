@@ -1,0 +1,78 @@
+{
+  "candidate_count": 2,
+  "dataset_sha256": "47b603181b2cf0866c9792eada02752054080c00200690a47b58def595e78e25",
+  "experiment": "MT-Ops x minimal kernel synthetic-agent smoke",
+  "exponential_winner": "local_adaptation",
+  "gaussian_ledger": {
+    "events": [
+      {
+        "delta": 5e-06,
+        "epsilon": 0.5,
+        "event_id": "mtops-smoke-gaussian:public_only",
+        "mechanism": "gaussian_sum",
+        "metadata": {
+          "candidate_id": "public_only",
+          "cohort_rate": 1.0
+        },
+        "timestamp_utc": "2026-10-02T14:59:04.136125+00:00"
+      },
+      {
+        "delta": 5e-06,
+        "epsilon": 0.5,
+        "event_id": "mtops-smoke-gaussian:local_adaptation",
+        "mechanism": "gaussian_sum",
+        "metadata": {
+          "candidate_id": "local_adaptation",
+          "cohort_rate": 1.0
+        },
+        "timestamp_utc": "2026-10-02T14:59:04.136152+00:00"
+      }
+    ],
+    "plan": {
+      "cohort_rate": 1.0,
+      "plan_id": "v0",
+      "q_max": 2,
+      "total_delta": 1e-05,
+      "total_epsilon": 1.0
+    },
+    "spent_delta": 1e-05,
+    "spent_epsilon": 1.0
+  },
+  "gaussian_noisy_sums": {
+    "local_adaptation": -13.33071774078303,
+    "public_only": -497.0771052162423
+  },
+  "notes": [
+    "Synthetic agents only: public_only and local_adaptation from MT-Ops v0.",
+    "No LLM calls, no model weights, and no claim about DP-RAE utility.",
+    "The oracle is intentionally excluded from the candidate pool."
+  ],
+  "raw_mean_contributions": {
+    "local_adaptation": -0.036,
+    "public_only": -1.0
+  },
+  "selection_ledger": {
+    "events": [
+      {
+        "delta": 0.0,
+        "epsilon": 1.0,
+        "event_id": "mtops-smoke-winner",
+        "mechanism": "exponential_winner",
+        "metadata": {
+          "candidate_count": 2
+        },
+        "timestamp_utc": "2026-10-02T14:59:04.136414+00:00"
+      }
+    ],
+    "plan": {
+      "cohort_rate": 1.0,
+      "plan_id": "v0",
+      "q_max": 2,
+      "total_delta": 0.0,
+      "total_epsilon": 1.0
+    },
+    "spent_delta": 0.0,
+    "spent_epsilon": 1.0
+  },
+  "status": "PASS"
+}
