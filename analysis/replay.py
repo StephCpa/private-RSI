@@ -31,6 +31,7 @@ class ReplayConfig:
     epsilon: float = 2.0
     delta: float = 1e-6
     svt_cutoff: int = 5
+    svt_margin: float = 0.01
     selection_events: int = 10
 
 
@@ -63,33 +64,50 @@ def replay_release_all(matrix: np.ndarray, config: ReplayConfig, q: int, rng: np
 
 
 def replay_private_selection(matrix: np.ndarray, config: ReplayConfig, q: int, rng: np.random.Generator) -> Dict[str, float]:
+    """Sequential private selection: each event releases only the winner among {incumbent} + one group.
+
+    The incumbent starts at M0 (index 0) and is carried into every event, so no
+    final choice is made on unreleased scores. Noise follows the conservative
+    Liu-Talwar calibration; report-noisy-max over a fixed-size group of
+    monotone [0, 1] scores would need less.
+    """
     means = matrix[:q].mean(axis=1)
-    groups = max(1, math.ceil(q / max(1, config.selection_events)))
     sigma = private_selection_noise_std(config.n_users, config.selection_events, config.epsilon, config.delta)
+    scale = sigma / math.sqrt(2.0)  # Laplace scale with the calibrated standard deviation
     selected: List[int] = []
     for _ in range(config.trials):
-        winners = []
-        for start in range(0, q, groups):
-            ids = np.arange(start, min(start + groups, q))
-            winners.append(int(ids[np.argmax(means[ids] + rng.normal(0.0, sigma, len(ids)))]))
-        selected.append(winners[int(np.argmax(means[winners]))])
+        incumbent = 0
+        for group in np.array_split(rng.permutation(np.arange(1, q)), config.selection_events):
+            ids = np.concatenate(([incumbent], group))
+            incumbent = int(ids[np.argmax(means[ids] + rng.laplace(0.0, scale, len(ids)))])
+        selected.append(incumbent)
     return _metrics(selected, means, float(means[0]))
 
 
 def replay_svt(matrix: np.ndarray, config: ReplayConfig, q: int, rng: np.random.Generator) -> Dict[str, float]:
+    """Sequential SVT acceptance tests against the current incumbent.
+
+    Matches ``calibration.svt_query_noise_std``: ``svt_cutoff`` AboveThreshold
+    instances with eps0 = epsilon / cutoff, threshold noise Lap(2/(eps0 n)) on
+    the mean (redrawn after each acceptance) and query noise Lap(4/(eps0 n)).
+    Each query is the paired gap mean(candidate) - mean(incumbent) against the
+    public margin ``svt_margin``.
+    """
     means = matrix[:q].mean(axis=1)
-    sigma = svt_query_noise_std(config.n_users, config.svt_cutoff, config.epsilon, config.delta)
-    threshold = float(means[0]) + 0.01
+    query_scale = svt_query_noise_std(config.n_users, config.svt_cutoff, config.epsilon, config.delta) / math.sqrt(2.0)
+    threshold_scale = query_scale / 2.0
     selected: List[int] = []
     for _ in range(config.trials):
-        accepted = []
-        for candidate in range(1, q):
-            noisy_gap = means[candidate] - means[0] + rng.normal(0.0, sigma)
-            if noisy_gap >= threshold - means[0]:
-                accepted.append(candidate)
-                if len(accepted) >= config.svt_cutoff:
+        incumbent, accepted = 0, 0
+        rho = rng.laplace(0.0, threshold_scale)
+        for candidate in rng.permutation(np.arange(1, q)):
+            gap = means[candidate] - means[incumbent] + rng.laplace(0.0, query_scale)
+            if gap >= config.svt_margin + rho:
+                incumbent, accepted = int(candidate), accepted + 1
+                if accepted >= config.svt_cutoff:
                     break
-        selected.append(accepted[-1] if accepted else 0)
+                rho = rng.laplace(0.0, threshold_scale)
+        selected.append(incumbent)
     return _metrics(selected, means, float(means[0]))
 
 

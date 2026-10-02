@@ -1,0 +1,104 @@
+{
+  "experiment": "MT-Ops v0 headroom audit for the real-agent Mode L pilot",
+  "label_dependence": {
+    "P(B | account_management)": 0.4965,
+    "P(B | billing_refunds)": 0.5,
+    "P(B | incident_tickets)": 0.49785,
+    "P(B | inventory_scheduling)": 0.49775,
+    "P(B)": 0.498025
+  },
+  "llm_seed_level_statistics": {
+    "hierarchical_bootstrap_interval": [
+      -0.02777777777777778,
+      0.03298611111111111
+    ],
+    "mean": 0.0017361111111111117,
+    "one_sided_p_true_gain_ge_5pp": 0.044406749481597785,
+    "per_seed_differences": [
+      0.03125,
+      -0.020833333333333332,
+      -0.005208333333333333
+    ],
+    "pooled_tenant_bootstrap_interval": [
+      -0.017361111111111112,
+      0.020833333333333332
+    ],
+    "sd": 0.02672709083045252,
+    "seeds": 3,
+    "t_interval": [
+      -0.06465766314619245,
+      0.06812988536841466
+    ],
+    "tie_fraction": 0.8472222222222222
+  },
+  "notes": [
+    "No LLM calls. Reference policies use the same test tenants as the three interactive pilot seeds.",
+    "Interactive scoring follows experiments/real_agent_calibration.py: retry only after choosing A when B is required."
+  ],
+  "observed_llm_pooled_success": {
+    "private": 0.7534722222222222,
+    "public": 0.7517361111111112
+  },
+  "plug_in_learner_placebo": {
+    "interactive": {
+      "mean_private_minus_public": 0.0015624999999999988,
+      "sd_across_seeds": 0.07059136299175742,
+      "seeds": 200,
+      "share_of_seeds_with_abs_diff_ge_5pp": 0.45
+    },
+    "one_shot": {
+      "mean_private_minus_public": -0.0001302083333333326,
+      "sd_across_seeds": 0.04851815259218567,
+      "seeds": 200,
+      "share_of_seeds_with_abs_diff_ge_5pp": 0.31
+    }
+  },
+  "reference_policies_pilot_seeds": [
+    {
+      "interactive": 1.0,
+      "one_shot": 0.4704861111111111,
+      "policy": "always A"
+    },
+    {
+      "interactive": 0.5295138888888888,
+      "one_shot": 0.5295138888888888,
+      "policy": "always B"
+    },
+    {
+      "interactive": 0.8454861111111112,
+      "one_shot": 0.6614583333333334,
+      "policy": "tenant support majority (own support only)"
+    },
+    {
+      "interactive": 0.8368055555555556,
+      "one_shot": 0.6631944444444444,
+      "policy": "same-family last support outcome"
+    },
+    {
+      "interactive": 0.8385416666666666,
+      "one_shot": 0.6631944444444444,
+      "policy": "Bayes, fitted on 20,000 other tenants (ceiling for any strategy)"
+    },
+    {
+      "interactive": 1.0,
+      "one_shot": 1.0,
+      "policy": "oracle (knows the hidden rule)"
+    }
+  ],
+  "split_exchangeability": [
+    {
+      "overlap": 0.0,
+      "private_max_rule_prevalence": 0.059,
+      "private_slots_outside_public_rules": 1.0,
+      "public_max_rule_prevalence": 0.06666666666666667,
+      "public_slots_outside_public_rules": 1.0
+    },
+    {
+      "overlap": 0.5,
+      "private_max_rule_prevalence": 0.059,
+      "private_slots_outside_public_rules": 0.49442190669371194,
+      "public_max_rule_prevalence": 0.06666666666666667,
+      "public_slots_outside_public_rules": 0.45993031358885017
+    }
+  ]
+}

@@ -155,9 +155,12 @@ def advanced_composition_eps(eps0: float, k: int, delta_prime: float) -> float:
 def per_mechanism_eps(total_eps: float, k: int, delta: float | None) -> float:
     """Per-mechanism budget for k pure-DP mechanisms: basic, or best of basic/advanced."""
     basic = total_eps / k
-    if delta is None:
+    if delta is None or k == 1:
         return basic
-    advanced = brentq(lambda e0: advanced_composition_eps(e0, k, delta) - total_eps, 1e-9, total_eps)
+    try:
+        advanced = brentq(lambda e0: advanced_composition_eps(e0, k, delta) - total_eps, 1e-9, total_eps)
+    except OverflowError:  # huge budgets: the k*eps0*(e^eps0 - 1) term makes advanced composition lose
+        return basic
     return max(basic, advanced)
 
 

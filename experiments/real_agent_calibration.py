@@ -19,19 +19,10 @@ from typing import Iterable, Sequence
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from benchmarks.mtops.simulator import MTopsConfig, Task, Tenant, generate_dataset
+from benchmarks.mtops.simulator import MTopsConfig, Task, Tenant, generate_dataset, rule_requires_extra
 
 
 MODEL_DEFAULT = "/home/wlwuser/LZN/models/qwen2.5-7b-instruct"
-
-
-def rule_requires_extra(rule_id: str) -> bool:
-    """Hidden convention used only by the evaluator, never shown to the model."""
-    if rule_id.startswith("local_"):
-        index = int(rule_id.split("_", 1)[1])
-    else:
-        index = int(rule_id.split("_", 1)[1])
-    return index % 2 == 0
 
 
 def family_label(family: str) -> str:

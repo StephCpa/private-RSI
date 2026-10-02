@@ -174,6 +174,11 @@ def generate_dataset(config: MTopsConfig = MTopsConfig()) -> MTopsDataset:
     return MTopsDataset(config, prevalence, public_rules, tuple(tenants))
 
 
+def rule_requires_extra(rule_id: str) -> bool:
+    """Hidden A/B label of the real-agent pilot: an even rule index needs the extra check."""
+    return int(rule_id.split("_", 1)[1]) % 2 == 0
+
+
 def _known_rules(agent: str, tenant: Tenant, dataset: MTopsDataset) -> Set[str]:
     if agent == "oracle":
         return set(tenant.rules)
