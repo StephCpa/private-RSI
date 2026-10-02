@@ -117,12 +117,14 @@ def evaluate_strategy(
     strategy: str,
     tenants: Sequence[Tenant],
     support_tasks: int,
+    interactive: bool = False,
 ) -> dict:
     rows = []
     for tenant in tenants:
         support = tenant_support(tenant, support_tasks)
         successes = 0
         parsed = 0
+        attempts = 0
         for task in tenant.tasks[support_tasks:]:
             expected = "B" if rule_requires_extra(task.rule_id) else "A"
             prompt = (
@@ -132,9 +134,21 @@ def evaluate_strategy(
                 "Return exactly one character, A or B."
             )
             raw = runner.generate(prompt, max_new_tokens=16)
+            attempts += 1
             choice = parse_choice(raw)
             parsed += int(choice is not None)
-            successes += int(choice == expected)
+            if interactive and choice == "A" and expected == "B":
+                retry_prompt = (
+                    f"{prompt}\n\nEnvironment feedback: POLICY_CHECK_REQUIRED. "
+                    "Choose the corrective procedure now. Return exactly one character, A or B."
+                )
+                retry_raw = runner.generate(retry_prompt, max_new_tokens=16)
+                attempts += 1
+                retry = parse_choice(retry_raw)
+                parsed += int(retry is not None)
+                successes += int(retry == expected)
+            else:
+                successes += int(choice == expected)
         query_count = len(tenant.tasks) - support_tasks
         rows.append(
             {
@@ -142,7 +156,9 @@ def evaluate_strategy(
                 "successes": successes,
                 "queries": query_count,
                 "success_rate": successes / query_count,
-                "parse_rate": parsed / query_count,
+                "attempts": attempts,
+                "parsed_outputs": parsed,
+                "parse_rate": parsed / attempts,
             }
         )
     total_queries = sum(row["queries"] for row in rows)
@@ -151,7 +167,10 @@ def evaluate_strategy(
         "queries": total_queries,
         "successes": sum(row["successes"] for row in rows),
         "success_rate": sum(row["successes"] for row in rows) / total_queries,
-        "parse_rate": sum(row["parse_rate"] * row["queries"] for row in rows) / total_queries,
+        "attempts": sum(row["attempts"] for row in rows),
+        "parsed_outputs": sum(row["parsed_outputs"] for row in rows),
+        "parse_rate": sum(row["parsed_outputs"] for row in rows) / sum(row["attempts"] for row in rows),
+        "interactive": interactive,
         "tenant_rows": rows,
     }
 
@@ -166,6 +185,7 @@ def run(
     n_private: int = 12,
     n_test: int = 12,
     overlap: float = 0.5,
+    interactive: bool = False,
 ) -> dict:
     config = MTopsConfig(seed=seed, n_public=n_public, n_private=n_private, n_test=n_test, overlap=overlap)
     dataset = generate_dataset(config)
@@ -173,13 +193,14 @@ def run(
     public_strategy = distill_strategy(runner, dataset.by_split("public"), config.support_tasks, "public")
     private_strategy = distill_strategy(runner, dataset.by_split("private"), config.support_tasks, "private")
     test_tenants = dataset.by_split("test")
-    public_eval = evaluate_strategy(runner, public_strategy, test_tenants, config.support_tasks)
-    private_eval = evaluate_strategy(runner, private_strategy, test_tenants, config.support_tasks)
+    public_eval = evaluate_strategy(runner, public_strategy, test_tenants, config.support_tasks, interactive)
+    private_eval = evaluate_strategy(runner, private_strategy, test_tenants, config.support_tasks, interactive)
     payload = {
         "experiment": "small real-agent Mode L calibration",
         "status": "COMPLETED",
         "model_path": model_path,
         "device": device,
+        "interactive": interactive,
         "dataset_config": config.__dict__,
         "dataset_sha256": dataset.sha256(),
         "strategies": {"public": public_strategy, "private": private_strategy},
@@ -207,6 +228,7 @@ def main() -> None:
     parser.add_argument("--n-private", type=int, default=12)
     parser.add_argument("--n-test", type=int, default=12)
     parser.add_argument("--overlap", type=float, default=0.5)
+    parser.add_argument("--interactive", action="store_true")
     args = parser.parse_args()
     payload = run(
         args.model,
@@ -217,6 +239,7 @@ def main() -> None:
         n_private=args.n_private,
         n_test=args.n_test,
         overlap=args.overlap,
+        interactive=args.interactive,
     )
     print(json.dumps({key: payload[key] for key in ("status", "private_meta_minus_public_meta", "evaluations")}, indent=2))
 

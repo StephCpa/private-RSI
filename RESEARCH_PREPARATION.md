@@ -68,3 +68,7 @@ G0 在 `overlap=0` 下通过：oracle 查询成功率 1.000，public-only 为 0.
 已在 `gpu-gfkd`（8×RTX A6000）上完成第一轮真实 agent 非 DP Mode L 校准：Qwen2.5-7B-Instruct，8 public 训练租户、12 private 训练租户、12 test 租户；private strategy 为 34/48，public strategy 为 29/48，差值 +10.42 pp。12 个租户配对 bootstrap 95% 区间为 [-8.33, 33.33] pp，包含 0，因此 G1 未通过；结果仅支持扩大样本和固定策略后的复验。原始结果见 `results/real_agent_calibration.json`，报告见 `results/real_agent_calibration.md`。
 
 扩展到 24 public、24 private、48 test 租户后，private strategy 为 127/192，public strategy 为 139/192，差值 -6.25 pp；配对 bootstrap 95% 区间为 [-10.42, -2.08] pp。两轮方向相反，说明当前“由模型自由生成策略 + 一次性 A/B 判断”的校准不稳定，不能支持正的 private-meta gain。下一轮需预注册固定候选策略，并让评估执行策略实际描述的交互式工具流程，再重新检验 Mode L 差值。
+
+已修正评估协议并完成交互式 n=12 先导：遇到 `POLICY_CHECK_REQUIRED` 时允许同一查询进行一次纠正步骤。private strategy 为 38/48，public strategy 为 30/48，差值 +16.67 pp；配对 bootstrap 95% 区间为 [0, 37.5] pp，仍不足以通过 G1。n=48 的同协议复验正在 gpu-gfkd 的 GPU4 上运行。结果见 `results/real_agent_calibration_interactive_n12.json`。
+
+交互式 n=48 复验已完成：private strategy 为 157/192，public strategy 为 151/192，差值 +3.125 pp；48 个租户配对 bootstrap 95% 区间为 [+0.52, +6.25] pp。方向为正且区间不含 0，但点估计低于 G1 要求的 5 pp，因此仍不能进入完整 DP-RAE 主实验。下一步应固定策略候选并运行多 seed，再判断非 DP meta-gain 是否稳定达到门槛。
