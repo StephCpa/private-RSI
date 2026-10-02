@@ -1,0 +1,54 @@
+# 项目 G：private-RSI 研究准备记录
+
+更新日期：2026-10-02（Asia/Shanghai）
+
+## 来源与冻结状态
+
+- 上游：<https://github.com/StephCpa/private-RSI>
+- 默认分支：`claude/private-recursive-agent-evolution-384c6h`
+- 已核对提交：`0e670e0bd2a561673df7a8ee2e4da2a82d1d71fd`
+- 本地目录：`E:\科研工作流\项目G-private-RSI`
+- 上游仓库状态：planning stage；没有 LLM 实验，所有性能数字在当前版本中都应视为假设或分析性校准结果。
+
+## 文件地图
+
+- `README.md`：项目定位、阅读顺序、可复现命令与四条分析性发现。
+- `docs/01_review_of_gpt_analysis.md`：对早期 GPT 分析逐点复核，指出 DP-ES 信号弱、机制形状、数据规模和隐私攻击面等关键分歧。
+- `docs/02_research_plan.md`：完整研究计划；定义 DP-RAE、Mode L/Mode G、MT-Ops、基线 B0–B10、假设 H0–H5、实验 E0–E8、统计、预算、时间表和门控。
+- `docs/03_related_work.md`：截至 2026-10-02 的相关工作地图及核验状态。
+- `docs/04_privacy_and_security_spec.md`：K1–K8 内核不变量、两个 DP 定理、记账规则、硬化和审计计划。
+- `analysis/calibration.py`：自包含的 GDP/RDP/SVT/private-selection 校准分析。
+- `results/calibration_output.md`：由脚本生成的数字输出。
+- `tests/test_calibration.py`：16 个校准与机制测试。
+
+## 当前已验证的内容
+
+1. `python analysis/calibration.py` 可运行并生成校准输出。
+2. `python -m unittest discover -s tests -v`：16/16 通过。
+3. 校准显示：DP-ES 发布设置下的私有信号噪声标准差约为 1.0；在候选质量接近时，选中最佳提示只获得约 3% 的 oracle gain。这个结果支持先做 E0（ε=0 控制），但它仍是分析/模拟结果，不是 LLM 实验结果。
+4. 在相同预算下，全批评分的分析性噪声标准差约 0.109；SVT/私有选择在“候选很多、接受升级少”的 RSI 形状下可能更有利。机制选择必须由 E1 replay 决定。
+5. 5 个百分点的 meta-gain 在 ε=1 时大致需要 1,000–3,000 个用户，数据规模是主要约束。
+
+## 研究主线
+
+核心问题是：在用户级 `(ε, δ)` 隐私预算下，共享 improver 能否从多个租户的私有经验中学习并改进“改进程序”本身。计划把改进对象分为 task agent、improver、system/lineage 三层；主验证环境是新建的 MT-Ops 多租户工具使用沙箱，LaMP 用于 Mode L 外部验证，GSM8K 只承担 DP-ES 连续性控制。
+
+首要门控顺序：
+
+- G0：MT-Ops 的 oracle 相对 public-only 至少提升 15 pp，且 sandbox 信息流测试通过。
+- G1：先证明非 DP meta-gain（至少 5 pp 且 CI 排除 0），再证明某种机制在 ε≤4、n≤2,000 的 replay 中保留至少 50% 的增益；Mode G 代理相关性不足时降级为辅助模式。
+- G2：完整信息流审计、红队、基线复现通过。
+- G3：在 ε≤4 的某个设置下 H0/H1a 成立，且 transplantation gain 在匹配预算后仍存在。
+
+## 建议立即开展的 WP0
+
+1. 固定环境、随机种子、模型版本、token 上限和数据生成器版本；把隐私计划参数写成不可变配置。
+2. 先复现 E0：DP-ES、ε=0 public-only、同 ε 全批评分；每个条件 10 seeds，先只报告控制结果。
+3. 实现 MT-Ops v0：租户边界、公共/私有规则、重叠参数 ω、可审计事件日志和非私有 oracle。
+4. 实现 DP kernel 最小骨架：ledger、CSPRNG、sandbox、Gaussian/SVT、固定计划检查和完整 transcript 导出。
+5. 以非私有 utility matrix 做 E1 replay，先筛机制与功效，再决定昂贵的 LLM 运行矩阵。
+6. 为每个结果保留 claim/evidence 表：分析性校准、replay、真实 LLM 实验和外部论文基线分开记录。
+
+## 研究边界
+
+当前不能把仓库里的“约 3% oracle gain”“需要 1,000–3,000 用户”“定理 1/2”写成已被实验确认的系统性能；前两者是校准分析，定理依赖实现满足规范中的不变量。下一阶段的第一项可审查成果应是 E0 + MT-Ops G0，而不是直接运行 E3 主实验。
