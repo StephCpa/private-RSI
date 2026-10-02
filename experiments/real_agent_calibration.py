@@ -156,8 +156,18 @@ def evaluate_strategy(
     }
 
 
-def run(model_path: str, output: Path, device: str = "cuda:0") -> dict:
-    config = MTopsConfig(seed=20261002, n_public=8, n_private=12, n_test=12, overlap=0.5)
+def run(
+    model_path: str,
+    output: Path,
+    device: str = "cuda:0",
+    *,
+    seed: int = 20261002,
+    n_public: int = 8,
+    n_private: int = 12,
+    n_test: int = 12,
+    overlap: float = 0.5,
+) -> dict:
+    config = MTopsConfig(seed=seed, n_public=n_public, n_private=n_private, n_test=n_test, overlap=overlap)
     dataset = generate_dataset(config)
     runner = QwenRunner(model_path, device=device)
     public_strategy = distill_strategy(runner, dataset.by_split("public"), config.support_tasks, "public")
@@ -192,8 +202,22 @@ def main() -> None:
     parser.add_argument("--model", default=MODEL_DEFAULT)
     parser.add_argument("--output", default="results/real_agent_calibration.json")
     parser.add_argument("--device", default="cuda:0")
+    parser.add_argument("--seed", type=int, default=20261002)
+    parser.add_argument("--n-public", type=int, default=8)
+    parser.add_argument("--n-private", type=int, default=12)
+    parser.add_argument("--n-test", type=int, default=12)
+    parser.add_argument("--overlap", type=float, default=0.5)
     args = parser.parse_args()
-    payload = run(args.model, Path(args.output), args.device)
+    payload = run(
+        args.model,
+        Path(args.output),
+        args.device,
+        seed=args.seed,
+        n_public=args.n_public,
+        n_private=args.n_private,
+        n_test=args.n_test,
+        overlap=args.overlap,
+    )
     print(json.dumps({key: payload[key] for key in ("status", "private_meta_minus_public_meta", "evaluations")}, indent=2))
 
 

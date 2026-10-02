@@ -1,0 +1,724 @@
+{
+  "dataset_config": {
+    "family_count": 4,
+    "n_private": 24,
+    "n_public": 24,
+    "n_test": 48,
+    "overlap": 0.5,
+    "public_rule_count": 12,
+    "seed": 20261002,
+    "shared_rules": 40,
+    "support_tasks": 8,
+    "tasks_per_tenant": 12,
+    "tenant_rule_max": 3,
+    "tenant_rule_min": 1
+  },
+  "dataset_sha256": "87106c06712cc76f40b6c71b112959d91e4a4733964c754e26599ab5a04b0bb5",
+  "device": "cuda:0",
+  "evaluations": {
+    "private_strategy": {
+      "parse_rate": 1.0,
+      "queries": 192,
+      "success_rate": 0.6614583333333334,
+      "successes": 127,
+      "tenant_rows": [
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00048"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00049"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00050"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00051"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00052"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00053"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00054"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00055"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00056"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00057"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00058"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00059"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00060"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00061"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00062"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00063"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00064"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00065"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00066"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00067"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00068"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.0,
+          "successes": 0,
+          "tenant_id": "test-00069"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00070"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00071"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00072"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.0,
+          "successes": 0,
+          "tenant_id": "test-00073"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00074"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00075"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00076"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00077"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00078"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00079"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00080"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00081"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00082"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00083"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00084"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00085"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00086"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00087"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00088"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00089"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00090"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00091"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00092"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00093"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00094"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00095"
+        }
+      ],
+      "tenants": 48
+    },
+    "public_strategy": {
+      "parse_rate": 1.0,
+      "queries": 192,
+      "success_rate": 0.7239583333333334,
+      "successes": 139,
+      "tenant_rows": [
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00048"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00049"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00050"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00051"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00052"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00053"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00054"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00055"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00056"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00057"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00058"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00059"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00060"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.0,
+          "successes": 0,
+          "tenant_id": "test-00061"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00062"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00063"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00064"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00065"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00066"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00067"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00068"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.0,
+          "successes": 0,
+          "tenant_id": "test-00069"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00070"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00071"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00072"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00073"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00074"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00075"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00076"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00077"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00078"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00079"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00080"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00081"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00082"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00083"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00084"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00085"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00086"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00087"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00088"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00089"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00090"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00091"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00092"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00093"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00094"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00095"
+        }
+      ],
+      "tenants": 48
+    }
+  },
+  "experiment": "small real-agent Mode L calibration",
+  "model_path": "/home/wlwuser/LZN/models/qwen2.5-7b-instruct",
+  "notes": [
+    "Non-DP pilot; private strategy is distilled from private training tenants.",
+    "Both conditions use identical test tenants, support tasks, query tasks and decoding settings.",
+    "Canaries and rule IDs are withheld from the model prompt; evaluator-only rule signatures define correctness.",
+    "This is an E2/G1 pilot and not a DP-RAE headline result."
+  ],
+  "private_meta_minus_public_meta": -0.0625,
+  "status": "COMPLETED",
+  "strategies": {
+    "private": "To infer hidden operation conventions, analyze support traces for patterns: 1. Identify if an intermediate step (B) is often unnecessary and can be bypassed. 2. Note when a direct operation (A) fails due to POLICY_CHECK_REQUIRED. 3. Observe that correcting by adding the required check (B) allows success. 4. Apply this pattern to new queries by first attempting the direct operation (A). 5. If it fails with POLICY_CHECK_REQUIRED, implement the additional check (B) to proceed.",
+    "public": "To infer hidden operation conventions, analyze support traces for patterns where an initial operation (A) fails due to a policy check, requiring an additional step (B), followed by a successful direct operation (A). If the initial operation (A) succeeds without the additional step (B), it indicates that B is unnecessary. Apply this pattern to new queries: if A initially fails, perform B to bypass the policy check, then retry A. If A succeeds directly afterward, B is unnecessary."
+  }
+}
