@@ -64,3 +64,5 @@ G0 在 `overlap=0` 下通过：oracle 查询成功率 1.000，public-only 为 0.
 已补上 DP kernel 最小闭环 `dprae/kernel/`：当前仅包含 gamma=1、add/remove、有界求和、basic composition 下的 Gaussian release-all 与 exponential winner-only。5/5 kernel 测试通过；审计边界见 `results/kernel_minimal_audit.md`。这一步不等同于 G2，也没有实现 SVT、Poisson 放大、生产级 RDP/PLD accountant、sandbox 隔离或信息流红队。
 
 已完成 `experiments/kernel_mtops_smoke.py`：将 MT-Ops v0 的 public-only 与 local-adaptation 合成基线接入 kernel，Gaussian release-all 和 winner-only 均成功写入独立 ledger；结果见 `results/kernel_mtops_smoke.json`。该 smoke 只证明数据流和账本闭环，不是 LLM 或 DP-RAE utility 结果。
+
+已在 `gpu-gfkd`（8×RTX A6000）上完成第一轮真实 agent 非 DP Mode L 校准：Qwen2.5-7B-Instruct，8 public 训练租户、12 private 训练租户、12 test 租户；private strategy 为 34/48，public strategy 为 29/48，差值 +10.42 pp。12 个租户配对 bootstrap 95% 区间为 [-8.33, 33.33] pp，包含 0，因此 G1 未通过；结果仅支持扩大样本和固定策略后的复验。原始结果见 `results/real_agent_calibration.json`，报告见 `results/real_agent_calibration.md`。

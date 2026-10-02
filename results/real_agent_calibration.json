@@ -1,0 +1,220 @@
+{
+  "dataset_config": {
+    "family_count": 4,
+    "n_private": 12,
+    "n_public": 8,
+    "n_test": 12,
+    "overlap": 0.5,
+    "public_rule_count": 12,
+    "seed": 20261002,
+    "shared_rules": 40,
+    "support_tasks": 8,
+    "tasks_per_tenant": 12,
+    "tenant_rule_max": 3,
+    "tenant_rule_min": 1
+  },
+  "dataset_sha256": "2c8ed1da944fda740b3068cad20842bd32afa76b8d68df838da8ad9a3dcc2dab",
+  "device": "cuda:0",
+  "evaluations": {
+    "private_strategy": {
+      "parse_rate": 1.0,
+      "queries": 48,
+      "success_rate": 0.7083333333333334,
+      "successes": 34,
+      "tenant_rows": [
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.0,
+          "successes": 0,
+          "tenant_id": "test-00020"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00021"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00022"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00023"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00024"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00025"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00026"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00027"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00028"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00029"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00030"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00031"
+        }
+      ],
+      "tenants": 12
+    },
+    "public_strategy": {
+      "parse_rate": 1.0,
+      "queries": 48,
+      "success_rate": 0.6041666666666666,
+      "successes": 29,
+      "tenant_rows": [
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00020"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00021"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00022"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00023"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00024"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00025"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00026"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.0,
+          "successes": 0,
+          "tenant_id": "test-00027"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00028"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00029"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00030"
+        },
+        {
+          "parse_rate": 1.0,
+          "queries": 4,
+          "success_rate": 0.0,
+          "successes": 0,
+          "tenant_id": "test-00031"
+        }
+      ],
+      "tenants": 12
+    }
+  },
+  "experiment": "small real-agent Mode L calibration",
+  "model_path": "/home/wlwuser/LZN/models/qwen2.5-7b-instruct",
+  "notes": [
+    "Non-DP pilot; private strategy is distilled from private training tenants.",
+    "Both conditions use identical test tenants, support tasks, query tasks and decoding settings.",
+    "Canaries and rule IDs are withheld from the model prompt; evaluator-only rule signatures define correctness.",
+    "This is an E2/G1 pilot and not a DP-RAE headline result."
+  ],
+  "private_meta_minus_public_meta": 0.10416666666666674,
+  "status": "COMPLETED",
+  "strategies": {
+    "private": "To infer hidden operation conventions, analyze support traces for patterns: 1. Identify if an operation (A) is initially rejected (e.g., POLICY_CHECK_REQUIRED). 2. Determine if a secondary operation (B) is required to succeed. 3. If direct operation (A) succeeds after initial failure, B is likely unnecessary. 4. Apply this pattern to new queries by first attempting A, then B if A fails.",
+    "public": "To infer hidden operation conventions, analyze support traces for patterns where an initial operation (A) fails due to a policy check, followed by a successful direct operation (B). Identify cases where B succeeds without A, indicating B bypasses the policy check. Apply this understanding: if A fails with POLICY_CHECK_REQUIRED, perform B to bypass the check, then follow with A if needed."
+  }
+}
