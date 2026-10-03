@@ -157,7 +157,7 @@ subcheck exceeds 5 pp, but it is a direct rule-table comparison rather than
 the planned strategy-distillation G1 experiment. It is non-DP calibration
 evidence, not a DP-RAE utility claim.
 
-Evidence: [`results/mtops_v1_transfer_3seed_summary.md`](results/mtops_v1_transfer_3seed_summary.md) and [`experiments/mtops_v1_transfer_check.py`](experiments/mtops_v1_transfer_check.py).
+Evidence: [`results/mtops_v1_transfer_8seed_summary.md`](results/mtops_v1_transfer_8seed_summary.md) and [`experiments/mtops_v1_transfer_check.py`](experiments/mtops_v1_transfer_check.py).
 
 ## 5. Verification status
 

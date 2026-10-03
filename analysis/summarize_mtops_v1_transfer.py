@@ -105,6 +105,6 @@ def markdown(payload: dict) -> str:
 if __name__ == "__main__":
     root = Path(__file__).resolve().parents[1]
     payload = summarize(root)
-    (root / "results" / "mtops_v1_transfer_3seed_summary.json").write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
-    (root / "results" / "mtops_v1_transfer_3seed_summary.md").write_text(markdown(payload), encoding="utf-8")
+    (root / "results" / "mtops_v1_transfer_8seed_summary.json").write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+    (root / "results" / "mtops_v1_transfer_8seed_summary.md").write_text(markdown(payload), encoding="utf-8")
     print(markdown(payload))
