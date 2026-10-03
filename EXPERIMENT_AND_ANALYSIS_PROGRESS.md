@@ -4,7 +4,7 @@
 **Local workspace:** the project root containing this report  
 **Report date:** 2026-10-03 (Asia/Shanghai)  
 **Upstream snapshot:** `StephCpa/private-RSI`, branch `claude/private-recursive-agent-evolution-384c6h`, upstream commit `0e670e0bd2a561673df7a8ee2e4da2a82d1d71fd`  
-**Latest experimental-code commit:** `10f641f`
+**Latest experimental-code commit:** `1ce1c1c`
 
 ## Executive status
 
@@ -259,7 +259,7 @@ The latest local verification covered 59 tests:
 | MT-Ops v0 and v1 | 11/11 passed |
 | **Total** | **59/59 passed** |
 
-The experimental code and kernel-boundary audit are recorded at commit `10f641f`. The remote v1 usability,
+The experimental code and kernel-boundary audit are recorded at commit `1ce1c1c`. The remote v1 usability,
 corrected permuted-content and corrected full-experience strategy-distillation
 processes completed normally; the final check found no active v1 transfer
 process on the remote host.
