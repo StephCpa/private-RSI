@@ -2,8 +2,8 @@
 
 The experiment freezes a small end-to-end contract:
 
-* the distiller sees only feature-level support observations from one training
-  split; tenant IDs, rule IDs and canaries are excluded;
+* the distiller sees only feature-level observations from one training split;
+  tenant IDs, rule IDs and canaries are excluded;
 * it emits a reusable strategy artifact as text;
 * the executor sees that artifact, one test tenant's support observations and
   one query, then returns exactly A or B;
@@ -42,11 +42,16 @@ def support_text(tenant: V1Tenant, support_tasks: int) -> str:
     return "\n".join(rows)
 
 
-def aggregate_training_observations(tenants: Sequence[V1Tenant], support_tasks: int) -> str:
-    """Build a compact, identifier-free training view for the distiller."""
+def aggregate_training_observations(
+    tenants: Sequence[V1Tenant], support_tasks: int, training_view: str = "all"
+) -> str:
+    """Build a compact, identifier-free training-experience view."""
+    if training_view not in {"all", "support"}:
+        raise ValueError("training_view must be 'all' or 'support'")
     counts: dict[Feature, dict[str, int]] = defaultdict(lambda: {"A": 0, "B": 0})
     for tenant in tenants:
-        for task in tenant.tasks[:support_tasks]:
+        tasks = tenant.tasks if training_view == "all" else tenant.tasks[:support_tasks]
+        for task in tasks:
             counts[task.features][task.procedure] += 1
     rows = []
     for feature in sorted(counts):
@@ -56,9 +61,7 @@ def aggregate_training_observations(tenants: Sequence[V1Tenant], support_tasks: 
             observed = "AMBIGUOUS"
         else:
             observed = "A" if labels["A"] else "B"
-        rows.append(
-            f"- {feature_text(feature)} -> observed procedure {observed}; support_count={total}"
-        )
+        rows.append(f"- {feature_text(feature)} -> observed procedure {observed}; experience_count={total}")
     return "\n".join(rows)
 
 
@@ -75,7 +78,7 @@ def distill_strategy(runner: QwenRunner, observations: str, split: str) -> str:
         "For an unknown or ambiguous feature combination, tell the executor to use the current tenant's support observations and then default to A. "
         "Do not copy identifiers, secrets or records. Return only the strategy, with no preamble and no analysis.\n\n"
         f"Training split: {split}\n"
-        "Aggregated support observations:\n"
+        "Aggregated training-experience observations:\n"
         f"{observations}"
     )
     return clean_strategy(
@@ -149,12 +152,13 @@ def run(
     n_private: int,
     n_test: int,
     output: Path,
+    training_view: str = "all",
 ) -> dict:
     config = MTopsV1Config(seed=seed, n_public=n_public, n_private=n_private, n_test=n_test)
     dataset = generate_dataset(config)
     runner = QwenRunner(model_path, device)
-    public_observations = aggregate_training_observations(dataset.by_split("public"), config.support_tasks)
-    private_observations = aggregate_training_observations(dataset.by_split("private"), config.support_tasks)
+    public_observations = aggregate_training_observations(dataset.by_split("public"), config.support_tasks, training_view)
+    private_observations = aggregate_training_observations(dataset.by_split("private"), config.support_tasks, training_view)
     public_strategy = distill_strategy(runner, public_observations, "public")
     private_strategy = distill_strategy(runner, private_observations, "private")
     test_tenants = dataset.by_split("test")
@@ -168,6 +172,8 @@ def run(
         "device": device,
         "dataset_manifest": dataset.manifest(),
         "contract": {
+            "training_view": training_view,
+            "training_experience": "all support and query observations from training tenants" if training_view == "all" else "support observations only from training tenants",
             "support_view": "feature-level observations only; no tenant IDs, rule IDs or canaries",
             "strategy_output": "reusable text, capped at 5000 characters",
             "executor_input": "strategy + current-tenant support observations + query attributes",
@@ -206,9 +212,10 @@ def main() -> None:
     parser.add_argument("--n-public", type=int, default=300)
     parser.add_argument("--n-private", type=int, default=300)
     parser.add_argument("--n-test", type=int, default=12)
-    parser.add_argument("--output", default="results/mtops_v1_strategy_distillation_seed20261002.json")
+    parser.add_argument("--training-view", choices=("all", "support"), default="all")
+    parser.add_argument("--output", default="results/mtops_v1_strategy_distillation_all_seed20261002.json")
     args = parser.parse_args()
-    payload = run(args.model, args.device, args.seed, args.n_public, args.n_private, args.n_test, Path(args.output))
+    payload = run(args.model, args.device, args.seed, args.n_public, args.n_private, args.n_test, Path(args.output), args.training_view)
     print(
         json.dumps(
             {

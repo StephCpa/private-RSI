@@ -15,9 +15,14 @@ INPUTS = tuple(
 )
 
 
-def summarize(root: Path, bootstrap_trials: int = 200_000, seed: int = 20261002) -> dict:
+def summarize(
+    root: Path,
+    inputs: tuple[str, ...] = INPUTS,
+    bootstrap_trials: int = 200_000,
+    seed: int = 20261002,
+) -> dict:
     rows = []
-    for relative in INPUTS:
+    for relative in inputs:
         payload = json.loads((root / relative).read_text(encoding="utf-8"))
         evaluations = payload["evaluations"]
         queries = evaluations["no_global_strategy"]["queries"]
@@ -56,6 +61,7 @@ def summarize(root: Path, bootstrap_trials: int = 200_000, seed: int = 20261002)
     )
     return {
         "experiment": "MT-Ops v1 eight-seed non-DP strategy-distillation pilot summary",
+        "training_view": json.loads((root / inputs[0]).read_text(encoding="utf-8"))["contract"]["training_view"],
         "inputs": rows,
         "seed_mean_private_minus_public": float(private_minus_public.mean()),
         "seed_sd_private_minus_public": float(private_minus_public.std(ddof=1)),
@@ -90,10 +96,12 @@ def summarize(root: Path, bootstrap_trials: int = 200_000, seed: int = 20261002)
 
 
 def markdown(payload: dict) -> str:
+    view = payload.get("training_view", "support")
+    experience = "all support and query observations" if view == "all" else "support observations only"
     lines = [
         "# MT-Ops v1 eight-seed strategy-distillation pilot",
         "",
-        "The distiller receives only aggregated feature-level support observations from one training split; tenant IDs, rule IDs and canaries are removed. The executor receives the resulting reusable strategy, one held-out tenant's support observations and one query. All conditions use greedy decoding and no interactive retry.",
+        f"The distiller receives only aggregated feature-level observations from one training split ({experience}); tenant IDs, rule IDs and canaries are removed. The executor receives the resulting reusable strategy, one held-out tenant's support observations and one query. All conditions use greedy decoding and no interactive retry.",
         "",
         "| Seed | No global strategy | Public strategy | Private strategy | Private - public |",
         "|---:|---:|---:|---:|---:|",
