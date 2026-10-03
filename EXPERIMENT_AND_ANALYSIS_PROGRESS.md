@@ -163,6 +163,21 @@ does not authorize a DP-RAE run.
 
 Evidence: [`results/mtops_v1_1_strategy_distillation_all_8seed_summary.md`](results/mtops_v1_1_strategy_distillation_all_8seed_summary.md) and [`analysis/summarize_mtops_v1_1_strategy_distillation.py`](analysis/summarize_mtops_v1_1_strategy_distillation.py).
 
+### 2.5 MT-Ops v1.1 format-matched placebo
+
+The eight-seed permuted-content negative control kept the same task set, table
+shape, `UNKNOWN` pattern and A/B marginals while deranging known procedure
+labels. The pooled public and private table totals were 173/384 and 162/384,
+giving private-minus-public **-2.86 pp**. The seed-level t interval was
+**[-8.13, +2.40] pp**, with bootstrap interval **[-6.77, +1.30] pp**. Some
+public-table outputs did not parse, so this remains a diagnostic control.
+
+The placebo does not reproduce the positive aligned-table contrast; it is kept
+separate from the primary strategy-distillation estimand and does not pass or
+replace G1.
+
+Evidence: [`results/mtops_v1_1_permuted_8seed_summary.md`](results/mtops_v1_1_permuted_8seed_summary.md) and [`analysis/summarize_mtops_v1_1_permuted.py`](analysis/summarize_mtops_v1_1_permuted.py).
+
 ## 3. Minimal privacy kernel
 
 `dprae/kernel/` implements a gamma=1 prototype under add/remove adjacency and basic composition. The production-style path is `KernelRuntime`, which keeps tenant payloads, cohort sampling and mechanism randomness inside the kernel. The arithmetic functions remain compatibility primitives for synthetic replay and unit tests. The kernel currently provides:
@@ -371,8 +386,8 @@ The project cannot currently claim:
 
 The next work should preserve the corrected evidence boundary and proceed in this order:
 
-1. **Run the small v1.1 non-DP calibration.** Use the isolated v1.1 strategy-distillation and matched-prompt transfer runners for the pre-registered eight seeds, first checking that every manifest matches the v1.1 contract audit. Keep the result diagnostic until the seed-level G1 criterion is evaluated.
-2. **Complete the remaining G0 information-flow evidence after calibration.** The in-process `KernelRuntime` contract audit now passes fixed-shape output, default-on-error, canary/tenant-ID absence, hidden cohort metadata, no caller-injected RNG and a seven-check provenance boundary. The process audit covers a killable worker, scalar output, error suppression, Python-level network denial and minimum-runtime padding. The local canary scanner reports no matches in 89 serialized artifacts. Add OS/container confinement, complete side-channel controls and remote/full-transcript canary coverage before calling the full G0 gate.
+1. **Freeze the v1.1 calibration boundary and complete the procedure-transfer track.** The direct-table, strategy-distillation and format-matched placebo ledgers are now frozen; design the opaque-content procedure-transfer condition and predeclare its contrast before any further scaling. The v1.1 strategy result remains below the G1 threshold.
+2. **Complete the remaining G0 information-flow evidence after the contract study.** The in-process `KernelRuntime` contract audit now passes fixed-shape output, default-on-error, canary/tenant-ID absence, hidden cohort metadata, no caller-injected RNG and a seven-check provenance boundary. The process audit covers a killable worker, scalar output, error suppression, Python-level network denial and minimum-runtime padding. The local canary scanner reports no matches in 89 serialized artifacts. Add OS/container confinement, complete side-channel controls and remote/full-transcript canary coverage before calling the full G0 gate.
 3. **Extend the kernel only after a reliable non-DP target exists.** Add an audited SVT implementation, explicit Poisson/add-remove accounting and a production RDP/PLD cross-check. Do not apply subsampling amplification to a reused cohort without a matching joint analysis.
 4. **Start DP-RAE experiments only if a corrected non-DP pilot establishes a meaningful gain.** The first DP study should be a small matched-budget pilot, with the ledger covering every private release, restart, diagnostic and selection event.
 

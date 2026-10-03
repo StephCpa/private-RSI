@@ -1,0 +1,265 @@
+{
+  "conditions": {
+    "no_table": {
+      "parse_rate": 1.0,
+      "parsed_outputs": 48,
+      "queries": 48,
+      "success_rate": 0.625,
+      "successes": 30,
+      "tenant_rows": [
+        {
+          "queries": 4,
+          "successes": 2,
+          "tenant_id": "test-00600"
+        },
+        {
+          "queries": 4,
+          "successes": 2,
+          "tenant_id": "test-00601"
+        },
+        {
+          "queries": 4,
+          "successes": 3,
+          "tenant_id": "test-00602"
+        },
+        {
+          "queries": 4,
+          "successes": 2,
+          "tenant_id": "test-00603"
+        },
+        {
+          "queries": 4,
+          "successes": 3,
+          "tenant_id": "test-00604"
+        },
+        {
+          "queries": 4,
+          "successes": 3,
+          "tenant_id": "test-00605"
+        },
+        {
+          "queries": 4,
+          "successes": 3,
+          "tenant_id": "test-00606"
+        },
+        {
+          "queries": 4,
+          "successes": 2,
+          "tenant_id": "test-00607"
+        },
+        {
+          "queries": 4,
+          "successes": 3,
+          "tenant_id": "test-00608"
+        },
+        {
+          "queries": 4,
+          "successes": 2,
+          "tenant_id": "test-00609"
+        },
+        {
+          "queries": 4,
+          "successes": 4,
+          "tenant_id": "test-00610"
+        },
+        {
+          "queries": 4,
+          "successes": 1,
+          "tenant_id": "test-00611"
+        }
+      ]
+    },
+    "private_table": {
+      "parse_rate": 1.0,
+      "parsed_outputs": 48,
+      "queries": 48,
+      "success_rate": 0.4166666666666667,
+      "successes": 20,
+      "tenant_rows": [
+        {
+          "queries": 4,
+          "successes": 2,
+          "tenant_id": "test-00600"
+        },
+        {
+          "queries": 4,
+          "successes": 3,
+          "tenant_id": "test-00601"
+        },
+        {
+          "queries": 4,
+          "successes": 2,
+          "tenant_id": "test-00602"
+        },
+        {
+          "queries": 4,
+          "successes": 1,
+          "tenant_id": "test-00603"
+        },
+        {
+          "queries": 4,
+          "successes": 3,
+          "tenant_id": "test-00604"
+        },
+        {
+          "queries": 4,
+          "successes": 1,
+          "tenant_id": "test-00605"
+        },
+        {
+          "queries": 4,
+          "successes": 1,
+          "tenant_id": "test-00606"
+        },
+        {
+          "queries": 4,
+          "successes": 1,
+          "tenant_id": "test-00607"
+        },
+        {
+          "queries": 4,
+          "successes": 0,
+          "tenant_id": "test-00608"
+        },
+        {
+          "queries": 4,
+          "successes": 0,
+          "tenant_id": "test-00609"
+        },
+        {
+          "queries": 4,
+          "successes": 3,
+          "tenant_id": "test-00610"
+        },
+        {
+          "queries": 4,
+          "successes": 3,
+          "tenant_id": "test-00611"
+        }
+      ]
+    },
+    "public_table": {
+      "parse_rate": 1.0,
+      "parsed_outputs": 48,
+      "queries": 48,
+      "success_rate": 0.4375,
+      "successes": 21,
+      "tenant_rows": [
+        {
+          "queries": 4,
+          "successes": 3,
+          "tenant_id": "test-00600"
+        },
+        {
+          "queries": 4,
+          "successes": 3,
+          "tenant_id": "test-00601"
+        },
+        {
+          "queries": 4,
+          "successes": 2,
+          "tenant_id": "test-00602"
+        },
+        {
+          "queries": 4,
+          "successes": 0,
+          "tenant_id": "test-00603"
+        },
+        {
+          "queries": 4,
+          "successes": 2,
+          "tenant_id": "test-00604"
+        },
+        {
+          "queries": 4,
+          "successes": 0,
+          "tenant_id": "test-00605"
+        },
+        {
+          "queries": 4,
+          "successes": 2,
+          "tenant_id": "test-00606"
+        },
+        {
+          "queries": 4,
+          "successes": 2,
+          "tenant_id": "test-00607"
+        },
+        {
+          "queries": 4,
+          "successes": 1,
+          "tenant_id": "test-00608"
+        },
+        {
+          "queries": 4,
+          "successes": 1,
+          "tenant_id": "test-00609"
+        },
+        {
+          "queries": 4,
+          "successes": 3,
+          "tenant_id": "test-00610"
+        },
+        {
+          "queries": 4,
+          "successes": 2,
+          "tenant_id": "test-00611"
+        }
+      ]
+    }
+  },
+  "dataset_manifest": {
+    "config": {
+      "feature_seed": 1101,
+      "n_private": 300,
+      "n_public": 300,
+      "n_test": 12,
+      "procedure_seed": 2201,
+      "public_pool_seed": 3301,
+      "public_pool_size": 12,
+      "query_tasks": 4,
+      "seed": 20261003,
+      "shared_rules": 40,
+      "support_tasks": 8,
+      "tenant_rule_max": 6,
+      "tenant_rule_min": 4,
+      "transfer_fraction": 0.75,
+      "zipf_exponent": 0.9
+    },
+    "public_rule_ids": [
+      "rule_02",
+      "rule_04",
+      "rule_05",
+      "rule_10",
+      "rule_13",
+      "rule_14",
+      "rule_18",
+      "rule_19",
+      "rule_20",
+      "rule_27",
+      "rule_33",
+      "rule_38"
+    ],
+    "sha256": "5351ae4df7dde5d5b896c11a7aa897585bea234eab811cc37d01bdb6e3f6e2ec",
+    "tenant_count": 612
+  },
+  "device": "cuda:1",
+  "experiment": "MT-Ops v1.1 public-private table transfer check",
+  "model_path": "/home/wlwuser/LZN/models/qwen2.5-7b-instruct",
+  "notes": [
+    "Non-DP, one-shot check; public and private tables are learned from disjoint training splits.",
+    "The two table prompts have the same fixed length; unavailable procedures are marked UNKNOWN.",
+    "All conditions use identical test tenants, support traces, query tasks and decoding settings.",
+    "In permuted_content mode, every known procedure label is complemented within each training split to break feature-to-procedure alignment."
+  ],
+  "private_minus_public": -0.020833333333333315,
+  "public_minus_no_table": -0.1875,
+  "status": "COMPLETED",
+  "table_mode": "permuted_content",
+  "table_sizes": {
+    "known_private": 40,
+    "known_public": 12,
+    "private": 40,
+    "public": 40
+  }
+}

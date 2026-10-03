@@ -38,6 +38,8 @@ procedure that improves it.
 > parse; it remains diagnostic and is not a G1 result.
 > The v1.1 strategy-distillation calibration is also complete: +1.82 pp pooled
 > private-minus-public with an interval crossing zero, so G1 remains unpassed.
+> The v1.1 format-matched placebo is −2.86 pp pooled private-minus-public,
+> with an interval crossing zero; it is retained as a separate negative control.
 
 ## Read in this order
 
@@ -66,6 +68,7 @@ procedure that improves it.
 | [results/mtops_v1_1_contract_audit.md](results/mtops_v1_1_contract_audit.md) | Eight-seed no-LLM v1.1 contract audit |
 | [results/mtops_v1_1_transfer_8seed_summary.md](results/mtops_v1_1_transfer_8seed_summary.md) | Eight-seed v1.1 direct-table calibration summary; parse failures retained |
 | [results/mtops_v1_1_strategy_distillation_all_8seed_summary.md](results/mtops_v1_1_strategy_distillation_all_8seed_summary.md) | Eight-seed v1.1 full-experience strategy-distillation calibration |
+| [results/mtops_v1_1_permuted_8seed_summary.md](results/mtops_v1_1_permuted_8seed_summary.md) | Eight-seed v1.1 format-matched permuted-content negative control |
 
 ## Key findings so far (analytical, no LLM calls)
 

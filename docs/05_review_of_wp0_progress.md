@@ -239,6 +239,15 @@ zero; G1 is unpassed.
 
 Evidence: [`results/mtops_v1_1_strategy_distillation_all_8seed_summary.md`](../results/mtops_v1_1_strategy_distillation_all_8seed_summary.md).
 
+The v1.1 format-matched permuted-content control kept the same tasks, table
+shape, `UNKNOWN` pattern and A/B marginals while deranging known labels. Its
+pooled public and private totals were 173/384 and 162/384, for a private-minus-
+public difference of -2.86 pp; t interval [-8.13, +2.40] pp and bootstrap
+interval [-6.77, +1.30] pp. Some public outputs did not parse. The control is
+reported separately and does not alter the unpassed G1 result.
+
+Evidence: [`results/mtops_v1_1_permuted_8seed_summary.md`](../results/mtops_v1_1_permuted_8seed_summary.md).
+
 ## Recommended next steps
 
 1. **Run the small v1.1 non-DP calibration.** Use the isolated v1.1 strategy
