@@ -1,0 +1,428 @@
+{
+  "artifact_fidelity_totals": {
+    "private": {
+      "conflicting_duplicates": 0,
+      "correct": 315,
+      "extra": 4,
+      "malformed_lines": 0,
+      "missing": 4,
+      "true_rows": 320,
+      "wrong_label": 1
+    },
+    "public": {
+      "conflicting_duplicates": 0,
+      "correct": 95,
+      "extra": 0,
+      "malformed_lines": 0,
+      "missing": 1,
+      "true_rows": 96,
+      "wrong_label": 0
+    }
+  },
+  "experiment": "MT-Ops v1.1 artifact fidelity and signal-loss audit",
+  "notes": [
+    "No LLM calls. Scripted executors use support > table > fallback precedence, one-shot."
+  ],
+  "private_minus_public_seed_level": {
+    "LLM, direct tables": {
+      "high": 0.18345146392475897,
+      "low": 0.04050686940857433,
+      "mean": 0.11197916666666666
+    },
+    "LLM, distilled artifacts": {
+      "high": 0.08499923375971438,
+      "low": -0.04854090042638106,
+      "mean": 0.018229166666666664
+    },
+    "scripted, parsed artifacts": {
+      "high": 0.2695158628448864,
+      "low": 0.19402580382178022,
+      "mean": 0.23177083333333331
+    },
+    "scripted, true tables": {
+      "high": 0.2718335405447983,
+      "low": 0.20733312612186833,
+      "mean": 0.23958333333333331
+    }
+  },
+  "rows": [
+    {
+      "aggregator_equals_true_table": {
+        "private": true,
+        "public": true
+      },
+      "artifact_fidelity": {
+        "private": {
+          "conflicting_duplicates": 0,
+          "correct": 39,
+          "extra": 1,
+          "fallback": "A",
+          "malformed_lines": 0,
+          "missing": 1,
+          "true_rows": 40,
+          "wrong_label": 0
+        },
+        "public": {
+          "conflicting_duplicates": 0,
+          "correct": 12,
+          "extra": 0,
+          "fallback": "A",
+          "malformed_lines": 0,
+          "missing": 0,
+          "true_rows": 12,
+          "wrong_label": 0
+        }
+      },
+      "llm": {
+        "direct_private": 42,
+        "direct_public": 35,
+        "distilled_private": 38,
+        "distilled_public": 38,
+        "no_global_strategy": 31,
+        "no_table": 29
+      },
+      "queries": 48,
+      "scripted": {
+        "artifact_private": 48,
+        "artifact_public": 36,
+        "oracle": 48,
+        "support_then_A": 29,
+        "true_private": 48,
+        "true_public": 36
+      },
+      "seed": 20261002
+    },
+    {
+      "aggregator_equals_true_table": {
+        "private": true,
+        "public": true
+      },
+      "artifact_fidelity": {
+        "private": {
+          "conflicting_duplicates": 0,
+          "correct": 40,
+          "extra": 0,
+          "fallback": "A",
+          "malformed_lines": 0,
+          "missing": 0,
+          "true_rows": 40,
+          "wrong_label": 0
+        },
+        "public": {
+          "conflicting_duplicates": 0,
+          "correct": 12,
+          "extra": 0,
+          "fallback": "A",
+          "malformed_lines": 0,
+          "missing": 0,
+          "true_rows": 12,
+          "wrong_label": 0
+        }
+      },
+      "llm": {
+        "direct_private": 35,
+        "direct_public": 30,
+        "distilled_private": 32,
+        "distilled_public": 32,
+        "no_global_strategy": 31,
+        "no_table": 30
+      },
+      "queries": 48,
+      "scripted": {
+        "artifact_private": 48,
+        "artifact_public": 37,
+        "oracle": 48,
+        "support_then_A": 31,
+        "true_private": 48,
+        "true_public": 37
+      },
+      "seed": 20261003
+    },
+    {
+      "aggregator_equals_true_table": {
+        "private": true,
+        "public": true
+      },
+      "artifact_fidelity": {
+        "private": {
+          "conflicting_duplicates": 0,
+          "correct": 39,
+          "extra": 1,
+          "fallback": "A",
+          "malformed_lines": 0,
+          "missing": 1,
+          "true_rows": 40,
+          "wrong_label": 0
+        },
+        "public": {
+          "conflicting_duplicates": 0,
+          "correct": 12,
+          "extra": 0,
+          "fallback": "A",
+          "malformed_lines": 0,
+          "missing": 0,
+          "true_rows": 12,
+          "wrong_label": 0
+        }
+      },
+      "llm": {
+        "direct_private": 44,
+        "direct_public": 42,
+        "distilled_private": 37,
+        "distilled_public": 38,
+        "no_global_strategy": 34,
+        "no_table": 30
+      },
+      "queries": 48,
+      "scripted": {
+        "artifact_private": 47,
+        "artifact_public": 38,
+        "oracle": 48,
+        "support_then_A": 35,
+        "true_private": 48,
+        "true_public": 38
+      },
+      "seed": 20261004
+    },
+    {
+      "aggregator_equals_true_table": {
+        "private": true,
+        "public": true
+      },
+      "artifact_fidelity": {
+        "private": {
+          "conflicting_duplicates": 0,
+          "correct": 40,
+          "extra": 0,
+          "fallback": "A",
+          "malformed_lines": 0,
+          "missing": 0,
+          "true_rows": 40,
+          "wrong_label": 0
+        },
+        "public": {
+          "conflicting_duplicates": 0,
+          "correct": 12,
+          "extra": 0,
+          "fallback": "A",
+          "malformed_lines": 0,
+          "missing": 0,
+          "true_rows": 12,
+          "wrong_label": 0
+        }
+      },
+      "llm": {
+        "direct_private": 43,
+        "direct_public": 36,
+        "distilled_private": 35,
+        "distilled_public": 32,
+        "no_global_strategy": 30,
+        "no_table": 30
+      },
+      "queries": 48,
+      "scripted": {
+        "artifact_private": 48,
+        "artifact_public": 35,
+        "oracle": 48,
+        "support_then_A": 32,
+        "true_private": 48,
+        "true_public": 35
+      },
+      "seed": 20261005
+    },
+    {
+      "aggregator_equals_true_table": {
+        "private": true,
+        "public": true
+      },
+      "artifact_fidelity": {
+        "private": {
+          "conflicting_duplicates": 0,
+          "correct": 40,
+          "extra": 0,
+          "fallback": "A",
+          "malformed_lines": 0,
+          "missing": 0,
+          "true_rows": 40,
+          "wrong_label": 0
+        },
+        "public": {
+          "conflicting_duplicates": 0,
+          "correct": 12,
+          "extra": 0,
+          "fallback": "A",
+          "malformed_lines": 0,
+          "missing": 0,
+          "true_rows": 12,
+          "wrong_label": 0
+        }
+      },
+      "llm": {
+        "direct_private": 38,
+        "direct_public": 25,
+        "distilled_private": 24,
+        "distilled_public": 31,
+        "no_global_strategy": 23,
+        "no_table": 22
+      },
+      "queries": 48,
+      "scripted": {
+        "artifact_private": 48,
+        "artifact_public": 33,
+        "oracle": 48,
+        "support_then_A": 23,
+        "true_private": 48,
+        "true_public": 33
+      },
+      "seed": 20261006
+    },
+    {
+      "aggregator_equals_true_table": {
+        "private": true,
+        "public": true
+      },
+      "artifact_fidelity": {
+        "private": {
+          "conflicting_duplicates": 0,
+          "correct": 40,
+          "extra": 0,
+          "fallback": "A",
+          "malformed_lines": 0,
+          "missing": 0,
+          "true_rows": 40,
+          "wrong_label": 0
+        },
+        "public": {
+          "conflicting_duplicates": 0,
+          "correct": 12,
+          "extra": 0,
+          "fallback": "A",
+          "malformed_lines": 0,
+          "missing": 0,
+          "true_rows": 12,
+          "wrong_label": 0
+        }
+      },
+      "llm": {
+        "direct_private": 39,
+        "direct_public": 40,
+        "distilled_private": 40,
+        "distilled_public": 35,
+        "no_global_strategy": 29,
+        "no_table": 34
+      },
+      "queries": 48,
+      "scripted": {
+        "artifact_private": 48,
+        "artifact_public": 39,
+        "oracle": 48,
+        "support_then_A": 30,
+        "true_private": 48,
+        "true_public": 39
+      },
+      "seed": 20261007
+    },
+    {
+      "aggregator_equals_true_table": {
+        "private": true,
+        "public": true
+      },
+      "artifact_fidelity": {
+        "private": {
+          "conflicting_duplicates": 0,
+          "correct": 38,
+          "extra": 1,
+          "fallback": "A",
+          "malformed_lines": 0,
+          "missing": 1,
+          "true_rows": 40,
+          "wrong_label": 1
+        },
+        "public": {
+          "conflicting_duplicates": 0,
+          "correct": 12,
+          "extra": 0,
+          "fallback": "A",
+          "malformed_lines": 0,
+          "missing": 0,
+          "true_rows": 12,
+          "wrong_label": 0
+        }
+      },
+      "llm": {
+        "direct_private": 40,
+        "direct_public": 36,
+        "distilled_private": 35,
+        "distilled_public": 31,
+        "no_global_strategy": 32,
+        "no_table": 35
+      },
+      "queries": 48,
+      "scripted": {
+        "artifact_private": 46,
+        "artifact_public": 37,
+        "oracle": 48,
+        "support_then_A": 33,
+        "true_private": 48,
+        "true_public": 37
+      },
+      "seed": 20261008
+    },
+    {
+      "aggregator_equals_true_table": {
+        "private": true,
+        "public": true
+      },
+      "artifact_fidelity": {
+        "private": {
+          "conflicting_duplicates": 0,
+          "correct": 39,
+          "extra": 1,
+          "fallback": "A",
+          "malformed_lines": 0,
+          "missing": 1,
+          "true_rows": 40,
+          "wrong_label": 0
+        },
+        "public": {
+          "conflicting_duplicates": 0,
+          "correct": 11,
+          "extra": 0,
+          "fallback": "A",
+          "malformed_lines": 0,
+          "missing": 1,
+          "true_rows": 12,
+          "wrong_label": 0
+        }
+      },
+      "llm": {
+        "direct_private": 46,
+        "direct_public": 40,
+        "distilled_private": 41,
+        "distilled_public": 38,
+        "no_global_strategy": 33,
+        "no_table": 40
+      },
+      "queries": 48,
+      "scripted": {
+        "artifact_private": 48,
+        "artifact_public": 37,
+        "oracle": 48,
+        "support_then_A": 31,
+        "true_private": 48,
+        "true_public": 37
+      },
+      "seed": 20261009
+    }
+  ],
+  "seeds": [
+    20261002,
+    20261003,
+    20261004,
+    20261005,
+    20261006,
+    20261007,
+    20261008,
+    20261009
+  ]
+}

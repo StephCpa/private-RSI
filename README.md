@@ -71,6 +71,10 @@ procedure that improves it.
 | [results/mtops_v1_1_permuted_8seed_summary.md](results/mtops_v1_1_permuted_8seed_summary.md) | Eight-seed v1.1 format-matched permuted-content negative control |
 | [docs/procedure_transfer_preregistered_contract.md](docs/procedure_transfer_preregistered_contract.md) | Opaque-content procedure-transfer estimand and gates |
 | [results/procedure_transfer_contract_audit.md](results/procedure_transfer_contract_audit.md) | Eight-seed no-LLM procedure-transfer contract audit |
+| [docs/06_review_of_v1_1_progress.md](docs/06_review_of_v1_1_progress.md) | Review of v1.1: where the private signal is lost (LLM executor, not distillation), scripted DP retention for the content track, and why the opaque procedure track has no headroom |
+| [results/mtops_v1_1_artifact_audit.md](results/mtops_v1_1_artifact_audit.md) | Artifact fidelity and scripted-vs-LLM signal-loss audit (`python -m analysis.mtops_v1_1_artifact_audit`) |
+| [results/mtops_v1_1_dp_aggregator.md](results/mtops_v1_1_dp_aggregator.md) | Scripted user-level DP count aggregator for the content track (`python -m analysis.mtops_v1_1_dp_aggregator`) |
+| [results/procedure_dsl_audit.md](results/procedure_dsl_audit.md) | Bounded procedure language: opaque-track null, structural-overlap prototype, DP program selection (`python -m analysis.procedure_dsl_audit`) |
 
 ## Key findings so far (analytical, no LLM calls)
 
