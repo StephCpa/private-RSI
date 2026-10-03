@@ -329,5 +329,3 @@ python -m experiments.real_agent_calibration --interactive \
 The command above is an exploratory non-DP calibration command. It must not be
 treated as the full DP-RAE experiment until the strategy contract and G0/G1
 gates are resolved.
-
-
