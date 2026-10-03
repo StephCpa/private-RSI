@@ -1,0 +1,10 @@
+{
+  "files_scanned": 89,
+  "matches": [],
+  "scanner": "mtops-canary-scan",
+  "scope": [
+    "Local serialized artifacts under the supplied paths.",
+    "Remote process memory and logs not copied into this workspace are outside the scan."
+  ],
+  "status": "PASS"
+}

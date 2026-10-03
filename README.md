@@ -48,6 +48,7 @@ procedure that improves it.
 | [results/mtops_v1_strategy_distillation_protocol_audit.md](results/mtops_v1_strategy_distillation_protocol_audit.md) | Frozen intermediate protocol audit and superseded-run boundaries |
 | [results/kernel_information_flow_audit.md](results/kernel_information_flow_audit.md) | In-process kernel data-flow audit; explicitly not an OS sandbox or G0 pass |
 | [results/sandbox_process_audit.md](results/sandbox_process_audit.md) | Killable process sandbox contract audit; Python-level network guard only |
+| [results/mtops_canary_scan.md](results/mtops_canary_scan.md) | Local serialized-artifact canary scan; remote logs are outside scope |
 
 ## Key findings so far (analytical, no LLM calls)
 
