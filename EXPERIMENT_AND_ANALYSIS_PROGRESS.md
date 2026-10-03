@@ -4,7 +4,7 @@
 **Local workspace:** the project root containing this report  
 **Report date:** 2026-10-03 (Asia/Shanghai)  
 **Upstream snapshot:** `StephCpa/private-RSI`, branch `claude/private-recursive-agent-evolution-384c6h`, upstream commit `0e670e0bd2a561673df7a8ee2e4da2a82d1d71fd`  
-**Latest experimental-code commit:** `6117665`
+**Latest experimental-code commit:** `002b18a`
 
 ## Executive status
 
@@ -259,7 +259,7 @@ The latest local verification covered 48 tests:
 | MT-Ops v0 and v1 | 11/11 passed |
 | **Total** | **51/51 passed** |
 
-The experimental code and kernel-boundary audit are recorded at commit `6117665`. The remote v1 usability,
+The experimental code and kernel-boundary audit are recorded at commit `002b18a`. The remote v1 usability,
 corrected permuted-content and corrected full-experience strategy-distillation
 processes completed normally; the final check found no active v1 transfer
 process on the remote host.
@@ -329,4 +329,5 @@ python -m experiments.real_agent_calibration --interactive \
 The command above is an exploratory non-DP calibration command. It must not be
 treated as the full DP-RAE experiment until the strategy contract and G0/G1
 gates are resolved.
+
 
