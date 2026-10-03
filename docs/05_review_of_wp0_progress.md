@@ -98,8 +98,8 @@ All 288 outputs parse as A or B.
 This establishes that the v1 attributes and supplied rule table are usable by
 the selected 7B model. It does not establish private-experience transfer,
 strategy distillation, differential privacy, or a G1 result. The table is a
-usability oracle; the next transfer experiment must compare public and private
-learned tables under the same contract.
+usability oracle; the subsequent transfer experiment compares public and
+private learned tables under the same contract.
 
 The matched-prompt public-private transfer check then used 300 public and 300
 private training tenants, 12 test tenants and 48 queries per condition for
