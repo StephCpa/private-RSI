@@ -12,31 +12,22 @@ import argparse
 import json
 from pathlib import Path
 
-from benchmarks.mtops.v1 import MTopsV1Config, generate_dataset, observed_rule_table
+from benchmarks.mtops.v1 import MTopsV1Config, fixed_length_rule_table, generate_dataset, permuted_rule_table
 
 
 MODEL_DEFAULT = "/home/wlwuser/LZN/models/qwen2.5-7b-instruct"
 
 
-def padded_rule_table(dataset, split: str) -> dict:
-    """Return a fixed-length table, marking unavailable rules as UNKNOWN.
-
-    Public and private conditions therefore have the same prompt length and
-    differ only in which procedures their training split identified.
-    """
-    known = observed_rule_table(dataset, split)
-    return {rule.features: known.get(rule.features, "UNKNOWN") for rule in dataset.rules}
-
-
-def run(model_path: str, device: str, seed: int, n_public: int, n_private: int, n_test: int) -> dict:
+def run(model_path: str, device: str, seed: int, n_public: int, n_private: int, n_test: int, permuted: bool = False) -> dict:
     from experiments.mtops_v1_llm_check import QwenRunner, evaluate
 
     config = MTopsV1Config(seed=seed, n_public=n_public, n_private=n_private, n_test=n_test)
     dataset = generate_dataset(config)
     runner = QwenRunner(model_path, device)
     test = dataset.by_split("test")
-    public_table = padded_rule_table(dataset, "public")
-    private_table = padded_rule_table(dataset, "private")
+    table_factory = permuted_rule_table if permuted else fixed_length_rule_table
+    public_table = table_factory(dataset, "public")
+    private_table = table_factory(dataset, "private")
     conditions = {
         "no_table": evaluate(runner, test, config.support_tasks, None),
         "public_table": evaluate(runner, test, config.support_tasks, public_table),
@@ -44,6 +35,7 @@ def run(model_path: str, device: str, seed: int, n_public: int, n_private: int, 
     }
     return {
         "experiment": "MT-Ops v1 public-private table transfer check",
+        "table_mode": "permuted_content" if permuted else "aligned_content",
         "status": "COMPLETED",
         "model_path": model_path,
         "device": device,
@@ -61,6 +53,7 @@ def run(model_path: str, device: str, seed: int, n_public: int, n_private: int, 
             "Non-DP, one-shot check; public and private tables are learned from disjoint training splits.",
             "The two table prompts have the same fixed length; unavailable procedures are marked UNKNOWN.",
             "All conditions use identical test tenants, support traces, query tasks and decoding settings.",
+            "In permuted_content mode, known procedure labels are independently rotated within each training split.",
         ],
     }
 
@@ -73,9 +66,10 @@ def main() -> None:
     parser.add_argument("--n-public", type=int, default=300)
     parser.add_argument("--n-private", type=int, default=300)
     parser.add_argument("--n-test", type=int, default=12)
+    parser.add_argument("--permuted-content", action="store_true")
     parser.add_argument("--output", default="results/mtops_v1_transfer_matched_seed20261002.json")
     args = parser.parse_args()
-    payload = run(args.model, args.device, args.seed, args.n_public, args.n_private, args.n_test)
+    payload = run(args.model, args.device, args.seed, args.n_public, args.n_private, args.n_test, args.permuted_content)
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")

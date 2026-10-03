@@ -242,6 +242,30 @@ def observed_rule_table(dataset: MTopsV1Dataset, split: str) -> Dict[Feature, st
     return {rule.features: rule.procedure for rule in dataset.rules if rule.rule_id in allowed}
 
 
+def fixed_length_rule_table(dataset: MTopsV1Dataset, split: str) -> Dict[Feature, str]:
+    """Return all rule features, marking procedures absent from a split as unknown."""
+    observed = observed_rule_table(dataset, split)
+    return {rule.features: observed.get(rule.features, "UNKNOWN") for rule in dataset.rules}
+
+
+def permuted_rule_table(dataset: MTopsV1Dataset, split: str, salt: int = 0) -> Dict[Feature, str]:
+    """Permute known procedure labels while preserving table length and marginals.
+
+    This is a content-permutation control: table prompts retain the same
+    feature rows and known/unknown pattern, but the feature-to-procedure
+    mapping is independently rotated within each training split.
+    """
+    table = fixed_length_rule_table(dataset, split)
+    known_features = [feature for feature, procedure in table.items() if procedure != "UNKNOWN"]
+    values = [table[feature] for feature in known_features]
+    if len(values) > 1:
+        offset = random.Random(f"{dataset.config.seed}:{split}:{salt}").randrange(1, len(values))
+        values = values[offset:] + values[:offset]
+    return {feature: procedure for feature, procedure in zip(known_features, values)} | {
+        feature: "UNKNOWN" for feature, procedure in table.items() if procedure == "UNKNOWN"
+    }
+
+
 def support_only_policy(tenant: V1Tenant, task: V1Task) -> str:
     observed = {support.features: support.procedure for support in tenant.tasks[:8]}
     return observed.get(task.features, "A")

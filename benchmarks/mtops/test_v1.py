@@ -1,9 +1,9 @@
 import unittest
 
 try:
-    from .v1 import MTopsV1Config, generate_dataset, run_checks
+    from .v1 import MTopsV1Config, fixed_length_rule_table, generate_dataset, permuted_rule_table, run_checks
 except ImportError:  # discovery with benchmarks/mtops as the start directory
-    from v1 import MTopsV1Config, generate_dataset, run_checks
+    from v1 import MTopsV1Config, fixed_length_rule_table, generate_dataset, permuted_rule_table, run_checks
 
 
 class MTopsV1Test(unittest.TestCase):
@@ -32,6 +32,14 @@ class MTopsV1Test(unittest.TestCase):
         prevalence = run_checks(data)["rule_prevalence"]
         self.assertGreaterEqual(max(prevalence.values()), 0.30)
         self.assertLessEqual(min(prevalence.values()), 0.05)
+
+    def test_permuted_table_preserves_shape_and_marginals(self):
+        data = generate_dataset(MTopsV1Config(n_public=30, n_private=100, n_test=30))
+        original = fixed_length_rule_table(data, "private")
+        permuted = permuted_rule_table(data, "private")
+        self.assertEqual(set(original), set(permuted))
+        self.assertEqual(sorted(original.values()), sorted(permuted.values()))
+        self.assertEqual(sum(value == "UNKNOWN" for value in original.values()), sum(value == "UNKNOWN" for value in permuted.values()))
 
 
 if __name__ == "__main__":
