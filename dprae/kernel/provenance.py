@@ -67,4 +67,3 @@ def check_public_artifacts(
             visited.add(node_id)
 
         visit(artifact_id)
-
