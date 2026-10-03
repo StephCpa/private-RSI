@@ -203,14 +203,31 @@ content so that only the conversion of support evidence into a local policy can
 transfer. No confirmatory LLM rerun should begin until the scripted leakage and
 headroom checks pass under the revised contract.
 
+## Follow-up: v1.1 repair and pre-LLM gate (2026-10-03)
+
+The repaired generator is implemented in `benchmarks/mtops/v1_1.py`. Feature
+assignment, procedure labels and public-pool selection use independent seeds;
+the public pool is exactly balanced at six A and six B rules; and the
+format-matched placebo preserves feature rows, `UNKNOWN` rows and label
+marginals while deranging all known labels.
+
+The eight-seed pre-LLM audit passes: the maximum of three visible-only policies
+is 58.07% against a 60% ceiling, pooled public labels are A=48 and B=48,
+placebo checks pass, and private-only non-fallback headroom is 23.96% against a
+20% floor. This opens the v1.1 calibration gate only. It does not establish
+private-experience transfer, G1, or any DP result.
+
+Frozen protocol: [`docs/mtops_v1_1_preregistered_contract.md`](mtops_v1_1_preregistered_contract.md).
+Audit output: [`results/mtops_v1_1_contract_audit.md`](../results/mtops_v1_1_contract_audit.md).
+
 ## Recommended next steps
 
-1. **Freeze the candidate strategies and evaluation contract.** Replace free-form
-   strategy wording with pre-registered candidates whose claimed interaction is
-   executable by the environment.
-2. **Diagnose and refine the strategy contract before scaling.** Audit mapping
-   coverage, fallback behavior and strategy-content errors while retaining the
-   seed-level G1 criterion.
+1. **Run the small v1.1 non-DP calibration.** Use the isolated v1.1 strategy
+   distillation and matched-prompt transfer runners for the pre-registered
+   seeds, and retain the seed-level G1 criterion.
+2. **Audit every v1.1 artifact before aggregation.** Check dataset hashes,
+   mapping coverage, fallback behavior and strategy-content errors; keep
+   format-matched placebo results separate from the primary estimand.
 3. **Run E0 (DP-ES ε = 0 control)** in parallel. It is independent of MT-Ops.
 4. **Complete the remaining G0 information-flow tests.** The runtime contract
    audit now covers the in-process boundary; add OS/container confinement,

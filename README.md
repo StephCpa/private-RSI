@@ -31,6 +31,8 @@ procedure that improves it.
 > 100% on all eight frozen seeds, so the current v1 LLM transfer result is
 > retained as a diagnostic and should not be interpreted as clean evidence of
 > private-experience learning.
+> MT-Ops v1.1 now removes that deterministic channel and passes its four
+> pre-LLM contract gates; the v1.1 LLM calibration has not yet been run.
 
 ## Read in this order
 
@@ -55,6 +57,8 @@ procedure that improves it.
 | [results/mtops_canary_scan.md](results/mtops_canary_scan.md) | Local serialized-artifact canary scan; remote logs are outside scope |
 | [results/mtops_v1_exact_headroom_audit.md](results/mtops_v1_exact_headroom_audit.md) | Exact support/table/fallback headroom partition for frozen v4 artifacts |
 | [results/mtops_v1_structure_leakage_audit.md](results/mtops_v1_structure_leakage_audit.md) | Feature-only procedure leakage audit for the current v1 generator |
+| [docs/mtops_v1_1_preregistered_contract.md](docs/mtops_v1_1_preregistered_contract.md) | Frozen MT-Ops v1.1 repair, gates and calibration estimand |
+| [results/mtops_v1_1_contract_audit.md](results/mtops_v1_1_contract_audit.md) | Eight-seed no-LLM v1.1 contract audit |
 
 ## Key findings so far (analytical, no LLM calls)
 

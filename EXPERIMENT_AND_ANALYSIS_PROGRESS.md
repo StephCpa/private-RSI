@@ -113,6 +113,24 @@ should rename or permute rule content so that only the way support evidence is
 converted into a local policy can transfer. No new LLM run should be treated as
 confirmatory until these checks pass.
 
+### 2.2 MT-Ops v1.1 pre-LLM contract audit
+
+The v1.1 repair is now implemented in `benchmarks/mtops/v1_1.py`. Feature
+assignment, procedure labels and public-pool selection use independent seeded
+randomization; the 12-rule public pool is balanced at six A and six B labels;
+and the placebo is a deterministic derangement that preserves feature rows,
+unknown rows and A/B marginals. The v1 runner remains unchanged so the frozen
+v1 evidence is not rewritten.
+
+The pre-registered audit uses eight seeds and passes all four gates: the
+maximum of three visible-only policies is 58.07% (ceiling 60%), pooled public
+labels are A=48 and B=48, the format-matched placebo passes all shape and
+derangement checks, and private-only non-fallback headroom is 23.96% (floor
+20%). This permits a small v1.1 calibration run but does not establish G1 or
+authorize a DP experiment.
+
+Evidence and frozen protocol: [`results/mtops_v1_1_contract_audit.md`](results/mtops_v1_1_contract_audit.md), [`docs/mtops_v1_1_preregistered_contract.md`](docs/mtops_v1_1_preregistered_contract.md), and [`analysis/mtops_v1_1_contract_audit.py`](analysis/mtops_v1_1_contract_audit.py).
+
 ## 3. Minimal privacy kernel
 
 `dprae/kernel/` implements a gamma=1 prototype under add/remove adjacency and basic composition. The production-style path is `KernelRuntime`, which keeps tenant payloads, cohort sampling and mechanism randomness inside the kernel. The arithmetic functions remain compatibility primitives for synthetic replay and unit tests. The kernel currently provides:
@@ -321,8 +339,8 @@ The project cannot currently claim:
 
 The next work should preserve the corrected evidence boundary and proceed in this order:
 
-1. **Repair and re-audit the v1.1 benchmark contract before scaling.** Randomize feature assignment independently of procedure labels, randomize or balance the public rule pool, add a format-matched placebo, and retain the exact headroom and feature-only leakage audits. Do not start a confirmatory LLM rerun until the feature-only policy is below the predeclared ceiling.
-2. **Complete the remaining G0 information-flow evidence after the benchmark repair.** The in-process `KernelRuntime` contract audit now passes fixed-shape output, default-on-error, canary/tenant-ID absence, hidden cohort metadata, no caller-injected RNG and a seven-check provenance boundary. The process audit covers a killable worker, scalar output, error suppression, Python-level network denial and minimum-runtime padding. The local canary scanner reports no matches in 89 serialized artifacts. Add OS/container confinement, complete side-channel controls and remote/full-transcript canary coverage before calling the full G0 gate.
+1. **Run the small v1.1 non-DP calibration.** Use the isolated v1.1 strategy-distillation and matched-prompt transfer runners for the pre-registered eight seeds, first checking that every manifest matches the v1.1 contract audit. Keep the result diagnostic until the seed-level G1 criterion is evaluated.
+2. **Complete the remaining G0 information-flow evidence after calibration.** The in-process `KernelRuntime` contract audit now passes fixed-shape output, default-on-error, canary/tenant-ID absence, hidden cohort metadata, no caller-injected RNG and a seven-check provenance boundary. The process audit covers a killable worker, scalar output, error suppression, Python-level network denial and minimum-runtime padding. The local canary scanner reports no matches in 89 serialized artifacts. Add OS/container confinement, complete side-channel controls and remote/full-transcript canary coverage before calling the full G0 gate.
 3. **Extend the kernel only after a reliable non-DP target exists.** Add an audited SVT implementation, explicit Poisson/add-remove accounting and a production RDP/PLD cross-check. Do not apply subsampling amplification to a reused cohort without a matching joint analysis.
 4. **Start DP-RAE experiments only if a corrected non-DP pilot establishes a meaningful gain.** The first DP study should be a small matched-budget pilot, with the ledger covering every private release, restart, diagnostic and selection event.
 
