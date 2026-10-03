@@ -98,6 +98,16 @@ def summarize(
 def markdown(payload: dict) -> str:
     view = payload.get("training_view", "support")
     experience = "all support and query observations" if view == "all" else "support observations only"
+    if view == "all":
+        conclusion = (
+            "The public and private strategies both improve over the no-global reference, but the private strategy is lower than the public strategy in the corrected run. "
+            "This is a negative non-DP transfer result, not a G1 pass; the interval is entirely below zero."
+        )
+    else:
+        conclusion = (
+            "The public and private strategies both improve strongly over the no-global reference, but their difference is unstable across seeds and its confidence interval includes zero. "
+            "The support-only diagnostic therefore does not establish G1."
+        )
     lines = [
         "# MT-Ops v1 eight-seed strategy-distillation pilot",
         "",
@@ -122,7 +132,7 @@ def markdown(payload: dict) -> str:
             f"- Seed bootstrap interval: [{100 * payload['seed_bootstrap_interval_95'][0]:+.2f}, {100 * payload['seed_bootstrap_interval_95'][1]:+.2f}] pp.",
             f"- Mean public-strategy improvement over no-global reference: **{100 * payload['seed_mean_public_minus_no_global']:+.2f} pp**.",
             "",
-            "The strategy artifact is usable: all 1,152 executor outputs parsed as A or B. The public and private strategies both improve strongly over the no-global reference, but their difference is unstable across seeds and the confidence interval includes zero. The pre-registered G1 non-DP meta-gain gate is therefore **not passed**.",
+            f"The strategy artifact is usable: all 1,152 executor outputs parsed as A or B. {conclusion} The pre-registered G1 non-DP meta-gain gate is therefore **not passed**.",
             "",
         ]
     )

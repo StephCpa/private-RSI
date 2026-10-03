@@ -67,7 +67,7 @@ def aggregate_training_observations(
 
 def clean_strategy(text: str) -> str:
     text = re.sub(r"\s+", " ", text).strip()
-    return text[:5000]
+    return text[:8000]
 
 
 def distill_strategy(runner: QwenRunner, observations: str, split: str) -> str:
@@ -84,7 +84,7 @@ def distill_strategy(runner: QwenRunner, observations: str, split: str) -> str:
     return clean_strategy(
         runner.generate(
             prompt,
-            max_new_tokens=512,
+            max_new_tokens=1024,
             system_prompt="You are a careful operations-policy researcher. Follow the requested strategy-artifact format and do not answer a query.",
         )
     )
@@ -175,7 +175,7 @@ def run(
             "training_view": training_view,
             "training_experience": "all support and query observations from training tenants" if training_view == "all" else "support observations only from training tenants",
             "support_view": "feature-level observations only; no tenant IDs, rule IDs or canaries",
-            "strategy_output": "reusable text, capped at 5000 characters",
+            "strategy_output": "reusable text, capped at 8000 characters; generation budget 1024 tokens",
             "executor_input": "strategy + current-tenant support observations + query attributes",
             "decoding": "greedy; one-character A/B output",
             "interactive_retry": False,
