@@ -190,7 +190,7 @@ The latest local verification covered 42 tests:
 |---|---:|
 | DP kernel | 5/5 passed |
 | Kernel × MT-Ops smoke | 1/1 passed |
-| Calibration and replay | 18/18 passed |
+| Calibration and replay | 25/25 passed |
 | MT-Ops v0 and v1 | 11/11 passed |
 | **Total** | **42/42 passed** |
 
