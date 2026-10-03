@@ -40,6 +40,10 @@ class MTopsV1Test(unittest.TestCase):
         self.assertEqual(set(original), set(permuted))
         self.assertEqual(sorted(original.values()), sorted(permuted.values()))
         self.assertEqual(sum(value == "UNKNOWN" for value in original.values()), sum(value == "UNKNOWN" for value in permuted.values()))
+        self.assertTrue(all(
+            original[feature] == "UNKNOWN" or original[feature] != permuted[feature]
+            for feature in original
+        ))
 
 
 if __name__ == "__main__":

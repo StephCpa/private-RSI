@@ -249,18 +249,17 @@ def fixed_length_rule_table(dataset: MTopsV1Dataset, split: str) -> Dict[Feature
 
 
 def permuted_rule_table(dataset: MTopsV1Dataset, split: str, salt: int = 0) -> Dict[Feature, str]:
-    """Permute known procedure labels while preserving table length and marginals.
+    """Break feature-to-procedure alignment while preserving table marginals.
 
     This is a content-permutation control: table prompts retain the same
-    feature rows and known/unknown pattern, but the feature-to-procedure
-    mapping is independently rotated within each training split.
+    feature rows and known/unknown pattern, but every known A/B procedure
+    label is complemented independently within each training split. The
+    complement is used instead of an arbitrary rotation because the v1 rules
+    alternate A/B; an even rotation would accidentally preserve the mapping.
     """
     table = fixed_length_rule_table(dataset, split)
     known_features = [feature for feature, procedure in table.items() if procedure != "UNKNOWN"]
-    values = [table[feature] for feature in known_features]
-    if len(values) > 1:
-        offset = random.Random(f"{dataset.config.seed}:{split}:{salt}").randrange(1, len(values))
-        values = values[offset:] + values[:offset]
+    values = ["B" if table[feature] == "A" else "A" for feature in known_features]
     return {feature: procedure for feature, procedure in zip(known_features, values)} | {
         feature: "UNKNOWN" for feature, procedure in table.items() if procedure == "UNKNOWN"
     }
