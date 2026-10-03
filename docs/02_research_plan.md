@@ -225,7 +225,7 @@ DP-RAE (Mode L, SVT variant)
 input  : public (R, M0, D_pub), private D_1..D_n, fixed plan Π = (cohort rate γ, c, τ, Q_max, ε_SVT, ε_diag, ε_final)
 kernel : K (ledger, CSPRNG, sandboxes, mechanisms)
 M* ← M0;  archive ← {M0};  H ← ∅                       # H = public DP history
-cohort ← K.poisson_cohort(γ)                           # amplification for the whole SVT run
+cohort ← K.poisson_cohort(γ)                           # sampled once; see the amplification note below
 K.svt_init(ε_SVT, c)                                   # threshold noise drawn and held inside K
 for i in 1..Q_max:
     M' ← M*.π_prop(archive, H, D_pub)                  # public information only
@@ -239,6 +239,18 @@ for i in 1..Q_max:
 report ← K.gaussian_release(all users, G(M*), ε_final)  # optional
 return M*, archive, H, report, K.ledger
 ```
+
+**Amplification note (amended 2026-10-02).** The cohort is sampled once and
+reused by every SVT test and diagnostic histogram. Amplification therefore
+applies to the *joint* mechanism run on the cohort:
+
+1. Compose ε_SVT, ε_diag and anything else that touches the cohort into
+   (ε_c, δ_c).
+2. Amplify once: (log(1 + γ(e^{ε_c} − 1)), γ·δ_c).
+
+Never amplify each mechanism separately, and never use the cohort outside that
+joint mechanism. The final report runs on all users and is composed without
+amplification.
 
 ### 3.4 Recursion
 
@@ -360,10 +372,27 @@ cheap to scale to thousands of tenants and is released with fixed seeds.
   one-run audit (E6).
 * **Scale.** n up to 5,000 tenants, with 12 tasks each (8 support / 4 query) by
   default.
-* **Validity checks in WP0.** The non-private oracle (rules known) and
-  public-only agents must differ by ≥ 15 pp. Local-only adaptation with M_0
-  must leave room for improvement. Rule prevalence must be recoverable from
-  simulated data.
+* **Validity checks in WP0 (amended 2026-10-02 after the v0 audit).** Measure
+  every check under the *exact* contract of the LLM experiments: the same
+  prompt-visible information, interaction and retry rules, and scoring.
+  1. *Split separation.* Public tenants are generated from the ω-restricted
+     rule pool; private and test tenants from the full pool.
+  2. *Knowledge-free ceiling.* The best scripted policy that uses no rule
+     knowledge (e.g. "always A, then correct") stays ≥ 15 pp below the oracle.
+  3. *Transfer headroom.* A policy fitted on unlimited private-tenant data beats
+     the same policy fitted on unlimited public-tenant data, and the
+     tenant-only policy, by ≥ 10 pp. This requires two things: query prompts
+     that expose features identifying the governing rule, and query tasks that
+     need shared rules the tenant's own support never showed.
+  4. *Usability.* The LLM given the true rule table beats the LLM without it by
+     ≥ 15 pp.
+  5. *Prevalence.* Some shared rules have prevalence at or above the H5
+     detectability threshold (≥ 0.15).
+
+  Run strategy-distillation pilots only after all five pass.
+  `analysis/headroom_audit.py` implements checks 1–3 for v0. MT-Ops v0 fails
+  check 1, fails check 3, and fails check 2 under the interactive contract (see
+  `results/headroom_audit.md`).
 * **Robustness variant.** A τ-bench-derived version adds tenant-specific policy
   variations to existing retail/airline domains (uses a user simulator; costs
   more).
@@ -526,7 +555,7 @@ Assumes one lead researcher plus one student or engineer, starting October 2026.
 
 | WP | window | deliverables | gate (all must hold to proceed at full scale) |
 |---|---|---|---|
-| **WP0 Foundations** | Oct 5 – Nov 15, 2026 | E0; MT-Ops v0; kernel skeleton (ledger, CSPRNG, sandbox, Gaussian/SVT); throughput benchmark; literature refresh (REUSE, Hyperagents, FederatedSkill full texts) | **G0:** MT-Ops oracle − public-only ≥ 15 pp; sandbox passes information-flow tests |
+| **WP0 Foundations** | Oct 5 – Nov 15, 2026 | E0; MT-Ops v0; kernel skeleton (ledger, CSPRNG, sandbox, Gaussian/SVT); throughput benchmark; literature refresh (REUSE, Hyperagents, FederatedSkill full texts) | **G0:** the five MT-Ops validity checks of §5.1, measured under the exact LLM contract; sandbox passes information-flow tests |
 | **WP1 Calibration** | Nov 15 – Dec 31, 2026 | E1 replay; E2 non-DP pilot; mechanism choice; power update | **G1:** (a) non-DP meta-gain ≥ 5 pp, CI excludes 0; (b) some mechanism at ε ≤ 4, n ≤ 2,000 keeps ≥ 50 % of it in replay; (c) Mode G proxy ρ ≥ 0.5, otherwise Mode G is demoted |
 | **WP2 Prototype** | Jan – Feb 2027 | Full DP-RAE; proofs written; audit harness; baselines B1–B10; **preprint #1** (calibration + E0 + leakage demo + mechanism analysis) | **G2:** information-flow audit and red team pass; baselines reproduce |
 | **WP3 Main study** | Mar – Apr 2027 | E3, E4, E5 | **G3:** H0 and H1a hold at some ε ≤ 4; transplantation gain survives matched budgets |
@@ -622,3 +651,12 @@ highest-information steps come first:
    selection: implement and validate before use, since these would tighten C2.
 4. Whether a TEE-backed sandbox is in scope for a "provider must not see data"
    variant (default: no; stated as a limitation).
+
+## Appendix C: Amendments log
+
+| date | amendment | reason |
+|---|---|---|
+| 2026-10-02 | Cohort amplification applies once to the composition of all mechanisms sharing the cohort (§3.3, spec Lemma 2) | The original pseudocode reused one cohort for SVT and histograms without saying so |
+| 2026-10-02 | G0 redefined as five contract-level validity checks (§5.1, §11) | The v0 audit showed that the first real-agent pilot could not detect a meta gain by construction (`docs/05_review_of_wp0_progress.md`) |
+| 2026-10-02 | Pilot analyses use the seed (one pair of distilled strategies) as the unit: t-interval plus hierarchical bootstrap | The pooled tenant bootstrap ignores between-strategy variance |
+| 2026-10-02 | G1's 5 pp threshold is unchanged | Gates are not relaxed after seeing data; the contract changes instead |

@@ -7,6 +7,7 @@
     "seed": 20261002,
     "selection_events": 10,
     "svt_cutoff": 5,
+    "svt_margin": 0.01,
     "trials": 1000
   },
   "experiment": "E1 utility-matrix mechanism replay",
@@ -26,19 +27,19 @@
     },
     {
       "false_promotion_rate": 0.0,
-      "final_G": 0.09488824388221996,
+      "final_G": 0.2229086315123828,
       "mechanism": "svt",
       "q": 20,
-      "ranking_accuracy": 0.001,
-      "regret": 0.1349852600689866
+      "ranking_accuracy": 0.793,
+      "regret": 0.006964872438823713
     },
     {
       "false_promotion_rate": 0.0,
-      "final_G": 0.22987350395120654,
+      "final_G": 0.2109832162856843,
       "mechanism": "private_selection",
       "q": 20,
-      "ranking_accuracy": 1.0,
-      "regret": 0.0
+      "ranking_accuracy": 0.546,
+      "regret": 0.01889028766552223
     },
     {
       "false_promotion_rate": 0.0,
@@ -50,19 +51,19 @@
     },
     {
       "false_promotion_rate": 0.0,
-      "final_G": 0.09524722382629662,
+      "final_G": 0.21899991525091958,
       "mechanism": "svt",
       "q": 60,
-      "ranking_accuracy": 0.003,
-      "regret": 0.1346262801249099
+      "ranking_accuracy": 0.298,
+      "regret": 0.010873588700286938
     },
     {
       "false_promotion_rate": 0.0,
-      "final_G": 0.22975649154124736,
+      "final_G": 0.2106020564133348,
       "mechanism": "private_selection",
       "q": 60,
-      "ranking_accuracy": 0.972,
-      "regret": 0.00011701240995917895
+      "ranking_accuracy": 0.197,
+      "regret": 0.019271447537871723
     }
   ],
   "utility_matrix_sha256": "060534c4606f1d2e706d75792cc017dc254c3cfb30b0ec43bdd9ff169e29bed0"

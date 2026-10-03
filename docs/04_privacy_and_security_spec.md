@@ -63,6 +63,8 @@ mechanisms with data-independent mixing is DP with the same parameters.
    threshold noise Lap(2/ε) and query noise Lap(4c/ε) on sums. This is ε-DP for
    any number of adaptively chosen sensitivity-1 queries. When run on a Poisson
    cohort of rate γ it is log(1 + γ(e^ε − 1))-DP (Balle, Barthe, Gaboardi 2018).
+   If several mechanisms share one cohort, compose them first and amplify the
+   composition once. Amplifying each one separately is invalid.
 3. **Private selection** (Liu & Talwar 2019, random stopping). Each candidate
    is scored with an ε₀-DP Laplace release and only the best is output; the
    whole selection is 3ε₀-DP regardless of the expected number of candidates.
