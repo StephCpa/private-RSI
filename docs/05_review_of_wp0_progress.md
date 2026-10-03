@@ -78,14 +78,39 @@ public*. Each element maps to a validity check in plan §5.1.
 | Retries | Symmetric for recoverable rules (any wrong action gets feedback); none credited for costly or silent rules | 2 |
 | Content vs procedure | Same-pool test (rule *content* can transfer) and a permuted-pool test (renamed attributes and conditions; only improvement *procedure* can transfer) | H1 claim scope |
 
+## MT-Ops v1 checkpoint
+
+The v1 generator and four scripted checks are implemented in
+`benchmarks/mtops/v1.py`. The default dataset passes split separation,
+knowledge-free headroom, transfer headroom and head/tail prevalence. Its
+scripted success rates are 0.6895 for always-A, 0.6830 for always-B, 0.7465
+for tenant support only, 0.8485 for the public training table, and 1.0000 for
+the private training table and oracle.
+
+The first usability check on the A6000 server compares Qwen2.5-7B on identical
+test tasks with no global table versus the true private-training rule table. It
+uses three seeds, 12 test tenants per seed and 48 one-shot queries per
+condition. The no-table condition scores 99/144 (68.75%); the table condition
+scores 133/144 (92.36%), a descriptive gain of 23.61 percentage points. The
+seed-level mean is +23.61 pp with a 95% t interval of [+2.06, +45.16] pp.
+All 288 outputs parse as A or B.
+
+This establishes that the v1 attributes and supplied rule table are usable by
+the selected 7B model. It does not establish private-experience transfer,
+strategy distillation, differential privacy, or a G1 result. The table is a
+usability oracle; the next transfer experiment must compare public and private
+learned tables under the same contract.
+
 ## Recommended next steps
 
-1. **Implement v1 and extend the audit.** Pass checks 1–3 and 5 with scripted
-   policies only (minutes of CPU).
-2. **Run check 4 on the A6000s.** Compare Qwen2.5-7B with and without the true
-   rule table, three seeds. This is the cheapest LLM run that can falsify the
-   whole approach for this model size.
-3. **Re-run the distillation pilot.** Use ≥ 8 seeds with the seed as the unit,
+1. **Compare learned public and private tables.** Use the same v1 test tenants
+   and three or more seeds to separate cross-tenant transfer from the true-table
+   usability effect.
+2. **Add the permuted-content control.** Rename attributes and conditions while
+   preserving the procedure structure to test whether the gain is content
+   transfer or only procedure following.
+3. **Re-run the distillation pilot only after the table comparison.** Use ≥ 8
+   seeds with the seed as the unit,
    and report the private − public difference both raw and as a share of the
    check-3 headroom.
 4. **Run E0 (DP-ES ε = 0 control)** in parallel. It is independent of MT-Ops.

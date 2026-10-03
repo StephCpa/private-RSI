@@ -8,13 +8,14 @@ self-improvement* of LLM agents. A shared improver learns, under a fixed
 user-level DP budget, from many tenants' private experience, and improves the
 procedure that improves it.
 
-> Status (2026-10-02): **WP0/WP1 calibration.** In addition to the plan and
+> Status (2026-10-03): **WP0/WP1 calibration.** In addition to the plan and
 > analysis documents, the repository contains MT-Ops v0, a minimal fixed-plan
 > kernel and small non-DP Qwen2.5-7B pilots. The pilots show no private-minus-
 > public gain. The headroom audit shows the v0 pilot contract could not show
-> one by construction (see `docs/05_review_of_wp0_progress.md`), so MT-Ops v1
-> comes next. There are no DP-RAE results yet; all performance statements are
-> hypotheses.
+> one by construction (see `docs/05_review_of_wp0_progress.md`). MT-Ops v1 now
+> passes the scripted validity checks, and a three-seed Qwen usability check
+> shows a 23.61 pp gain from supplying the true rule table. This is not a
+> private-transfer or DP result; there are no DP-RAE results yet.
 
 ## Read in this order
 
@@ -28,6 +29,7 @@ procedure that improves it.
 | [docs/05_review_of_wp0_progress.md](docs/05_review_of_wp0_progress.md) | Review of the WP0/WP1 code and pilot: why the first real-agent pilot could not detect a gain, fixes made, and the proposed MT-Ops v1 contract |
 | [results/headroom_audit.md](results/headroom_audit.md) | Scripted headroom audit of the MT-Ops v0 pilot contract (`python -m analysis.headroom_audit`) |
 | [results/mtops_v1_checks.md](results/mtops_v1_checks.md) | Scripted MT-Ops v1 validity checks |
+| [results/mtops_v1_llm_check_3seed_summary.md](results/mtops_v1_llm_check_3seed_summary.md) | Three-seed Qwen2.5-7B v1 usability check |
 
 ## Key findings so far (analytical, no LLM calls)
 

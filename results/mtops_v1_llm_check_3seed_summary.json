@@ -1,0 +1,56 @@
+{
+  "experiment": "MT-Ops v1 three-seed LLM usability summary",
+  "inputs": [
+    {
+      "file": "results/mtops_v1_llm_check_seed20261002.json",
+      "paired_difference": 0.16666666666666666,
+      "queries_per_condition": 48,
+      "seed": 20261002,
+      "tenant_count": 12,
+      "with_table_success_rate": 0.8958333333333334,
+      "with_table_successes": 43,
+      "without_table_success_rate": 0.7291666666666666,
+      "without_table_successes": 35
+    },
+    {
+      "file": "results/mtops_v1_llm_check_seed20261003.json",
+      "paired_difference": 0.20833333333333334,
+      "queries_per_condition": 48,
+      "seed": 20261003,
+      "tenant_count": 12,
+      "with_table_success_rate": 0.9166666666666666,
+      "with_table_successes": 44,
+      "without_table_success_rate": 0.7083333333333334,
+      "without_table_successes": 34
+    },
+    {
+      "file": "results/mtops_v1_llm_check_seed20261004.json",
+      "paired_difference": 0.3333333333333333,
+      "queries_per_condition": 48,
+      "seed": 20261004,
+      "tenant_count": 12,
+      "with_table_success_rate": 0.9583333333333334,
+      "with_table_successes": 46,
+      "without_table_success_rate": 0.625,
+      "without_table_successes": 30
+    }
+  ],
+  "notes": [
+    "The true rule table is a usability oracle, not private experience and not a DP output.",
+    "The seed is the independent unit for the primary interval; pooled query totals are descriptive."
+  ],
+  "pooled_difference": 0.2361111111111111,
+  "pooled_queries_per_condition": 144,
+  "pooled_with_table_successes": 133,
+  "pooled_without_table_successes": 99,
+  "seed_bootstrap_interval_95": [
+    0.16666666666666666,
+    0.3333333333333333
+  ],
+  "seed_mean_difference": 0.23611111111111108,
+  "seed_sd": 0.08673608331108885,
+  "seed_t_interval_95": [
+    0.020646735588516818,
+    0.45157548663370534
+  ]
+}

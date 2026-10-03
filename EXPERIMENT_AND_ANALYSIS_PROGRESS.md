@@ -4,15 +4,15 @@
 **Local workspace:** the project root containing this report  
 **Report date:** 2026-10-03 (Asia/Shanghai)  
 **Upstream snapshot:** `StephCpa/private-RSI`, branch `claude/private-recursive-agent-evolution-384c6h`, upstream commit `0e670e0bd2a561673df7a8ee2e4da2a82d1d71fd`  
-**Latest experimental-code commit:** `df4949a`
+**Latest experimental-code commit:** `9b16286`
 
 ## Executive status
 
-The project has progressed from a written research plan to a reproducible MT-Ops v0 benchmark, a minimal fixed-plan privacy kernel, and small real-agent Mode L calibration runs on an RTX A6000 server. The evidence is useful for narrowing the next experiment, but it does not yet support a DP-RAE performance claim.
+The project has progressed from a written research plan to a reproducible MT-Ops v0 benchmark, a corrected MT-Ops v1 contract, a minimal fixed-plan privacy kernel, and small real-agent calibration runs on an RTX A6000 server. The v0 pilot was structurally blind to the intended transfer effect; the v1 scripted checks now pass, and a separate three-seed Qwen usability check confirms that the model can use a supplied rule table. The evidence still does not support a DP-RAE performance claim.
 
-The most important current result is negative or unresolved: after correcting a one-shot/interactive protocol mismatch and running three independent n=48 seeds, the pooled private-minus-public meta gain is **+0.17 percentage points**, with a tenant-level paired bootstrap 95% interval of **[-1.74, +2.08] percentage points**. The research plan's G1 requirement is a non-DP meta gain of at least 5 percentage points with a confidence interval excluding zero. **G1 is therefore not passed.**
+The original v0 real-agent result remains descriptive only: after correcting its one-shot/interactive mismatch and running three independent n=48 seeds, the pooled private-minus-public difference was **+0.17 percentage points**, with a tenant-level paired bootstrap 95% interval of **[-1.74, +2.08] percentage points**. The headroom audit shows that v0 could not reveal a private-transfer gain by construction. The research plan's G1 requirement is a non-DP meta gain of at least 5 percentage points with a confidence interval excluding zero. **G1 is therefore not passed.**
 
-The MT-Ops performance subcheck of G0 passes, but the full G0 gate is still open because sandbox information-flow and isolation tests have not been implemented. The project should remain in calibration and protocol-correction work before any full DP-RAE experiment.
+The MT-Ops v1 scripted checks pass, and the exploratory Qwen usability check exceeds the 15 percentage-point true-table criterion on all three seeds. The full G0 gate is still open because the exact transfer contract, sandbox information-flow and isolation tests have not been completed. The project should remain in calibration and protocol-correction work before any full DP-RAE experiment.
 
 ## Research question and planned gates
 
@@ -22,8 +22,8 @@ The current work follows the early gates in `docs/02_research_plan.md`:
 
 | Gate | Planned requirement | Current status |
 |---|---|---|
-| G0 performance subcheck | Oracle minus public-only success is at least 15 percentage points | **Pass** on MT-Ops v0 at overlap 0.0: 100.0 pp |
-| G0 full gate | Performance subcheck plus sandbox information-flow tests | **Open**; isolation, side-channel and provenance tests are not complete |
+| G0 contract validity | Five MT-Ops v1 checks under the exact LLM contract | **Partial**; scripted checks pass and the exploratory true-table usability check passes, but transfer and sandbox evidence remain open |
+| G0 full gate | Contract validity plus sandbox information-flow tests | **Open**; isolation, side-channel and provenance tests are not complete |
 | G1 non-DP meta gain | At least 5 percentage points with a confidence interval excluding zero | **Not passed**; pooled three-seed interactive estimate is +0.17 pp, interval includes zero |
 | G1 mechanism retention | At least one mechanism retains at least 50% of a reliable non-DP gain at ε ≤ 4 and n ≤ 2,000 | **Not started**; the non-DP gain gate is not established |
 | G2 prototype gate | Kernel audit, red team and baseline reproduction | **Not passed**; the current kernel is a minimal prototype |
@@ -44,15 +44,15 @@ The E1 replay in `analysis/replay.py` uses one synthetic utility matrix with 60 
 | Q | Mechanism | Ranking accuracy | Regret | False promotion | Final G |
 |---:|---|---:|---:|---:|---:|
 | 20 | Release-all | 0.815 | 0.0058 | 0.000 | 0.2241 |
-| 20 | Simplified SVT replay | 0.001 | 0.1350 | 0.000 | 0.0949 |
-| 20 | Private selection replay | 1.000 | 0.0000 | 0.000 | 0.2299 |
+| 20 | SVT (sequential, vs incumbent) | 0.793 | 0.0070 | 0.000 | 0.2229 |
+| 20 | Private selection (sequential, incumbent carried) | 0.546 | 0.0189 | 0.000 | 0.2110 |
 | 60 | Release-all | 0.228 | 0.0125 | 0.000 | 0.2174 |
-| 60 | Simplified SVT replay | 0.003 | 0.1346 | 0.000 | 0.0952 |
-| 60 | Private selection replay | 0.972 | 0.0001 | 0.000 | 0.2298 |
+| 60 | SVT (sequential, vs incumbent) | 0.298 | 0.0109 | 0.000 | 0.2190 |
+| 60 | Private selection (sequential, incumbent carried) | 0.197 | 0.0193 | 0.000 | 0.2106 |
 
-These numbers only prioritize implementation work. The matrix is synthetic, the SVT implementation is simplified, and the ranking metric is not sufficient to characterize sequential threshold acceptance. The replay must not be used to claim that private selection is superior in recursive agent evolution.
+These numbers only prioritize implementation work. The matrix is synthetic and the ranking metric is not sufficient to characterize sequential threshold acceptance. The earlier mechanism ranking was invalid because the replay used oracle means for private selection and a fixed baseline without threshold noise for SVT; both bugs are now fixed. The replay must not be used to claim a mechanism advantage in recursive agent evolution.
 
-## 2. MT-Ops v0 and G0 performance evidence
+## 2. MT-Ops v0 retrospective and MT-Ops v1 validity evidence
 
 `benchmarks/mtops/` now contains a deterministic, LLM-free multi-tenant operations simulator with:
 
@@ -65,7 +65,7 @@ These numbers only prioritize implementation work. The matrix is synthetic, the 
 - canary values stored in task records but excluded from the public agent interface;
 - oracle, public-only and local-adaptation evaluators.
 
-At overlap 0.0, the test-query results are:
+At overlap 0.0, the v0 test-query results are:
 
 | Evaluator | Query success |
 |---|---:|
@@ -75,9 +75,13 @@ At overlap 0.0, the test-query results are:
 
 The oracle minus public-only gap is 1.000, exceeding the planned 0.15 threshold. An overlap sweep gives public-only success rates of 0.000, 0.129, 0.249, 0.383 and 0.485 at overlap 0.00, 0.25, 0.50, 0.75 and 1.00 respectively, while the oracle remains 1.000.
 
-This establishes a controllable benchmark validity gap and a working overlap knob. It does **not** establish that an LLM can exploit private experience, that a shared improver transfers, or that the full G0 information-flow gate passes.
+The headroom audit later showed that this v0 gap was definitional: public and private tenants were exchangeable, the hidden label was not identified by visible features, and the interactive protocol had a perfect knowledge-free retry policy. The v0 result therefore does not establish an LLM transfer opportunity or a valid G0 result.
 
-Evidence: [`results/mtops_g0.md`](results/mtops_g0.md), [`results/mtops_g0.json`](results/mtops_g0.json), and [`results/mtops_validity_sweep.json`](results/mtops_validity_sweep.json).
+MT-Ops v1 implements the corrected contract in `benchmarks/mtops/v1.py`. Its four scripted checks pass. Under the default configuration, the public training table scores 0.8485 on test queries, the private training table scores 1.0000, and tenant support alone scores 0.7465. The v1 result file records the split separation, knowledge-free gap, transfer headroom and prevalence checks.
+
+Evidence: [`results/mtops_v1_checks.md`](results/mtops_v1_checks.md) and [`docs/05_review_of_wp0_progress.md`](docs/05_review_of_wp0_progress.md).
+
+Historical v0 evidence: [`results/mtops_g0.md`](results/mtops_g0.md), [`results/mtops_g0.json`](results/mtops_g0.json), and [`results/mtops_validity_sweep.json`](results/mtops_validity_sweep.json).
 
 ## 3. Minimal privacy kernel
 
@@ -126,48 +130,59 @@ The pooled result is far below the 5 pp G1 threshold and its interval includes z
 
 Evidence: [`results/real_agent_calibration_interactive_3seed_summary.md`](results/real_agent_calibration_interactive_3seed_summary.md), the three seed-specific JSON files in `results/`, and [`experiments/real_agent_calibration.py`](experiments/real_agent_calibration.py).
 
+### 4.3 MT-Ops v1 Qwen usability check
+
+The first v1 LLM check compares a direct one-shot Qwen2.5-7B policy with no global rule table against the same policy given the true private-training rule table. It uses 12 test tenants and 48 queries per condition for each of three seeds. The no-table condition scores 99/144 (68.75%), while the true-table condition scores 133/144 (92.36%), for a descriptive gain of **+23.61 percentage points**. The seed-level 95% t interval is **[+2.06, +45.16] percentage points**, and all 288 outputs parse as A or B.
+
+This is a usability check for the v1 attributes and rule-table representation. The true table is a supplied oracle, so the result is not evidence of private-experience transfer, strategy distillation, privacy or G1.
+
+Evidence: [`results/mtops_v1_llm_check_3seed_summary.md`](results/mtops_v1_llm_check_3seed_summary.md) and [`experiments/mtops_v1_llm_check.py`](experiments/mtops_v1_llm_check.py).
+
 ## 5. Verification status
 
-The latest local verification covered 29 tests:
+The latest local verification covered 41 tests:
 
 | Suite | Result |
 |---|---:|
 | DP kernel | 5/5 passed |
 | Kernel × MT-Ops smoke | 1/1 passed |
 | Calibration and replay | 18/18 passed |
-| MT-Ops v0 | 5/5 passed |
-| **Total** | **29/29 passed** |
+| MT-Ops v0 and v1 | 10/10 passed |
+| **Total** | **41/41 passed** |
 
-The working tree is clean at commit `df4949a`. The remote real-agent processes completed normally; the final check found no active `real_agent_calibration` process on the remote host.
+The experimental code is recorded at commit `9b16286`. The remote v1 usability processes completed normally; the final check found no active v1 calibration process on the remote host.
 
 ## 6. Current claims and non-claims
 
 The project can currently claim:
 
-1. A deterministic MT-Ops v0 simulator exists and exposes a measurable oracle/public-only validity gap.
-2. The public/private overlap parameter changes public-only performance monotonically in the current simulator.
+1. A deterministic MT-Ops v0 simulator exists and its structural limitations are documented.
+2. MT-Ops v1 passes the four scripted validity checks for split separation, knowledge-free headroom, transfer headroom and prevalence.
 3. A minimal gamma=1 fixed-plan kernel can clip contributions, reserve basic-composition budget and produce Gaussian or winner-only outputs under unit tests.
-4. Small Qwen2.5-7B Mode L pilots are executable on the A6000 server, and the corrected interactive protocol has been evaluated across three seeds.
+4. Qwen2.5-7B can use the MT-Ops v1 request attributes and supplied true rule table, with a +23.61 pp three-seed usability gain.
+5. Small Qwen2.5-7B Mode L pilots are executable on the A6000 server, and the corrected interactive protocol has been evaluated across three seeds.
 
 The project cannot currently claim:
 
 1. That private experience produces a reliable positive meta gain.
 2. That G1 has passed.
 3. That the full G0 information-flow requirement has passed.
-4. That the simplified replay mechanism ranking predicts recursive agent evolution.
-5. That the current kernel provides the complete DP-RAE privacy guarantee.
-6. That any reported pilot number is a DP result; all real-agent calibration runs were non-DP.
+4. That the v1 true-table usability gain is a private-experience transfer result.
+5. That the corrected replay mechanism ranking predicts recursive agent evolution.
+6. That the current kernel provides the complete DP-RAE privacy guarantee.
+7. That any reported pilot number is a DP result; all real-agent calibration runs were non-DP.
 
 ## 7. Next experimental sequence
 
 The next work should preserve the corrected evidence boundary and proceed in this order:
 
-1. **Freeze the candidate strategies and evaluation contract.** Replace free-form strategy wording as the primary comparison with pre-registered strategy candidates. Ensure each candidate's claimed interaction is exactly executable by the environment.
-2. **Separate strategy learning from task difficulty.** Keep the same reference agent, tenant support set, query set, tool-call budget and decoding settings across public and private strategy conditions. Add a shared-rule permutation diagnostic without exposing private rule values to the proposer.
-3. **Repeat the non-DP pilot only after the contract is frozen.** Use multiple seeds and report tenant-level paired differences, query-level totals, bootstrap intervals and all failed/invalid executions.
-4. **Complete G0 information-flow evidence.** Add sandbox confinement, fixed-shape output, error sanitization, canary transcript scans, no-network checks, provenance checks and hidden-cohort checks.
-5. **Extend the kernel only after the non-DP target is reliable.** Add an audited SVT implementation, explicit Poisson/add-remove accounting and a production RDP/PLD cross-check. Do not apply subsampling amplification to a reused cohort without a matching joint analysis.
-6. **Start DP-RAE experiments only if the corrected non-DP pilot establishes a meaningful gain.** The first DP study should be a small matched-budget pilot, with the ledger covering every private release, restart, diagnostic and selection event.
+1. **Compare learned public and private v1 tables.** Use the same test tenants and decoding settings to test cross-tenant transfer after the true-table usability check.
+2. **Add the permuted-content control.** Rename attributes and conditions while preserving procedures to separate rule-content transfer from generic procedure following.
+3. **Freeze the candidate strategies and evaluation contract.** Replace free-form strategy wording as the primary comparison with pre-registered strategy candidates. Ensure each candidate's claimed interaction is exactly executable by the environment.
+4. **Repeat the non-DP pilot only after the v1 contract is frozen.** Use at least eight seeds and report seed-level differences, tenant-level paired differences, query totals, bootstrap intervals and all failed/invalid executions.
+5. **Complete G0 information-flow evidence.** Add sandbox confinement, fixed-shape output, error sanitization, canary transcript scans, no-network checks, provenance checks and hidden-cohort checks.
+6. **Extend the kernel only after the non-DP target is reliable.** Add an audited SVT implementation, explicit Poisson/add-remove accounting and a production RDP/PLD cross-check. Do not apply subsampling amplification to a reused cohort without a matching joint analysis.
+7. **Start DP-RAE experiments only if the corrected non-DP pilot establishes a meaningful gain.** The first DP study should be a small matched-budget pilot, with the ledger covering every private release, restart, diagnostic and selection event.
 
 ## Reproducibility commands
 
@@ -180,8 +195,10 @@ python -m unittest discover -s tests -v
 python -m unittest discover -s benchmarks/mtops -v
 python benchmarks/mtops/run_g0.py
 python benchmarks/mtops/run_validity_sweep.py
+python benchmarks/mtops/run_v1_checks.py
 python -m analysis.replay
 python -m analysis.summarize_interactive_calibration
+python -m analysis.summarize_mtops_v1_llm_check
 ```
 
 The real-agent runner requires the remote environment and Qwen2.5-7B-Instruct:

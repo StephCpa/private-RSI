@@ -1,0 +1,183 @@
+{
+  "conditions": {
+    "with_private_true_rule_table": {
+      "parse_rate": 1.0,
+      "parsed_outputs": 48,
+      "queries": 48,
+      "success_rate": 0.9583333333333334,
+      "successes": 46,
+      "tenant_rows": [
+        {
+          "queries": 4,
+          "successes": 3,
+          "tenant_id": "test-00048"
+        },
+        {
+          "queries": 4,
+          "successes": 4,
+          "tenant_id": "test-00049"
+        },
+        {
+          "queries": 4,
+          "successes": 4,
+          "tenant_id": "test-00050"
+        },
+        {
+          "queries": 4,
+          "successes": 4,
+          "tenant_id": "test-00051"
+        },
+        {
+          "queries": 4,
+          "successes": 4,
+          "tenant_id": "test-00052"
+        },
+        {
+          "queries": 4,
+          "successes": 4,
+          "tenant_id": "test-00053"
+        },
+        {
+          "queries": 4,
+          "successes": 4,
+          "tenant_id": "test-00054"
+        },
+        {
+          "queries": 4,
+          "successes": 3,
+          "tenant_id": "test-00055"
+        },
+        {
+          "queries": 4,
+          "successes": 4,
+          "tenant_id": "test-00056"
+        },
+        {
+          "queries": 4,
+          "successes": 4,
+          "tenant_id": "test-00057"
+        },
+        {
+          "queries": 4,
+          "successes": 4,
+          "tenant_id": "test-00058"
+        },
+        {
+          "queries": 4,
+          "successes": 4,
+          "tenant_id": "test-00059"
+        }
+      ]
+    },
+    "without_true_rule_table": {
+      "parse_rate": 1.0,
+      "parsed_outputs": 48,
+      "queries": 48,
+      "success_rate": 0.625,
+      "successes": 30,
+      "tenant_rows": [
+        {
+          "queries": 4,
+          "successes": 2,
+          "tenant_id": "test-00048"
+        },
+        {
+          "queries": 4,
+          "successes": 2,
+          "tenant_id": "test-00049"
+        },
+        {
+          "queries": 4,
+          "successes": 3,
+          "tenant_id": "test-00050"
+        },
+        {
+          "queries": 4,
+          "successes": 3,
+          "tenant_id": "test-00051"
+        },
+        {
+          "queries": 4,
+          "successes": 2,
+          "tenant_id": "test-00052"
+        },
+        {
+          "queries": 4,
+          "successes": 3,
+          "tenant_id": "test-00053"
+        },
+        {
+          "queries": 4,
+          "successes": 1,
+          "tenant_id": "test-00054"
+        },
+        {
+          "queries": 4,
+          "successes": 2,
+          "tenant_id": "test-00055"
+        },
+        {
+          "queries": 4,
+          "successes": 3,
+          "tenant_id": "test-00056"
+        },
+        {
+          "queries": 4,
+          "successes": 3,
+          "tenant_id": "test-00057"
+        },
+        {
+          "queries": 4,
+          "successes": 3,
+          "tenant_id": "test-00058"
+        },
+        {
+          "queries": 4,
+          "successes": 3,
+          "tenant_id": "test-00059"
+        }
+      ]
+    }
+  },
+  "dataset_manifest": {
+    "config": {
+      "n_private": 24,
+      "n_public": 24,
+      "n_test": 12,
+      "public_pool_size": 12,
+      "query_tasks": 4,
+      "seed": 20261004,
+      "shared_rules": 40,
+      "support_tasks": 8,
+      "tenant_rule_max": 6,
+      "tenant_rule_min": 4,
+      "transfer_fraction": 0.75,
+      "zipf_exponent": 0.9
+    },
+    "public_rule_ids": [
+      "rule_00",
+      "rule_01",
+      "rule_02",
+      "rule_03",
+      "rule_04",
+      "rule_05",
+      "rule_06",
+      "rule_07",
+      "rule_08",
+      "rule_09",
+      "rule_10",
+      "rule_11"
+    ],
+    "sha256": "3f513a4d51de063c6b100c9dcf39723591ad12de68eb29da9c39d853ebea5d2d",
+    "tenant_count": 60
+  },
+  "device": "cuda:0",
+  "experiment": "MT-Ops v1 LLM usability check",
+  "model_path": "/home/wlwuser/LZN/models/qwen2.5-7b-instruct",
+  "notes": [
+    "Non-DP, one-shot check; no strategy distillation and no privacy release.",
+    "Both conditions use identical test tenants, support traces, query tasks and decoding settings."
+  ],
+  "private_table_minus_no_table": 0.33333333333333337,
+  "status": "COMPLETED"
+}
