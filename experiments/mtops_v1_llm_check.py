@@ -45,9 +45,12 @@ class QwenRunner:
         )
         self.model.eval()
 
-    def generate(self, prompt: str) -> str:
+    def generate(self, prompt: str, max_new_tokens: int = 4, system_prompt: str | None = None) -> str:
         messages = [
-            {"role": "system", "content": "You are a careful operations-policy assistant. Return exactly one character: A or B."},
+            {
+                "role": "system",
+                "content": system_prompt or "You are a careful operations-policy assistant. Return exactly one character: A or B.",
+            },
             {"role": "user", "content": prompt},
         ]
         encoded = self.tokenizer.apply_chat_template(
@@ -56,7 +59,7 @@ class QwenRunner:
         with torch.inference_mode():
             output = self.model.generate(
                 encoded,
-                max_new_tokens=4,
+                max_new_tokens=max_new_tokens,
                 do_sample=False,
                 pad_token_id=self.tokenizer.eos_token_id,
             )

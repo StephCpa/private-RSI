@@ -53,7 +53,7 @@ def run(model_path: str, device: str, seed: int, n_public: int, n_private: int, 
             "Non-DP, one-shot check; public and private tables are learned from disjoint training splits.",
             "The two table prompts have the same fixed length; unavailable procedures are marked UNKNOWN.",
             "All conditions use identical test tenants, support traces, query tasks and decoding settings.",
-            "In permuted_content mode, known procedure labels are independently rotated within each training split.",
+            "In permuted_content mode, every known procedure label is complemented within each training split to break feature-to-procedure alignment.",
         ],
     }
 
