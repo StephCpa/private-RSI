@@ -182,6 +182,38 @@ alternative method. It does not establish G1 or DP-RAE utility.
 
 Evidence: [`results/mtops_v1_permuted_3seed_summary.md`](results/mtops_v1_permuted_3seed_summary.md), [`analysis/summarize_mtops_v1_permuted.py`](analysis/summarize_mtops_v1_permuted.py), and [`experiments/mtops_v1_transfer_check.py`](experiments/mtops_v1_transfer_check.py).
 
+### 4.6 MT-Ops v1 eight-seed strategy-distillation pilot
+
+The strategy contract was then frozen and evaluated end to end. The distiller
+received only aggregated feature-level support observations from one training
+split; tenant IDs, rule IDs and canaries were removed. The executor received
+the resulting strategy artifact, the current tenant's support observations and
+the query attributes, with greedy decoding and no retry. The same 300 public
+tenants, 300 private tenants, 12 test tenants and 48 queries per condition
+were used for eight seeds.
+
+| Seed | No global strategy | Public strategy | Private strategy | Private - public |
+|---:|---:|---:|---:|---:|
+| 20261002 | 29/48 = 0.6042 | 45/48 = 0.9375 | 46/48 = 0.9583 | +2.08 pp |
+| 20261003 | 34/48 = 0.7083 | 39/48 = 0.8125 | 47/48 = 0.9792 | +16.67 pp |
+| 20261004 | 26/48 = 0.5417 | 45/48 = 0.9375 | 38/48 = 0.7917 | -14.58 pp |
+| 20261005 | 31/48 = 0.6458 | 48/48 = 1.0000 | 46/48 = 0.9583 | -4.17 pp |
+| 20261006 | 28/48 = 0.5833 | 45/48 = 0.9375 | 45/48 = 0.9375 | +0.00 pp |
+| 20261007 | 28/48 = 0.5833 | 39/48 = 0.8125 | 44/48 = 0.9167 | +10.42 pp |
+| 20261008 | 29/48 = 0.6042 | 35/48 = 0.7292 | 40/48 = 0.8333 | +10.42 pp |
+| 20261009 | 36/48 = 0.7500 | 44/48 = 0.9167 | 46/48 = 0.9583 | +4.17 pp |
+
+The pooled rates were 241/384 for no global strategy, 340/384 for public
+strategy and 352/384 for private strategy. The pooled private-minus-public
+difference was **+3.12 pp**; the seed-level mean was **+3.13 pp**, with a 95%
+t interval of **[-5.04, +11.29] pp** and a seed bootstrap interval of
+**[-3.39, +9.11] pp**. All 1,152 executor outputs parsed as A or B. Both
+strategy artifacts improved substantially over the no-global reference, but
+the private-minus-public contrast was unstable and its interval included zero.
+The pre-registered G1 non-DP meta-gain gate is therefore **not passed**.
+
+Evidence: [`results/mtops_v1_strategy_distillation_8seed_summary.md`](results/mtops_v1_strategy_distillation_8seed_summary.md), [`analysis/summarize_mtops_v1_strategy_distillation.py`](analysis/summarize_mtops_v1_strategy_distillation.py), and [`experiments/mtops_v1_strategy_distillation.py`](experiments/mtops_v1_strategy_distillation.py).
+
 ## 5. Verification status
 
 The latest local verification covered 42 tests:
@@ -194,7 +226,10 @@ The latest local verification covered 42 tests:
 | MT-Ops v0 and v1 | 11/11 passed |
 | **Total** | **42/42 passed** |
 
-The experimental code is recorded at commit `c7196f4`. The remote v1 usability and corrected permuted-content processes completed normally; the final check found no active v1 transfer process on the remote host.
+The experimental code is recorded at commit `e41546a`. The remote v1 usability,
+corrected permuted-content and eight-seed strategy-distillation processes
+completed normally; the final check found no active v1 transfer process on the
+remote host.
 
 ## 6. Current claims and non-claims
 
@@ -206,6 +241,7 @@ The project can currently claim:
 4. Qwen2.5-7B can use the MT-Ops v1 request attributes and supplied true rule table, with a +23.61 pp three-seed usability gain.
 5. The matched-prompt public/private table comparison is reproducible across eight seeds (+7.81 pp pooled private-minus-public).
 6. The corrected permuted-content control shows low table performance after feature-to-procedure alignment is broken, while the private-minus-public difference remains small across three seeds.
+7. The v1 strategy-distillation artifact is executable and improves over the no-global reference, but the eight-seed private-minus-public contrast is not reliable enough for G1.
 
 The project cannot currently claim:
 
@@ -221,11 +257,10 @@ The project cannot currently claim:
 
 The next work should preserve the corrected evidence boundary and proceed in this order:
 
-1. **Freeze the candidate strategies and evaluation contract.** Replace free-form strategy wording as the primary comparison with pre-registered strategy candidates. Ensure each candidate's claimed interaction is exactly executable by the environment.
-2. **Repeat the non-DP pilot only after the v1 contract is frozen.** Use at least eight seeds and report seed-level differences, tenant-level paired differences, query totals, bootstrap intervals and all failed/invalid executions.
-3. **Complete G0 information-flow evidence.** Add sandbox confinement, fixed-shape output, error sanitization, canary transcript scans, no-network checks, provenance checks and hidden-cohort checks.
-4. **Extend the kernel only after the non-DP target is reliable.** Add an audited SVT implementation, explicit Poisson/add-remove accounting and a production RDP/PLD cross-check. Do not apply subsampling amplification to a reused cohort without a matching joint analysis.
-5. **Start DP-RAE experiments only if the corrected non-DP pilot establishes a meaningful gain.** The first DP study should be a small matched-budget pilot, with the ledger covering every private release, restart, diagnostic and selection event.
+1. **Diagnose and refine the strategy contract before scaling.** Audit strategy artifacts for mapping coverage, fallback behavior and content errors; keep the seed-level G1 criterion unchanged.
+2. **Complete G0 information-flow evidence.** Add sandbox confinement, fixed-shape output, error sanitization, canary transcript scans, no-network checks, provenance checks and hidden-cohort checks.
+3. **Extend the kernel only after a reliable non-DP target exists.** Add an audited SVT implementation, explicit Poisson/add-remove accounting and a production RDP/PLD cross-check. Do not apply subsampling amplification to a reused cohort without a matching joint analysis.
+4. **Start DP-RAE experiments only if a corrected non-DP pilot establishes a meaningful gain.** The first DP study should be a small matched-budget pilot, with the ledger covering every private release, restart, diagnostic and selection event.
 
 ## Reproducibility commands
 
@@ -244,6 +279,7 @@ python -m analysis.summarize_interactive_calibration
 python -m analysis.summarize_mtops_v1_llm_check
 python -m analysis.summarize_mtops_v1_transfer
 python -m analysis.summarize_mtops_v1_permuted
+python -m analysis.summarize_mtops_v1_strategy_distillation
 ```
 
 The real-agent runner requires the remote environment and Qwen2.5-7B-Instruct:

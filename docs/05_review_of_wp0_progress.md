@@ -122,15 +122,26 @@ strategy-distillation result or a G1 pass.
 
 Evidence: [`results/mtops_v1_permuted_3seed_summary.md`](../results/mtops_v1_permuted_3seed_summary.md).
 
+The frozen strategy-distillation pilot then used the same eight-seed public and
+private training splits. Its strategy artifact contract removed tenant IDs,
+rule IDs and canaries from the distiller input; the executor saw only the
+artifact, current-tenant support observations and query attributes. The pooled
+no-global, public-strategy and private-strategy totals were 241/384, 340/384
+and 352/384. The private-minus-public difference was +3.12 pp, with a
+seed-level 95% t interval of [-5.04, +11.29] pp. All 1,152 outputs parsed, and
+both learned strategies improved over the no-global reference, but the primary
+contrast was unstable. G1 remains unpassed.
+
+Evidence: [`results/mtops_v1_strategy_distillation_8seed_summary.md`](../results/mtops_v1_strategy_distillation_8seed_summary.md).
+
 ## Recommended next steps
 
 1. **Freeze the candidate strategies and evaluation contract.** Replace free-form
    strategy wording with pre-registered candidates whose claimed interaction is
    executable by the environment.
-2. **Re-run the distillation pilot only after the table comparison.** Use ≥ 8
-   seeds with the seed as the unit,
-   and report the private − public difference both raw and as a share of the
-   check-3 headroom.
+2. **Diagnose and refine the strategy contract before scaling.** Audit mapping
+   coverage, fallback behavior and strategy-content errors while retaining the
+   seed-level G1 criterion.
 3. **Run E0 (DP-ES ε = 0 control)** in parallel. It is independent of MT-Ops.
 4. **Restructure the kernel API (F7, F8)** before the G0 information-flow
    tests; it is a prerequisite for them.
