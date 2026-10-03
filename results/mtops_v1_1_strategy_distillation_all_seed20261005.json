@@ -1,0 +1,311 @@
+{
+  "contract": {
+    "decoding": "greedy; one-character A/B output",
+    "executor_input": "strategy + current-tenant support observations + query attributes",
+    "interactive_retry": false,
+    "strategy_output": "compact mapping lines plus FALLBACK|A, capped at 8000 characters; generation budget 768 tokens",
+    "support_view": "feature-level observations only; no tenant IDs, rule IDs or canaries",
+    "training_experience": "all support and query observations from training tenants",
+    "training_view": "all"
+  },
+  "dataset_manifest": {
+    "config": {
+      "feature_seed": 1101,
+      "n_private": 300,
+      "n_public": 300,
+      "n_test": 12,
+      "procedure_seed": 2201,
+      "public_pool_seed": 3301,
+      "public_pool_size": 12,
+      "query_tasks": 4,
+      "seed": 20261005,
+      "shared_rules": 40,
+      "support_tasks": 8,
+      "tenant_rule_max": 6,
+      "tenant_rule_min": 4,
+      "transfer_fraction": 0.75,
+      "zipf_exponent": 0.9
+    },
+    "public_rule_ids": [
+      "rule_00",
+      "rule_01",
+      "rule_02",
+      "rule_08",
+      "rule_11",
+      "rule_14",
+      "rule_22",
+      "rule_25",
+      "rule_26",
+      "rule_30",
+      "rule_33",
+      "rule_35"
+    ],
+    "sha256": "e9aedb2220eb31ff5d4a0801d3c8628adf3a074e3cf8da207ae302a0e6d4c7ef",
+    "tenant_count": 612
+  },
+  "device": "cuda:3",
+  "evaluations": {
+    "no_global_strategy": {
+      "parse_rate": 1.0,
+      "parsed_outputs": 48,
+      "queries": 48,
+      "success_rate": 0.625,
+      "successes": 30,
+      "tenant_rows": [
+        {
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00600"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00601"
+        },
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00602"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00603"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00604"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00605"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00606"
+        },
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00607"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00608"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00609"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00610"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00611"
+        }
+      ]
+    },
+    "private_strategy": {
+      "parse_rate": 1.0,
+      "parsed_outputs": 48,
+      "queries": 48,
+      "success_rate": 0.7291666666666666,
+      "successes": 35,
+      "tenant_rows": [
+        {
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00600"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00601"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00602"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00603"
+        },
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00604"
+        },
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00605"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00606"
+        },
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00607"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00608"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00609"
+        },
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00610"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00611"
+        }
+      ]
+    },
+    "public_strategy": {
+      "parse_rate": 1.0,
+      "parsed_outputs": 48,
+      "queries": 48,
+      "success_rate": 0.6666666666666666,
+      "successes": 32,
+      "tenant_rows": [
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00600"
+        },
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00601"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00602"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00603"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00604"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00605"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00606"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00607"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00608"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00609"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00610"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00611"
+        }
+      ]
+    }
+  },
+  "experiment": "MT-Ops v1.1 non-DP strategy-distillation pilot",
+  "model_path": "/home/wlwuser/LZN/models/qwen2.5-7b-instruct",
+  "notes": [
+    "Non-DP, one-shot v1 strategy-distillation calibration; the seed is the independent unit.",
+    "The private strategy is distilled from private training tenants and evaluated on held-out test tenants.",
+    "The no-global condition is a reference baseline; the primary contrast is private strategy minus public strategy.",
+    "This pilot does not establish G1 until the pre-registered multi-seed criterion is met."
+  ],
+  "private_minus_public": 0.0625,
+  "public_minus_no_global": 0.04166666666666663,
+  "status": "COMPLETED",
+  "strategies": {
+    "private": "account|high|premium|east|web|A\naccount|high|premium|west|phone|A\naccount|high|premium|west|web|B\naccount|low|enterprise|north|web|A\naccount|low|enterprise|south|web|A\naccount|low|premium|west|phone|A\naccount|low|standard|east|web|B\naccount|medium|enterprise|south|partner|A\naccount|medium|standard|east|web|A\nbilling|high|premium|north|partner|B\nbilling|high|standard|east|partner|B\nbilling|low|enterprise|east|phone|B\nbilling|low|premium|south|phone|B\nbilling|medium|enterprise|east|partner|B\nbilling|medium|enterprise|west|web|A\nincident|high|enterprise|east|partner|B\nincident|high|enterprise|west|partner|A\nincident|high|premium|north|phone|A\nincident|high|premium|north|web|B\nincident|high|premium|west|phone|A\nincident|low|enterprise|east|partner|B\nincident|low|enterprise|south|partner|B\nincident|low|enterprise|west|phone|B\nincident|low|standard|north|phone|A\nincident|low|standard|north|web|A\nincident|medium|enterprise|north|partner|B\ninventory|high|enterprise|east|phone|A\ninventory|high|premium|north|web|B\ninventory|high|standard|north|web|A\ninventory|high|standard|south|phone|A\ninventory|high|standard|west|partner|A\ninventory|low|premium|east|partner|B\ninventory|low|standard|north|phone|B\ninventory|low|standard|south|web|B\ninventory|medium|enterprise|east|web|A\ninventory|medium|enterprise|west|partner|B\ninventory|medium|premium|east|phone|B\ninventory|medium|premium|south|partner|A\ninventory|medium|standard|east|web|B\ninventory|medium|standard|north|partner|A\nFALLBACK|A",
+    "public": "account|high|premium|west|phone|A\naccount|low|standard|east|web|B\nbilling|low|premium|south|phone|B\nbilling|medium|enterprise|west|web|A\nincident|high|premium|west|phone|A\nincident|low|enterprise|west|phone|B\ninventory|high|enterprise|east|phone|A\ninventory|high|standard|north|web|A\ninventory|high|standard|south|phone|A\ninventory|medium|enterprise|west|partner|B\ninventory|medium|premium|east|phone|B\ninventory|medium|standard|east|web|B\nFALLBACK|A"
+  },
+  "training_observation_counts": {
+    "private_feature_rows": 40,
+    "public_feature_rows": 12
+  }
+}

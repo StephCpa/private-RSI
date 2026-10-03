@@ -220,6 +220,25 @@ private-experience transfer, G1, or any DP result.
 Frozen protocol: [`docs/mtops_v1_1_preregistered_contract.md`](mtops_v1_1_preregistered_contract.md).
 Audit output: [`results/mtops_v1_1_contract_audit.md`](../results/mtops_v1_1_contract_audit.md).
 
+The eight-seed v1.1 direct-table calibration then produced pooled no-table,
+public-table and private-table totals of 250/384, 284/384 and 327/384. The
+descriptive private-minus-public difference was +11.20 pp, with seed-level t
+interval [+4.05, +18.35] pp. Six public-table outputs did not parse. This
+calibration confirms that the repaired feature format and tables are usable by
+the selected model, but it is not strategy distillation and does not pass G1.
+
+Evidence: [`results/mtops_v1_1_transfer_8seed_summary.md`](../results/mtops_v1_1_transfer_8seed_summary.md).
+
+The v1.1 strategy-distillation calibration then produced pooled no-global,
+public-strategy and private-strategy totals of 243/384, 275/384 and 282/384.
+The private-minus-public difference was +1.82 pp, with t interval
+[-4.85, +8.50] pp and bootstrap interval [-3.65, +6.51] pp. All 1,152
+executor outputs parsed. Both strategies improved over no-global, but the
+primary contrast remains below the 5 pp G1 threshold and its interval crosses
+zero; G1 is unpassed.
+
+Evidence: [`results/mtops_v1_1_strategy_distillation_all_8seed_summary.md`](../results/mtops_v1_1_strategy_distillation_all_8seed_summary.md).
+
 ## Recommended next steps
 
 1. **Run the small v1.1 non-DP calibration.** Use the isolated v1.1 strategy

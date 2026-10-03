@@ -131,6 +131,38 @@ authorize a DP experiment.
 
 Evidence and frozen protocol: [`results/mtops_v1_1_contract_audit.md`](results/mtops_v1_1_contract_audit.md), [`docs/mtops_v1_1_preregistered_contract.md`](docs/mtops_v1_1_preregistered_contract.md), and [`analysis/mtops_v1_1_contract_audit.py`](analysis/mtops_v1_1_contract_audit.py).
 
+### 2.3 MT-Ops v1.1 direct-table calibration
+
+The first eight-seed v1.1 A6000 calibration compared no table, public table
+and private table conditions on identical held-out tasks. The pooled totals
+were 250/384, 284/384 and 327/384, respectively, giving a descriptive
+private-minus-public difference of **+11.20 pp**. The seed-level t interval was
+**[+4.05, +18.35] pp**, with bootstrap interval **[+5.73, +16.93] pp**.
+
+This is a direct table-usability calibration, not strategy distillation. Six
+public-table outputs did not parse, so parse completeness is **false** and the
+result remains diagnostic. The raw seed ledgers and deterministic summary are
+retained without repairing or dropping those outputs. No G1 or DP claim is
+made.
+
+Evidence: [`results/mtops_v1_1_transfer_8seed_summary.md`](results/mtops_v1_1_transfer_8seed_summary.md) and [`analysis/summarize_mtops_v1_1_transfer.py`](analysis/summarize_mtops_v1_1_transfer.py).
+
+### 2.4 MT-Ops v1.1 strategy-distillation calibration
+
+The isolated v1.1 strategy-distillation runner then completed the same eight
+seeds using all support and query observations from each training split. The
+pooled no-global, public-strategy and private-strategy totals were 243/384,
+275/384 and 282/384. The private-minus-public difference was **+1.82 pp**,
+with seed-level t interval **[-4.85, +8.50] pp** and bootstrap interval
+**[-3.65, +6.51] pp**. All 1,152 executor outputs parsed.
+
+Both learned strategies improved over the no-global reference, but the primary
+private-versus-public contrast is below the 5 pp G1 threshold and its interval
+crosses zero. **G1 remains unpassed.** This is non-DP calibration evidence and
+does not authorize a DP-RAE run.
+
+Evidence: [`results/mtops_v1_1_strategy_distillation_all_8seed_summary.md`](results/mtops_v1_1_strategy_distillation_all_8seed_summary.md) and [`analysis/summarize_mtops_v1_1_strategy_distillation.py`](analysis/summarize_mtops_v1_1_strategy_distillation.py).
+
 ## 3. Minimal privacy kernel
 
 `dprae/kernel/` implements a gamma=1 prototype under add/remove adjacency and basic composition. The production-style path is `KernelRuntime`, which keeps tenant payloads, cohort sampling and mechanism randomness inside the kernel. The arithmetic functions remain compatibility primitives for synthetic replay and unit tests. The kernel currently provides:

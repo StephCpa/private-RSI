@@ -33,6 +33,11 @@ procedure that improves it.
 > private-experience learning.
 > MT-Ops v1.1 now removes that deterministic channel and passes its four
 > pre-LLM contract gates; the v1.1 LLM calibration has not yet been run.
+> The v1.1 direct-table calibration is now complete across eight seeds
+> (+11.20 pp pooled private-minus-public), but six public-table outputs did not
+> parse; it remains diagnostic and is not a G1 result.
+> The v1.1 strategy-distillation calibration is also complete: +1.82 pp pooled
+> private-minus-public with an interval crossing zero, so G1 remains unpassed.
 
 ## Read in this order
 
@@ -59,6 +64,8 @@ procedure that improves it.
 | [results/mtops_v1_structure_leakage_audit.md](results/mtops_v1_structure_leakage_audit.md) | Feature-only procedure leakage audit for the current v1 generator |
 | [docs/mtops_v1_1_preregistered_contract.md](docs/mtops_v1_1_preregistered_contract.md) | Frozen MT-Ops v1.1 repair, gates and calibration estimand |
 | [results/mtops_v1_1_contract_audit.md](results/mtops_v1_1_contract_audit.md) | Eight-seed no-LLM v1.1 contract audit |
+| [results/mtops_v1_1_transfer_8seed_summary.md](results/mtops_v1_1_transfer_8seed_summary.md) | Eight-seed v1.1 direct-table calibration summary; parse failures retained |
+| [results/mtops_v1_1_strategy_distillation_all_8seed_summary.md](results/mtops_v1_1_strategy_distillation_all_8seed_summary.md) | Eight-seed v1.1 full-experience strategy-distillation calibration |
 
 ## Key findings so far (analytical, no LLM calls)
 
