@@ -9,10 +9,8 @@ import numpy as np
 from scipy import stats
 
 
-INPUTS = (
-    "results/mtops_v1_transfer_matched_seed20261002.json",
-    "results/mtops_v1_transfer_matched_seed20261003.json",
-    "results/mtops_v1_transfer_matched_seed20261004.json",
+INPUTS = tuple(
+    f"results/mtops_v1_transfer_matched_seed{seed}.json" for seed in range(20261002, 20261010)
 )
 
 
@@ -97,7 +95,7 @@ def markdown(payload: dict) -> str:
             f"- Seed-level mean private - public difference: **{100 * payload['seed_mean_private_minus_public']:+.2f} pp**; t interval: [{100 * payload['seed_t_interval_95'][0]:+.2f}, {100 * payload['seed_t_interval_95'][1]:+.2f}] pp.",
             f"- Seed bootstrap interval: [{100 * payload['seed_bootstrap_interval_95'][0]:+.2f}, {100 * payload['seed_bootstrap_interval_95'][1]:+.2f}] pp.",
             "",
-            "The transfer signal is directionally positive but below the 5 pp G1 threshold. It is a small non-DP calibration result, not evidence for a DP-RAE claim.",
+            "The matched-table transfer subcheck exceeds 5 pp across these eight seeds, but it is a direct table-comparison result rather than the planned strategy-distillation G1 experiment. It is non-DP calibration evidence, not a DP-RAE claim.",
             "",
         ]
     )

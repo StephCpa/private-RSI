@@ -103,20 +103,19 @@ learned tables under the same contract.
 
 The matched-prompt public-private transfer check then used 300 public and 300
 private training tenants, 12 test tenants and 48 queries per condition for
-each of three seeds. The pooled rates were 102/144 with no table, 130/144 with
-the public table and 135/144 with the private table. The private-minus-public
-difference was +3.47 pp, with a seed-level 95% t interval of [+0.48, +6.46]
-pp. The direction is consistent but the mean is below the pre-registered 5 pp
-G1 threshold.
+eight seeds. The pooled rates were 258/384 with no table, 338/384 with the
+public table and 368/384 with the private table. The private-minus-public
+difference was +7.81 pp, with a seed-level 95% t interval of [+2.02, +13.61]
+pp. This matched-table transfer subcheck exceeds 5 pp, but it is a direct
+rule-table comparison rather than the planned strategy-distillation G1
+experiment.
 
 ## Recommended next steps
 
 1. **Add the permuted-content control.** Rename attributes and conditions while
    preserving the procedure structure to test whether the gain is content
    transfer or only procedure following.
-2. **Repeat the v1 transfer check with at least eight seeds.** Keep matched table
-   length, matched decoding and seed-level inference.
-3. **Re-run the distillation pilot only after the table comparison.** Use ≥ 8
+2. **Re-run the distillation pilot only after the table comparison.** Use ≥ 8
    seeds with the seed as the unit,
    and report the private − public difference both raw and as a share of the
    check-3 headroom.

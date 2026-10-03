@@ -45,6 +45,81 @@
       "public_table_successes": 42,
       "queries": 48,
       "seed": 20261004
+    },
+    {
+      "file": "results/mtops_v1_transfer_matched_seed20261005.json",
+      "known_private": 40,
+      "known_public": 12,
+      "no_table_rate": 0.6666666666666666,
+      "no_table_successes": 32,
+      "private_minus_public": 0.20833333333333337,
+      "private_table_rate": 1.0,
+      "private_table_successes": 48,
+      "public_minus_no_table": 0.125,
+      "public_table_rate": 0.7916666666666666,
+      "public_table_successes": 38,
+      "queries": 48,
+      "seed": 20261005
+    },
+    {
+      "file": "results/mtops_v1_transfer_matched_seed20261006.json",
+      "known_private": 40,
+      "known_public": 12,
+      "no_table_rate": 0.6666666666666666,
+      "no_table_successes": 32,
+      "private_minus_public": 0.04166666666666674,
+      "private_table_rate": 0.9583333333333334,
+      "private_table_successes": 46,
+      "public_minus_no_table": 0.25,
+      "public_table_rate": 0.9166666666666666,
+      "public_table_successes": 44,
+      "queries": 48,
+      "seed": 20261006
+    },
+    {
+      "file": "results/mtops_v1_transfer_matched_seed20261007.json",
+      "known_private": 40,
+      "known_public": 12,
+      "no_table_rate": 0.625,
+      "no_table_successes": 30,
+      "private_minus_public": 0.0625,
+      "private_table_rate": 0.9583333333333334,
+      "private_table_successes": 46,
+      "public_minus_no_table": 0.27083333333333337,
+      "public_table_rate": 0.8958333333333334,
+      "public_table_successes": 43,
+      "queries": 48,
+      "seed": 20261007
+    },
+    {
+      "file": "results/mtops_v1_transfer_matched_seed20261008.json",
+      "known_private": 40,
+      "known_public": 12,
+      "no_table_rate": 0.5416666666666666,
+      "no_table_successes": 26,
+      "private_minus_public": 0.16666666666666674,
+      "private_table_rate": 0.9583333333333334,
+      "private_table_successes": 46,
+      "public_minus_no_table": 0.25,
+      "public_table_rate": 0.7916666666666666,
+      "public_table_successes": 38,
+      "queries": 48,
+      "seed": 20261008
+    },
+    {
+      "file": "results/mtops_v1_transfer_matched_seed20261009.json",
+      "known_private": 40,
+      "known_public": 12,
+      "no_table_rate": 0.75,
+      "no_table_successes": 36,
+      "private_minus_public": 0.04166666666666663,
+      "private_table_rate": 0.9791666666666666,
+      "private_table_successes": 47,
+      "public_minus_no_table": 0.1875,
+      "public_table_rate": 0.9375,
+      "public_table_successes": 45,
+      "queries": 48,
+      "seed": 20261009
     }
   ],
   "notes": [
@@ -52,20 +127,20 @@
     "The seed is the independent unit for the primary interval; pooled query totals are descriptive.",
     "This is a non-DP transfer check and does not establish G1 or DP-RAE utility."
   ],
-  "pooled_no_table_successes": 102,
-  "pooled_private_minus_public": 0.034722222222222224,
-  "pooled_private_table_successes": 135,
-  "pooled_public_minus_no_table": 0.1944444444444445,
-  "pooled_public_table_successes": 130,
-  "pooled_queries": 144,
+  "pooled_no_table_successes": 258,
+  "pooled_private_minus_public": 0.078125,
+  "pooled_private_table_successes": 368,
+  "pooled_public_minus_no_table": 0.20833333333333337,
+  "pooled_public_table_successes": 338,
+  "pooled_queries": 384,
   "seed_bootstrap_interval_95": [
-    0.02083333333333326,
-    0.04166666666666663
+    0.03906249999999997,
+    0.12760416666666669
   ],
-  "seed_mean_private_minus_public": 0.034722222222222175,
-  "seed_sd_private_minus_public": 0.012028130608117225,
+  "seed_mean_private_minus_public": 0.078125,
+  "seed_sd_private_minus_public": 0.0693203255884055,
   "seed_t_interval_95": [
-    0.004842689376739748,
-    0.0646017550677046
+    0.020171757513909594,
+    0.1360782424860904
   ]
 }

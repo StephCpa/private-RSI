@@ -140,24 +140,22 @@ Evidence: [`results/mtops_v1_llm_check_3seed_summary.md`](results/mtops_v1_llm_c
 
 ### 4.4 MT-Ops v1 matched-prompt public-private transfer check
 
-To separate table usability from cross-tenant transfer, the next check used
-three conditions on identical test tasks: no table, a public-training table and
-a private-training table. Public and private table prompts had the same fixed
+To separate table usability from cross-tenant transfer, the check used three
+conditions on identical test tasks: no table, a public-training table and a
+private-training table. Public and private table prompts had the same fixed
 length; unavailable procedures were marked `UNKNOWN`. Each seed used 300 public
 training tenants, 300 private training tenants, 12 test tenants and 48 queries
-per condition.
+per condition. The check now covers eight seeds.
 
 | Seed | No table | Public table | Private table | Private - public |
 |---:|---:|---:|---:|---:|
-| 20261002 | 32/48 = 0.6667 | 42/48 = 0.8750 | 44/48 = 0.9167 | +4.17 pp |
-| 20261003 | 32/48 = 0.6667 | 46/48 = 0.9583 | 47/48 = 0.9792 | +2.08 pp |
-| 20261004 | 38/48 = 0.7917 | 42/48 = 0.8750 | 44/48 = 0.9167 | +4.17 pp |
-| **Pooled** | **102/144** | **130/144** | **135/144** | **+3.47 pp** |
+| 20261002-20261009 | 258/384 = 0.6719 | 338/384 = 0.8802 | 368/384 = 0.9583 | +7.81 pp |
 
-The seed-level mean private-minus-public difference is **+3.47 pp**, with a
-95% t interval of **[+0.48, +6.46] pp**. This is directionally positive but
-below the pre-registered 5 pp G1 threshold. It is a small non-DP calibration
-result, not evidence for a DP-RAE utility claim.
+The seed-level mean private-minus-public difference is **+7.81 pp**, with a
+95% t interval of **[+2.02, +13.61] pp**. This matched-table transfer
+subcheck exceeds 5 pp, but it is a direct rule-table comparison rather than
+the planned strategy-distillation G1 experiment. It is non-DP calibration
+evidence, not a DP-RAE utility claim.
 
 Evidence: [`results/mtops_v1_transfer_3seed_summary.md`](results/mtops_v1_transfer_3seed_summary.md) and [`experiments/mtops_v1_transfer_check.py`](experiments/mtops_v1_transfer_check.py).
 
@@ -200,8 +198,7 @@ The project cannot currently claim:
 The next work should preserve the corrected evidence boundary and proceed in this order:
 
 1. **Add the permuted-content control.** Rename attributes and conditions while preserving procedures to separate rule-content transfer from generic procedure following.
-2. **Repeat the v1 transfer check with at least eight seeds.** Keep matched table length, matched decoding, identical test tenants per seed and seed-level inference.
-3. **Freeze the candidate strategies and evaluation contract.** Replace free-form strategy wording as the primary comparison with pre-registered strategy candidates. Ensure each candidate's claimed interaction is exactly executable by the environment.
+2. **Freeze the candidate strategies and evaluation contract.** Replace free-form strategy wording as the primary comparison with pre-registered strategy candidates. Ensure each candidate's claimed interaction is exactly executable by the environment.
 4. **Repeat the non-DP pilot only after the v1 contract is frozen.** Use at least eight seeds and report seed-level differences, tenant-level paired differences, query totals, bootstrap intervals and all failed/invalid executions.
 5. **Complete G0 information-flow evidence.** Add sandbox confinement, fixed-shape output, error sanitization, canary transcript scans, no-network checks, provenance checks and hidden-cohort checks.
 6. **Extend the kernel only after the non-DP target is reliable.** Add an audited SVT implementation, explicit Poisson/add-remove accounting and a production RDP/PLD cross-check. Do not apply subsampling amplification to a reused cohort without a matching joint analysis.
