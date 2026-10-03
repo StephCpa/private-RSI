@@ -1,0 +1,72 @@
+{
+  "experiment": "MT-Ops v1 corrected three-seed permuted-content negative-control summary",
+  "inputs": [
+    {
+      "file": "results/mtops_v1_permuted_transfer_seed20261002.json",
+      "no_table_rate": 0.6666666666666666,
+      "no_table_successes": 32,
+      "private_minus_public": 0.041666666666666685,
+      "private_parse_rate": 1.0,
+      "private_table_rate": 0.2916666666666667,
+      "private_table_successes": 14,
+      "public_minus_no_table": -0.41666666666666663,
+      "public_parse_rate": 0.9583333333333334,
+      "public_table_rate": 0.25,
+      "public_table_successes": 12,
+      "queries": 48,
+      "seed": 20261002
+    },
+    {
+      "file": "results/mtops_v1_permuted_transfer_seed20261003.json",
+      "no_table_rate": 0.6666666666666666,
+      "no_table_successes": 32,
+      "private_minus_public": 0.0625,
+      "private_parse_rate": 1.0,
+      "private_table_rate": 0.3125,
+      "private_table_successes": 15,
+      "public_minus_no_table": -0.41666666666666663,
+      "public_parse_rate": 1.0,
+      "public_table_rate": 0.25,
+      "public_table_successes": 12,
+      "queries": 48,
+      "seed": 20261003
+    },
+    {
+      "file": "results/mtops_v1_permuted_transfer_seed20261004.json",
+      "no_table_rate": 0.7916666666666666,
+      "no_table_successes": 38,
+      "private_minus_public": 0.04166666666666666,
+      "private_parse_rate": 1.0,
+      "private_table_rate": 0.22916666666666666,
+      "private_table_successes": 11,
+      "public_minus_no_table": -0.6041666666666666,
+      "public_parse_rate": 1.0,
+      "public_table_rate": 0.1875,
+      "public_table_successes": 9,
+      "queries": 48,
+      "seed": 20261004
+    }
+  ],
+  "notes": [
+    "The permuted-content control keeps the fixed-length table shape and UNKNOWN pattern but complements every known A/B procedure label.",
+    "The three seeds are independent units for the interval; pooled query totals are descriptive.",
+    "This is a strong non-DP negative control for content dependence, not a fair alternative method and not the planned strategy-distillation G1 experiment."
+  ],
+  "pooled_no_table_successes": 102,
+  "pooled_private_minus_public": 0.04861111111111111,
+  "pooled_private_table_successes": 40,
+  "pooled_public_minus_no_table": -0.4791666666666667,
+  "pooled_public_table_successes": 33,
+  "pooled_queries": 144,
+  "seed_bootstrap_interval_95": [
+    0.04166666666666666,
+    0.0625
+  ],
+  "seed_mean_private_minus_public": 0.04861111111111111,
+  "seed_sd_private_minus_public": 0.0120281306081172,
+  "seed_t_interval_95": [
+    0.018731578265628743,
+    0.07849064395659348
+  ],
+  "table_mode": "permuted_content"
+}

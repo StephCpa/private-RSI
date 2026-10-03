@@ -159,19 +159,42 @@ evidence, not a DP-RAE utility claim.
 
 Evidence: [`results/mtops_v1_transfer_8seed_summary.md`](results/mtops_v1_transfer_8seed_summary.md) and [`experiments/mtops_v1_transfer_check.py`](experiments/mtops_v1_transfer_check.py).
 
+### 4.5 MT-Ops v1 corrected permuted-content negative control
+
+The next control kept the same fixed-length prompts and `UNKNOWN` pattern but
+complemented every known A/B procedure label. This preserves table shape and
+label marginals while breaking feature-to-procedure alignment. The control used
+the same 300 public tenants, 300 private tenants, 12 test tenants and 48
+queries per condition for three seeds.
+
+| Seed | No table | Permuted public table | Permuted private table | Private - public |
+|---:|---:|---:|---:|---:|
+| 20261002 | 32/48 = 0.6667 | 12/48 = 0.2500 | 14/48 = 0.2917 | +4.17 pp |
+| 20261003 | 32/48 = 0.6667 | 12/48 = 0.2500 | 15/48 = 0.3125 | +6.25 pp |
+| 20261004 | 38/48 = 0.7917 | 9/48 = 0.1875 | 11/48 = 0.2292 | +4.17 pp |
+
+The pooled permuted private-minus-public difference is **+4.86 pp**; the
+seed-level mean is **+4.86 pp**, with a 95% t interval of **[+1.87, +7.85]
+pp**. Both permuted table conditions are substantially below the no-table
+baseline in every seed. This supports dependence on aligned rule content in
+this benchmark, but it is an adversarial negative control rather than a fair
+alternative method. It does not establish G1 or DP-RAE utility.
+
+Evidence: [`results/mtops_v1_permuted_3seed_summary.md`](results/mtops_v1_permuted_3seed_summary.md), [`analysis/summarize_mtops_v1_permuted.py`](analysis/summarize_mtops_v1_permuted.py), and [`experiments/mtops_v1_transfer_check.py`](experiments/mtops_v1_transfer_check.py).
+
 ## 5. Verification status
 
-The latest local verification covered 41 tests:
+The latest local verification covered 42 tests:
 
 | Suite | Result |
 |---|---:|
 | DP kernel | 5/5 passed |
 | Kernel × MT-Ops smoke | 1/1 passed |
 | Calibration and replay | 18/18 passed |
-| MT-Ops v0 and v1 | 10/10 passed |
-| **Total** | **41/41 passed** |
+| MT-Ops v0 and v1 | 11/11 passed |
+| **Total** | **42/42 passed** |
 
-The experimental code is recorded at commit `9b16286`. The remote v1 usability processes completed normally; the final check found no active v1 calibration process on the remote host.
+The experimental code is recorded at commit `c7196f4`. The remote v1 usability and corrected permuted-content processes completed normally; the final check found no active v1 transfer process on the remote host.
 
 ## 6. Current claims and non-claims
 
@@ -181,7 +204,8 @@ The project can currently claim:
 2. MT-Ops v1 passes the four scripted validity checks for split separation, knowledge-free headroom, transfer headroom and prevalence.
 3. A minimal gamma=1 fixed-plan kernel can clip contributions, reserve basic-composition budget and produce Gaussian or winner-only outputs under unit tests.
 4. Qwen2.5-7B can use the MT-Ops v1 request attributes and supplied true rule table, with a +23.61 pp three-seed usability gain.
-5. Small Qwen2.5-7B Mode L pilots are executable on the A6000 server, and the corrected interactive protocol has been evaluated across three seeds.
+5. The matched-prompt public/private table comparison is reproducible across eight seeds (+7.81 pp pooled private-minus-public).
+6. The corrected permuted-content control shows low table performance after feature-to-procedure alignment is broken, while the private-minus-public difference remains small across three seeds.
 
 The project cannot currently claim:
 
@@ -197,12 +221,11 @@ The project cannot currently claim:
 
 The next work should preserve the corrected evidence boundary and proceed in this order:
 
-1. **Add the permuted-content control.** Rename attributes and conditions while preserving procedures to separate rule-content transfer from generic procedure following.
-2. **Freeze the candidate strategies and evaluation contract.** Replace free-form strategy wording as the primary comparison with pre-registered strategy candidates. Ensure each candidate's claimed interaction is exactly executable by the environment.
-4. **Repeat the non-DP pilot only after the v1 contract is frozen.** Use at least eight seeds and report seed-level differences, tenant-level paired differences, query totals, bootstrap intervals and all failed/invalid executions.
-5. **Complete G0 information-flow evidence.** Add sandbox confinement, fixed-shape output, error sanitization, canary transcript scans, no-network checks, provenance checks and hidden-cohort checks.
-6. **Extend the kernel only after the non-DP target is reliable.** Add an audited SVT implementation, explicit Poisson/add-remove accounting and a production RDP/PLD cross-check. Do not apply subsampling amplification to a reused cohort without a matching joint analysis.
-7. **Start DP-RAE experiments only if the corrected non-DP pilot establishes a meaningful gain.** The first DP study should be a small matched-budget pilot, with the ledger covering every private release, restart, diagnostic and selection event.
+1. **Freeze the candidate strategies and evaluation contract.** Replace free-form strategy wording as the primary comparison with pre-registered strategy candidates. Ensure each candidate's claimed interaction is exactly executable by the environment.
+2. **Repeat the non-DP pilot only after the v1 contract is frozen.** Use at least eight seeds and report seed-level differences, tenant-level paired differences, query totals, bootstrap intervals and all failed/invalid executions.
+3. **Complete G0 information-flow evidence.** Add sandbox confinement, fixed-shape output, error sanitization, canary transcript scans, no-network checks, provenance checks and hidden-cohort checks.
+4. **Extend the kernel only after the non-DP target is reliable.** Add an audited SVT implementation, explicit Poisson/add-remove accounting and a production RDP/PLD cross-check. Do not apply subsampling amplification to a reused cohort without a matching joint analysis.
+5. **Start DP-RAE experiments only if the corrected non-DP pilot establishes a meaningful gain.** The first DP study should be a small matched-budget pilot, with the ledger covering every private release, restart, diagnostic and selection event.
 
 ## Reproducibility commands
 
@@ -220,6 +243,7 @@ python -m analysis.replay
 python -m analysis.summarize_interactive_calibration
 python -m analysis.summarize_mtops_v1_llm_check
 python -m analysis.summarize_mtops_v1_transfer
+python -m analysis.summarize_mtops_v1_permuted
 ```
 
 The real-agent runner requires the remote environment and Qwen2.5-7B-Instruct:

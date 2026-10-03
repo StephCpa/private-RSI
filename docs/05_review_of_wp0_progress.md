@@ -110,15 +110,27 @@ pp. This matched-table transfer subcheck exceeds 5 pp, but it is a direct
 rule-table comparison rather than the planned strategy-distillation G1
 experiment.
 
+The corrected permuted-content control then complemented every known A/B
+procedure label while preserving the fixed-length prompt, `UNKNOWN` pattern,
+table shape and label marginals. Across three seeds, the pooled no-table,
+permuted-public and permuted-private totals were 102/144, 33/144 and 40/144;
+the private-minus-public difference was +4.86 pp, with a seed-level 95% t
+interval of [+1.87, +7.85] pp. Both permuted table conditions were below the
+no-table baseline in every seed. This is evidence that aligned rule content
+matters for this benchmark, but it is a strong negative control rather than a
+strategy-distillation result or a G1 pass.
+
+Evidence: [`results/mtops_v1_permuted_3seed_summary.md`](../results/mtops_v1_permuted_3seed_summary.md).
+
 ## Recommended next steps
 
-1. **Add the permuted-content control.** Rename attributes and conditions while
-   preserving the procedure structure to test whether the gain is content
-   transfer or only procedure following.
+1. **Freeze the candidate strategies and evaluation contract.** Replace free-form
+   strategy wording with pre-registered candidates whose claimed interaction is
+   executable by the environment.
 2. **Re-run the distillation pilot only after the table comparison.** Use ≥ 8
    seeds with the seed as the unit,
    and report the private − public difference both raw and as a share of the
    check-3 headroom.
-4. **Run E0 (DP-ES ε = 0 control)** in parallel. It is independent of MT-Ops.
-5. **Restructure the kernel API (F7, F8)** before the G0 information-flow
+3. **Run E0 (DP-ES ε = 0 control)** in parallel. It is independent of MT-Ops.
+4. **Restructure the kernel API (F7, F8)** before the G0 information-flow
    tests; it is a prerequisite for them.

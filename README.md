@@ -15,7 +15,11 @@ procedure that improves it.
 > one by construction (see `docs/05_review_of_wp0_progress.md`). MT-Ops v1 now
 > passes the scripted validity checks, and a three-seed Qwen usability check
 > shows a 23.61 pp gain from supplying the true rule table. This is not a
-> private-transfer or DP result; there are no DP-RAE results yet.
+> private-transfer or DP result; there are no DP-RAE results yet. The matched
+> public/private table comparison now covers eight seeds (+7.81 pp pooled
+> private-minus-public), and a corrected three-seed permuted-content control
+> drops both table conditions below the no-table baseline while keeping the
+> private-minus-public difference small. G1 remains unpassed.
 
 ## Read in this order
 
@@ -31,6 +35,7 @@ procedure that improves it.
 | [results/mtops_v1_checks.md](results/mtops_v1_checks.md) | Scripted MT-Ops v1 validity checks |
 | [results/mtops_v1_llm_check_3seed_summary.md](results/mtops_v1_llm_check_3seed_summary.md) | Three-seed Qwen2.5-7B v1 usability check |
 | [results/mtops_v1_transfer_8seed_summary.md](results/mtops_v1_transfer_8seed_summary.md) | Matched-prompt public/private v1 transfer check |
+| [results/mtops_v1_permuted_3seed_summary.md](results/mtops_v1_permuted_3seed_summary.md) | Corrected permuted-content negative control |
 
 ## Key findings so far (analytical, no LLM calls)
 
