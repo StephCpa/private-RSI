@@ -30,6 +30,7 @@ procedure that improves it.
 | [results/headroom_audit.md](results/headroom_audit.md) | Scripted headroom audit of the MT-Ops v0 pilot contract (`python -m analysis.headroom_audit`) |
 | [results/mtops_v1_checks.md](results/mtops_v1_checks.md) | Scripted MT-Ops v1 validity checks |
 | [results/mtops_v1_llm_check_3seed_summary.md](results/mtops_v1_llm_check_3seed_summary.md) | Three-seed Qwen2.5-7B v1 usability check |
+| [results/mtops_v1_transfer_3seed_summary.md](results/mtops_v1_transfer_3seed_summary.md) | Matched-prompt public/private v1 transfer check |
 
 ## Key findings so far (analytical, no LLM calls)
 

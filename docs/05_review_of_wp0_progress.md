@@ -101,14 +101,21 @@ strategy distillation, differential privacy, or a G1 result. The table is a
 usability oracle; the next transfer experiment must compare public and private
 learned tables under the same contract.
 
+The matched-prompt public-private transfer check then used 300 public and 300
+private training tenants, 12 test tenants and 48 queries per condition for
+each of three seeds. The pooled rates were 102/144 with no table, 130/144 with
+the public table and 135/144 with the private table. The private-minus-public
+difference was +3.47 pp, with a seed-level 95% t interval of [+0.48, +6.46]
+pp. The direction is consistent but the mean is below the pre-registered 5 pp
+G1 threshold.
+
 ## Recommended next steps
 
-1. **Compare learned public and private tables.** Use the same v1 test tenants
-   and three or more seeds to separate cross-tenant transfer from the true-table
-   usability effect.
-2. **Add the permuted-content control.** Rename attributes and conditions while
+1. **Add the permuted-content control.** Rename attributes and conditions while
    preserving the procedure structure to test whether the gain is content
    transfer or only procedure following.
+2. **Repeat the v1 transfer check with at least eight seeds.** Keep matched table
+   length, matched decoding and seed-level inference.
 3. **Re-run the distillation pilot only after the table comparison.** Use ≥ 8
    seeds with the seed as the unit,
    and report the private − public difference both raw and as a share of the
