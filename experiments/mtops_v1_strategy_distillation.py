@@ -66,17 +66,23 @@ def aggregate_training_observations(
 
 
 def clean_strategy(text: str) -> str:
-    text = re.sub(r"\s+", " ", text).strip()
-    return text[:8000]
+    lines = []
+    for line in text.replace("```", "").splitlines():
+        line = re.sub(r"\s+", " ", line).strip()
+        if line:
+            lines.append(line)
+    return "\n".join(lines)[:8000]
 
 
 def distill_strategy(runner: QwenRunner, observations: str, split: str) -> str:
+    expected_rows = len(observations.splitlines())
     prompt = (
         "Create a reusable, tenant-neutral operations strategy from the feature-level observations below. "
         "The strategy will be given to another assistant that must choose procedure A or B for a new query. "
-        "Use exact five-attribute matches when available; do not invent mappings for unseen attributes. "
-        "For an unknown or ambiguous feature combination, tell the executor to use the current tenant's support observations and then default to A. "
-        "Do not copy identifiers, secrets or records. Return only the strategy, with no preamble and no analysis.\n\n"
+        f"There are exactly {expected_rows} observed feature rows. Return exactly {expected_rows} mapping lines plus one final fallback line. "
+        "Each mapping line must use this compact format with no extra words: family|amount|tier|region|channel|A or B. "
+        "The final line must be FALLBACK|A. Do not add a preamble, explanation, markdown or analysis. "
+        "Do not copy identifiers, secrets or records.\n\n"
         f"Training split: {split}\n"
         "Aggregated training-experience observations:\n"
         f"{observations}"
@@ -84,7 +90,7 @@ def distill_strategy(runner: QwenRunner, observations: str, split: str) -> str:
     return clean_strategy(
         runner.generate(
             prompt,
-            max_new_tokens=1024,
+            max_new_tokens=768,
             system_prompt="You are a careful operations-policy researcher. Follow the requested strategy-artifact format and do not answer a query.",
         )
     )
@@ -175,7 +181,7 @@ def run(
             "training_view": training_view,
             "training_experience": "all support and query observations from training tenants" if training_view == "all" else "support observations only from training tenants",
             "support_view": "feature-level observations only; no tenant IDs, rule IDs or canaries",
-            "strategy_output": "reusable text, capped at 8000 characters; generation budget 1024 tokens",
+            "strategy_output": "compact mapping lines plus FALLBACK|A, capped at 8000 characters; generation budget 768 tokens",
             "executor_input": "strategy + current-tenant support observations + query attributes",
             "decoding": "greedy; one-character A/B output",
             "interactive_retry": False,
