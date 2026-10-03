@@ -19,10 +19,10 @@ procedure that improves it.
 > public/private table comparison now covers eight seeds (+7.81 pp pooled
 > private-minus-public), and a corrected three-seed permuted-content control
 > drops both table conditions below the no-table baseline while keeping the
-> private-minus-public difference small. The subsequent eight-seed strategy-
-> distillation pilot improves over the no-global reference but has an unstable
-> +3.13 pp private-minus-public mean with a confidence interval crossing zero.
-> G1 remains unpassed.
+> private-minus-public difference small. The corrected eight-seed strategy-
+> distillation pilot improves over the no-global reference, but its pooled
+> private-minus-public difference is -0.52 pp with a confidence interval
+> crossing zero. G1 remains unpassed.
 
 ## Read in this order
 
@@ -39,7 +39,9 @@ procedure that improves it.
 | [results/mtops_v1_llm_check_3seed_summary.md](results/mtops_v1_llm_check_3seed_summary.md) | Three-seed Qwen2.5-7B v1 usability check |
 | [results/mtops_v1_transfer_8seed_summary.md](results/mtops_v1_transfer_8seed_summary.md) | Matched-prompt public/private v1 transfer check |
 | [results/mtops_v1_permuted_3seed_summary.md](results/mtops_v1_permuted_3seed_summary.md) | Corrected permuted-content negative control |
-| [results/mtops_v1_strategy_distillation_8seed_summary.md](results/mtops_v1_strategy_distillation_8seed_summary.md) | Eight-seed v1 strategy-distillation pilot |
+| [results/mtops_v1_strategy_distillation_8seed_summary.md](results/mtops_v1_strategy_distillation_8seed_summary.md) | Eight-seed v1 support-only strategy-distillation diagnostic |
+| [results/mtops_v1_strategy_distillation_all_v4_8seed_summary.md](results/mtops_v1_strategy_distillation_all_v4_8seed_summary.md) | Corrected full-experience eight-seed strategy-distillation pilot |
+| [results/mtops_v1_strategy_distillation_protocol_audit.md](results/mtops_v1_strategy_distillation_protocol_audit.md) | Frozen intermediate protocol audit and superseded-run boundaries |
 
 ## Key findings so far (analytical, no LLM calls)
 

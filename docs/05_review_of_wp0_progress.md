@@ -134,6 +134,19 @@ contrast was unstable. G1 remains unpassed.
 
 Evidence: [`results/mtops_v1_strategy_distillation_8seed_summary.md`](../results/mtops_v1_strategy_distillation_8seed_summary.md).
 
+The support-only result was then audited for coverage. The distiller had seen
+only 8 support tasks per training tenant, while the plan defines private
+experience as both support and query records. The corrected full-experience
+pilot uses all 12 training tasks and a canonical mapping artifact with one
+line per observed feature. Across the same eight seeds, the pooled no-global,
+public-strategy and private-strategy totals were 241/384, 380/384 and 378/384.
+The private-minus-public difference was -0.52 pp, with a seed-level 95% t
+interval of [-3.11, +2.07] pp. All 1,152 executor outputs parsed, and all
+artifacts passed the 12-row public / 40-row private coverage audit. G1 remains
+unpassed.
+
+Evidence: [`results/mtops_v1_strategy_distillation_all_v4_8seed_summary.md`](../results/mtops_v1_strategy_distillation_all_v4_8seed_summary.md).
+
 ## Recommended next steps
 
 1. **Freeze the candidate strategies and evaluation contract.** Replace free-form

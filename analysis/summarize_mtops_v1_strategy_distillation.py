@@ -100,8 +100,8 @@ def markdown(payload: dict) -> str:
     experience = "all support and query observations" if view == "all" else "support observations only"
     if view == "all":
         conclusion = (
-            "The public and private strategies both improve over the no-global reference, but the private strategy is lower than the public strategy in the corrected run. "
-            "This is a negative non-DP transfer result, not a G1 pass; the interval is entirely below zero."
+            "The public and private strategies both improve over the no-global reference, but the private strategy is slightly lower than the public strategy in the corrected run. "
+            "This does not establish private transfer or G1: the point estimate is below 5 pp and the interval includes zero."
         )
     else:
         conclusion = (

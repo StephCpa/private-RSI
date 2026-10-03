@@ -182,15 +182,12 @@ alternative method. It does not establish G1 or DP-RAE utility.
 
 Evidence: [`results/mtops_v1_permuted_3seed_summary.md`](results/mtops_v1_permuted_3seed_summary.md), [`analysis/summarize_mtops_v1_permuted.py`](analysis/summarize_mtops_v1_permuted.py), and [`experiments/mtops_v1_transfer_check.py`](experiments/mtops_v1_transfer_check.py).
 
-### 4.6 MT-Ops v1 eight-seed strategy-distillation pilot
+### 4.6 MT-Ops v1 support-only strategy-distillation diagnostic
 
-The strategy contract was then frozen and evaluated end to end. The distiller
-received only aggregated feature-level support observations from one training
-split; tenant IDs, rule IDs and canaries were removed. The executor received
-the resulting strategy artifact, the current tenant's support observations and
-the query attributes, with greedy decoding and no retry. The same 300 public
-tenants, 300 private tenants, 12 test tenants and 48 queries per condition
-were used for eight seeds.
+An initial end-to-end diagnostic restricted the distiller to the eight support
+tasks of each training tenant. Its result is retained for debugging strategy
+coverage, but it is not the primary protocol: the research plan defines a
+tenant's experience as both support and query records.
 
 | Seed | No global strategy | Public strategy | Private strategy | Private - public |
 |---:|---:|---:|---:|---:|
@@ -203,16 +200,52 @@ were used for eight seeds.
 | 20261008 | 29/48 = 0.6042 | 35/48 = 0.7292 | 40/48 = 0.8333 | +10.42 pp |
 | 20261009 | 36/48 = 0.7500 | 44/48 = 0.9167 | 46/48 = 0.9583 | +4.17 pp |
 
-The pooled rates were 241/384 for no global strategy, 340/384 for public
+The pooled rates in this support-only diagnostic were 241/384 for no global strategy, 340/384 for public
 strategy and 352/384 for private strategy. The pooled private-minus-public
 difference was **+3.12 pp**; the seed-level mean was **+3.13 pp**, with a 95%
 t interval of **[-5.04, +11.29] pp** and a seed bootstrap interval of
 **[-3.39, +9.11] pp**. All 1,152 executor outputs parsed as A or B. Both
 strategy artifacts improved substantially over the no-global reference, but
 the private-minus-public contrast was unstable and its interval included zero.
-The pre-registered G1 non-DP meta-gain gate is therefore **not passed**.
+This diagnostic did not pass the pre-registered G1 non-DP meta-gain gate.
 
 Evidence: [`results/mtops_v1_strategy_distillation_8seed_summary.md`](results/mtops_v1_strategy_distillation_8seed_summary.md), [`analysis/summarize_mtops_v1_strategy_distillation.py`](analysis/summarize_mtops_v1_strategy_distillation.py), and [`experiments/mtops_v1_strategy_distillation.py`](experiments/mtops_v1_strategy_distillation.py).
+
+### 4.7 MT-Ops v1 corrected full-experience strategy-distillation pilot
+
+The coverage audit found that the support-only diagnostic exposed only about
+30--55% of the private rule features to the distiller. The corrected protocol
+uses all support and query observations from the public or private training
+split, which matches the plan's definition of tenant experience. The distiller
+must emit one canonical `family|amount|tier|region|channel|A/B` line per
+observed feature plus `FALLBACK|A`; tenant IDs, rule IDs and canaries remain
+excluded. The executor still sees only the artifact, held-out tenant support
+observations and one query, with greedy decoding and no retry.
+
+| Seed | No global strategy | Public strategy | Private strategy | Private - public |
+|---:|---:|---:|---:|---:|
+| 20261002 | 29/48 = 0.6042 | 48/48 = 1.0000 | 47/48 = 0.9792 | -2.08 pp |
+| 20261003 | 34/48 = 0.7083 | 48/48 = 1.0000 | 48/48 = 1.0000 | +0.00 pp |
+| 20261004 | 26/48 = 0.5417 | 48/48 = 1.0000 | 45/48 = 0.9375 | -6.25 pp |
+| 20261005 | 31/48 = 0.6458 | 48/48 = 1.0000 | 48/48 = 1.0000 | +0.00 pp |
+| 20261006 | 28/48 = 0.5833 | 47/48 = 0.9792 | 48/48 = 1.0000 | +2.08 pp |
+| 20261007 | 28/48 = 0.5833 | 48/48 = 1.0000 | 48/48 = 1.0000 | +0.00 pp |
+| 20261008 | 29/48 = 0.6042 | 45/48 = 0.9375 | 47/48 = 0.9792 | +4.17 pp |
+| 20261009 | 36/48 = 0.7500 | 48/48 = 1.0000 | 47/48 = 0.9792 | -2.08 pp |
+
+The corrected pooled rates were 241/384 for no global strategy, 380/384 for
+public strategy and 378/384 for private strategy. The pooled and seed-level
+private-minus-public difference was **-0.52 pp**, with a 95% t interval of
+**[-3.11, +2.07] pp** and a seed bootstrap interval of **[-2.60, +1.30] pp**.
+All 1,152 executor outputs parsed, and every public artifact had 12 mappings
+plus a fallback while every private artifact had 40 mappings plus a fallback.
+The public and private strategy artifacts are usable, but there is no reliable
+private-over-public meta gain. G1 remains **not passed**.
+
+Evidence: [`results/mtops_v1_strategy_distillation_all_v4_8seed_summary.md`](results/mtops_v1_strategy_distillation_all_v4_8seed_summary.md), [`analysis/summarize_mtops_v1_strategy_distillation_all.py`](analysis/summarize_mtops_v1_strategy_distillation_all.py), and [`experiments/mtops_v1_strategy_distillation.py`](experiments/mtops_v1_strategy_distillation.py).
+
+The intermediate support-only, truncated and malformed artifact runs are
+classified in [`results/mtops_v1_strategy_distillation_protocol_audit.md`](results/mtops_v1_strategy_distillation_protocol_audit.md); they are retained as frozen diagnostics and excluded from the primary estimate.
 
 ## 5. Verification status
 
@@ -226,10 +259,10 @@ The latest local verification covered 42 tests:
 | MT-Ops v0 and v1 | 11/11 passed |
 | **Total** | **42/42 passed** |
 
-The experimental code is recorded at commit `e41546a`. The remote v1 usability,
-corrected permuted-content and eight-seed strategy-distillation processes
-completed normally; the final check found no active v1 transfer process on the
-remote host.
+The experimental code is recorded at commit `23dd7af`. The remote v1 usability,
+corrected permuted-content and corrected full-experience strategy-distillation
+processes completed normally; the final check found no active v1 transfer
+process on the remote host.
 
 ## 6. Current claims and non-claims
 
@@ -241,7 +274,7 @@ The project can currently claim:
 4. Qwen2.5-7B can use the MT-Ops v1 request attributes and supplied true rule table, with a +23.61 pp three-seed usability gain.
 5. The matched-prompt public/private table comparison is reproducible across eight seeds (+7.81 pp pooled private-minus-public).
 6. The corrected permuted-content control shows low table performance after feature-to-procedure alignment is broken, while the private-minus-public difference remains small across three seeds.
-7. The v1 strategy-distillation artifact is executable and improves over the no-global reference, but the eight-seed private-minus-public contrast is not reliable enough for G1.
+7. The corrected full-experience v1 strategy-distillation artifact is executable and improves over the no-global reference, but the eight-seed private-minus-public contrast is near zero and not reliable enough for G1.
 
 The project cannot currently claim:
 
@@ -280,6 +313,7 @@ python -m analysis.summarize_mtops_v1_llm_check
 python -m analysis.summarize_mtops_v1_transfer
 python -m analysis.summarize_mtops_v1_permuted
 python -m analysis.summarize_mtops_v1_strategy_distillation
+python -m analysis.summarize_mtops_v1_strategy_distillation_all
 ```
 
 The real-agent runner requires the remote environment and Qwen2.5-7B-Instruct:

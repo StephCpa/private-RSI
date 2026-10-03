@@ -1,0 +1,308 @@
+{
+  "contract": {
+    "decoding": "greedy; one-character A/B output",
+    "executor_input": "strategy + current-tenant support observations + query attributes",
+    "interactive_retry": false,
+    "strategy_output": "reusable text, capped at 5000 characters",
+    "support_view": "feature-level observations only; no tenant IDs, rule IDs or canaries",
+    "training_experience": "all support and query observations from training tenants",
+    "training_view": "all"
+  },
+  "dataset_manifest": {
+    "config": {
+      "n_private": 300,
+      "n_public": 300,
+      "n_test": 12,
+      "public_pool_size": 12,
+      "query_tasks": 4,
+      "seed": 20261002,
+      "shared_rules": 40,
+      "support_tasks": 8,
+      "tenant_rule_max": 6,
+      "tenant_rule_min": 4,
+      "transfer_fraction": 0.75,
+      "zipf_exponent": 0.9
+    },
+    "public_rule_ids": [
+      "rule_00",
+      "rule_01",
+      "rule_02",
+      "rule_03",
+      "rule_04",
+      "rule_05",
+      "rule_06",
+      "rule_07",
+      "rule_08",
+      "rule_09",
+      "rule_10",
+      "rule_11"
+    ],
+    "sha256": "3c8dc09db0fe13c5d89945df1c29c17193f1914a2d798bfb569235b0891954bd",
+    "tenant_count": 612
+  },
+  "device": "cuda:0",
+  "evaluations": {
+    "no_global_strategy": {
+      "parse_rate": 1.0,
+      "parsed_outputs": 48,
+      "queries": 48,
+      "success_rate": 0.6041666666666666,
+      "successes": 29,
+      "tenant_rows": [
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00600"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00601"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00602"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00603"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00604"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00605"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00606"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00607"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00608"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00609"
+        },
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00610"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.25,
+          "successes": 1,
+          "tenant_id": "test-00611"
+        }
+      ]
+    },
+    "private_strategy": {
+      "parse_rate": 1.0,
+      "parsed_outputs": 48,
+      "queries": 48,
+      "success_rate": 0.8125,
+      "successes": 39,
+      "tenant_rows": [
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00600"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00601"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00602"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00603"
+        },
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00604"
+        },
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00605"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00606"
+        },
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00607"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00608"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.5,
+          "successes": 2,
+          "tenant_id": "test-00609"
+        },
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00610"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00611"
+        }
+      ]
+    },
+    "public_strategy": {
+      "parse_rate": 1.0,
+      "parsed_outputs": 48,
+      "queries": 48,
+      "success_rate": 0.9166666666666666,
+      "successes": 44,
+      "tenant_rows": [
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00600"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00601"
+        },
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00602"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00603"
+        },
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00604"
+        },
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00605"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00606"
+        },
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00607"
+        },
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00608"
+        },
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00609"
+        },
+        {
+          "queries": 4,
+          "success_rate": 1.0,
+          "successes": 4,
+          "tenant_id": "test-00610"
+        },
+        {
+          "queries": 4,
+          "success_rate": 0.75,
+          "successes": 3,
+          "tenant_id": "test-00611"
+        }
+      ]
+    }
+  },
+  "experiment": "MT-Ops v1 non-DP strategy-distillation pilot",
+  "model_path": "/home/wlwuser/LZN/models/qwen2.5-7b-instruct",
+  "notes": [
+    "Non-DP, one-shot v1 strategy-distillation calibration; the seed is the independent unit.",
+    "The private strategy is distilled from private training tenants and evaluated on held-out test tenants.",
+    "The no-global condition is a reference baseline; the primary contrast is private strategy minus public strategy.",
+    "This pilot does not establish G1 until the pre-registered multi-seed criterion is met."
+  ],
+  "private_minus_public": -0.10416666666666663,
+  "public_minus_no_global": 0.3125,
+  "status": "COMPLETED",
+  "strategies": {
+    "private": "family=account, amount=high, tier=enterprise, region=north, channel=web -> A family=account, amount=high, tier=premium, region=north, channel=web -> A family=account, amount=high, tier=standard, region=north, channel=web -> A family=account, amount=low, tier=enterprise, region=north, channel=web -> A family=account, amount=low, tier=premium, region=north, channel=web -> A family=account, amount=low, tier=standard, region=north, channel=web -> A family=account, amount=low, tier=standard, region=south, channel=web -> A family=account, amount=medium, tier=enterprise, region=north, channel=web -> A family=account, amount=medium, tier=premium, region=north, channel=web -> A family=account, amount=medium, tier=standard, region=north, channel=web -> A family=billing, amount=high, tier=enterprise, region=north, channel=web -> B family=billing, amount=high, tier=premium, region=north, channel=web -> B family=billing, amount=high, tier=standard, region=north, channel=web -> B family=billing, amount=low, tier=enterprise, region=north, channel=web -> B family=billing, amount=low, tier=premium, region=north, channel=web -> B family=billing, amount=low, tier=standard, region=north, channel=web -> B family=billing, amount=low, tier=standard, region=south, channel=web -> B family=billing, amount=medium, tier=enterprise, region=north, channel=web -> B family=billing, amount=medium, tier=premium, region=north, channel=web -> B family=billing, amount=medium, tier=standard, region=north, channel=web -> B family=incident, amount=high, tier=enterprise, region=north, channel=web -> A family=incident, amount=high, tier=premium, region=north, channel=web -> A family=incident, amount=high, tier=standard, region=north, channel=web -> A family=incident, amount=",
+    "public": "family=account, amount=high, tier=standard, region=north, channel=web -> procedure A family=account, amount=low, tier=standard, region=north, channel=web -> procedure A family=account, amount=medium, tier=standard, region=north, channel=web -> procedure A family=billing, amount=high, tier=standard, region=north, channel=web -> procedure B family=billing, amount=low, tier=standard, region=north, channel=web -> procedure B family=billing, amount=medium, tier=standard, region=north, channel=web -> procedure B family=incident, amount=high, tier=standard, region=north, channel=web -> procedure A family=incident, amount=low, tier=standard, region=north, channel=web -> procedure A family=incident, amount=medium, tier=standard, region=north, channel=web -> procedure A family=inventory, amount=high, tier=standard, region=north, channel=web -> procedure B family=inventory, amount=low, tier=standard, region=north, channel=web -> procedure B family=inventory, amount=medium, tier=standard, region=north, channel=web -> procedure B Unknown or ambiguous feature combination -> use current tenant's support observations, then default to procedure A"
+  },
+  "training_observation_counts": {
+    "private_feature_rows": 40,
+    "public_feature_rows": 12
+  }
+}
