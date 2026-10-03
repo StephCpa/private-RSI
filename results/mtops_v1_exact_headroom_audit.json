@@ -1,0 +1,420 @@
+{
+  "audit": "MT-Ops v1 exact executor headroom",
+  "per_seed": [
+    {
+      "dataset_sha256": "3c8dc09db0fe13c5d89945df1c29c17193f1914a2d798bfb569235b0891954bd",
+      "fallbacks": {
+        "private": "A",
+        "public": "A"
+      },
+      "groups": {
+        "private_only_fallback": {
+          "fraction": 0.22916666666666666,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 11
+        },
+        "private_only_nonfallback": {
+          "fraction": 0.20833333333333334,
+          "private_minus_public": 1.0,
+          "private_success": 1.0,
+          "public_success": 0.0,
+          "queries": 10
+        },
+        "public_table_covered": {
+          "fraction": 0.3125,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 15
+        },
+        "support_covered": {
+          "fraction": 0.25,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 12
+        }
+      },
+      "seed": 20261002,
+      "strategy_errors": {
+        "private": [],
+        "public": []
+      },
+      "strategy_rows": {
+        "private": 40,
+        "public": 12
+      }
+    },
+    {
+      "dataset_sha256": "17077ba041cabf3c41964cfbdda8f593250c24085e70afd21752badc87cdf241",
+      "fallbacks": {
+        "private": "A",
+        "public": "A"
+      },
+      "groups": {
+        "private_only_fallback": {
+          "fraction": 0.3958333333333333,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 19
+        },
+        "private_only_nonfallback": {
+          "fraction": 0.1875,
+          "private_minus_public": 1.0,
+          "private_success": 1.0,
+          "public_success": 0.0,
+          "queries": 9
+        },
+        "public_table_covered": {
+          "fraction": 0.16666666666666666,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 8
+        },
+        "support_covered": {
+          "fraction": 0.25,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 12
+        }
+      },
+      "seed": 20261003,
+      "strategy_errors": {
+        "private": [],
+        "public": []
+      },
+      "strategy_rows": {
+        "private": 40,
+        "public": 12
+      }
+    },
+    {
+      "dataset_sha256": "9acec9a749b4e85935d66dd9a88ca506c32e3e8ad0e281fde1c511ae88465861",
+      "fallbacks": {
+        "private": "A",
+        "public": "A"
+      },
+      "groups": {
+        "private_only_fallback": {
+          "fraction": 0.22916666666666666,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 11
+        },
+        "private_only_nonfallback": {
+          "fraction": 0.3541666666666667,
+          "private_minus_public": 1.0,
+          "private_success": 1.0,
+          "public_success": 0.0,
+          "queries": 17
+        },
+        "public_table_covered": {
+          "fraction": 0.1875,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 9
+        },
+        "support_covered": {
+          "fraction": 0.22916666666666666,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 11
+        }
+      },
+      "seed": 20261004,
+      "strategy_errors": {
+        "private": [],
+        "public": []
+      },
+      "strategy_rows": {
+        "private": 40,
+        "public": 12
+      }
+    },
+    {
+      "dataset_sha256": "8eefe56296eb85bbb97665791705aa65f578d02649430e45e8365f44a3650292",
+      "fallbacks": {
+        "private": "A",
+        "public": "A"
+      },
+      "groups": {
+        "private_only_fallback": {
+          "fraction": 0.2708333333333333,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 13
+        },
+        "private_only_nonfallback": {
+          "fraction": 0.2916666666666667,
+          "private_minus_public": 1.0,
+          "private_success": 1.0,
+          "public_success": 0.0,
+          "queries": 14
+        },
+        "public_table_covered": {
+          "fraction": 0.1875,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 9
+        },
+        "support_covered": {
+          "fraction": 0.25,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 12
+        }
+      },
+      "seed": 20261005,
+      "strategy_errors": {
+        "private": [],
+        "public": []
+      },
+      "strategy_rows": {
+        "private": 40,
+        "public": 12
+      }
+    },
+    {
+      "dataset_sha256": "b3670e160f1ab50d0dcdf46771a13a71ba6e97eb6aefcb232c4ff8b7f9833a69",
+      "fallbacks": {
+        "private": "A",
+        "public": "A"
+      },
+      "groups": {
+        "private_only_fallback": {
+          "fraction": 0.20833333333333334,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 10
+        },
+        "private_only_nonfallback": {
+          "fraction": 0.2708333333333333,
+          "private_minus_public": 1.0,
+          "private_success": 1.0,
+          "public_success": 0.0,
+          "queries": 13
+        },
+        "public_table_covered": {
+          "fraction": 0.2708333333333333,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 13
+        },
+        "support_covered": {
+          "fraction": 0.25,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 12
+        }
+      },
+      "seed": 20261006,
+      "strategy_errors": {
+        "private": [],
+        "public": []
+      },
+      "strategy_rows": {
+        "private": 40,
+        "public": 12
+      }
+    },
+    {
+      "dataset_sha256": "4ec635cb0b867a9b1b29baaefcf1d4d34dd0098d1c67324cea5c1a7cc72fa6de",
+      "fallbacks": {
+        "private": "A",
+        "public": "A"
+      },
+      "groups": {
+        "private_only_fallback": {
+          "fraction": 0.1875,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 9
+        },
+        "private_only_nonfallback": {
+          "fraction": 0.2708333333333333,
+          "private_minus_public": 1.0,
+          "private_success": 1.0,
+          "public_success": 0.0,
+          "queries": 13
+        },
+        "public_table_covered": {
+          "fraction": 0.2916666666666667,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 14
+        },
+        "support_covered": {
+          "fraction": 0.25,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 12
+        }
+      },
+      "seed": 20261007,
+      "strategy_errors": {
+        "private": [],
+        "public": []
+      },
+      "strategy_rows": {
+        "private": 40,
+        "public": 12
+      }
+    },
+    {
+      "dataset_sha256": "9f5aebd0bdb36274a4e137f9a6ee193346cbae398e70aabffd078b3752223dfd",
+      "fallbacks": {
+        "private": "A",
+        "public": "A"
+      },
+      "groups": {
+        "private_only_fallback": {
+          "fraction": 0.2708333333333333,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 13
+        },
+        "private_only_nonfallback": {
+          "fraction": 0.3125,
+          "private_minus_public": 1.0,
+          "private_success": 1.0,
+          "public_success": 0.0,
+          "queries": 15
+        },
+        "public_table_covered": {
+          "fraction": 0.16666666666666666,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 8
+        },
+        "support_covered": {
+          "fraction": 0.25,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 12
+        }
+      },
+      "seed": 20261008,
+      "strategy_errors": {
+        "private": [],
+        "public": []
+      },
+      "strategy_rows": {
+        "private": 40,
+        "public": 12
+      }
+    },
+    {
+      "dataset_sha256": "1a6e4f5c04f55e2dbdb949fd6b8895b8493ed399eb962d406f15cfddcbd6e63a",
+      "fallbacks": {
+        "private": "A",
+        "public": "A"
+      },
+      "groups": {
+        "private_only_fallback": {
+          "fraction": 0.1875,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 9
+        },
+        "private_only_nonfallback": {
+          "fraction": 0.14583333333333334,
+          "private_minus_public": 1.0,
+          "private_success": 1.0,
+          "public_success": 0.0,
+          "queries": 7
+        },
+        "public_table_covered": {
+          "fraction": 0.4166666666666667,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 20
+        },
+        "support_covered": {
+          "fraction": 0.25,
+          "private_minus_public": 0.0,
+          "private_success": 1.0,
+          "public_success": 1.0,
+          "queries": 12
+        }
+      },
+      "seed": 20261009,
+      "strategy_errors": {
+        "private": [],
+        "public": []
+      },
+      "strategy_rows": {
+        "private": 40,
+        "public": 12
+      }
+    }
+  ],
+  "pooled_groups": {
+    "private_only_fallback": {
+      "fraction": 0.24739583333333334,
+      "private_minus_public": 0.0,
+      "private_success": 1.0,
+      "public_success": 1.0,
+      "queries": 95
+    },
+    "private_only_nonfallback": {
+      "fraction": 0.2552083333333333,
+      "private_minus_public": 1.0,
+      "private_success": 1.0,
+      "public_success": 0.0,
+      "queries": 98
+    },
+    "public_table_covered": {
+      "fraction": 0.25,
+      "private_minus_public": 0.0,
+      "private_success": 1.0,
+      "public_success": 1.0,
+      "queries": 96
+    },
+    "support_covered": {
+      "fraction": 0.24739583333333334,
+      "private_minus_public": 0.0,
+      "private_success": 1.0,
+      "public_success": 1.0,
+      "queries": 95
+    }
+  },
+  "primary_headroom_fraction": 0.2552083333333333,
+  "primary_headroom_group": "private_only_nonfallback",
+  "scope": [
+    "Deterministic lookup diagnostic using the frozen v4 artifacts, held-out tenants and exact support/table/fallback precedence.",
+    "No LLM calls; this does not replace the frozen v4 executor result or establish G1."
+  ],
+  "seeds": [
+    20261002,
+    20261003,
+    20261004,
+    20261005,
+    20261006,
+    20261007,
+    20261008,
+    20261009
+  ],
+  "status": "PASS"
+}

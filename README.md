@@ -27,6 +27,10 @@ procedure that improves it.
 > isolation and side-channel padding remain open; there are still no
 > DP-RAE results. A separate process-sandbox audit passes its host-level
 > contract checks, but it is not a container or firewall proof.
+> A subsequent v1 contract audit found a feature-only policy that reaches
+> 100% on all eight frozen seeds, so the current v1 LLM transfer result is
+> retained as a diagnostic and should not be interpreted as clean evidence of
+> private-experience learning.
 
 ## Read in this order
 
@@ -49,6 +53,8 @@ procedure that improves it.
 | [results/kernel_information_flow_audit.md](results/kernel_information_flow_audit.md) | In-process kernel data-flow audit; explicitly not an OS sandbox or G0 pass |
 | [results/sandbox_process_audit.md](results/sandbox_process_audit.md) | Killable process sandbox contract audit; Python-level network guard only |
 | [results/mtops_canary_scan.md](results/mtops_canary_scan.md) | Local serialized-artifact canary scan; remote logs are outside scope |
+| [results/mtops_v1_exact_headroom_audit.md](results/mtops_v1_exact_headroom_audit.md) | Exact support/table/fallback headroom partition for frozen v4 artifacts |
+| [results/mtops_v1_structure_leakage_audit.md](results/mtops_v1_structure_leakage_audit.md) | Feature-only procedure leakage audit for the current v1 generator |
 
 ## Key findings so far (analytical, no LLM calls)
 

@@ -171,6 +171,38 @@ unpassed.
 
 Evidence: [`results/mtops_v1_strategy_distillation_all_v4_8seed_summary.md`](../results/mtops_v1_strategy_distillation_all_v4_8seed_summary.md).
 
+## Follow-up: exact v1 contract audit (2026-10-03)
+
+The frozen v4 artifacts were audited under the executor's exact precedence:
+current-tenant support, then the strategy table, then `FALLBACK|A`. The
+headroom partition contains 95 support-covered queries (24.74%), 96
+public-table-covered queries (25.00%), 95 private-only queries already answered
+by the private fallback (24.74%), and 98 private-only queries with a
+non-fallback label (25.52%). The last group is therefore large enough to test
+transfer; the null v4 result cannot be explained by a 1--3% effective transfer
+fraction or by fallback saturation.
+
+The same audit found a structural procedure channel in the current generator.
+The five visible feature fields deterministically identify the rule index, and
+the hidden procedure is assigned from that index parity. A feature-only policy
+that sees no support records, strategy table, tenant ID, rule ID or canary
+therefore reaches 384/384 (100%) across all eight frozen seeds. This is a
+benchmark-contract failure for clean transfer interpretation. The v4 LLM
+numbers remain frozen calibration outputs, but they must not be presented as
+evidence that private experience caused the observed performance.
+
+Evidence: [`results/mtops_v1_exact_headroom_audit.md`](../results/mtops_v1_exact_headroom_audit.md),
+[`results/mtops_v1_structure_leakage_audit.md`](../results/mtops_v1_structure_leakage_audit.md),
+and the reproducible scripts in `analysis/mtops_v1_headroom_audit.py` and
+`analysis/mtops_v1_structure_leakage_audit.py`.
+
+The next revision must randomize feature assignment independently of procedure
+labels, randomize or deliberately balance the public rule pool, and include a
+format-matched placebo. A separate procedure-transfer track should permute rule
+content so that only the conversion of support evidence into a local policy can
+transfer. No confirmatory LLM rerun should begin until the scripted leakage and
+headroom checks pass under the revised contract.
+
 ## Recommended next steps
 
 1. **Freeze the candidate strategies and evaluation contract.** Replace free-form

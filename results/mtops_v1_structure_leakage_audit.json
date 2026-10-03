@@ -1,0 +1,71 @@
+{
+  "audit": "MT-Ops v1 feature-only procedure leakage",
+  "notes": [
+    "The policy uses only query attributes and no support observations, table, tenant ID, rule ID or canary.",
+    "A FAIL status means the current synthetic feature encoding determines the hidden procedure and invalidates a clean private-transfer interpretation.",
+    "This is a benchmark-contract audit, not an LLM result and not a DP result."
+  ],
+  "per_seed": [
+    {
+      "dataset_sha256": "3c8dc09db0fe13c5d89945df1c29c17193f1914a2d798bfb569235b0891954bd",
+      "queries": 48,
+      "seed": 20261002,
+      "success_rate": 1.0,
+      "successes": 48
+    },
+    {
+      "dataset_sha256": "17077ba041cabf3c41964cfbdda8f593250c24085e70afd21752badc87cdf241",
+      "queries": 48,
+      "seed": 20261003,
+      "success_rate": 1.0,
+      "successes": 48
+    },
+    {
+      "dataset_sha256": "9acec9a749b4e85935d66dd9a88ca506c32e3e8ad0e281fde1c511ae88465861",
+      "queries": 48,
+      "seed": 20261004,
+      "success_rate": 1.0,
+      "successes": 48
+    },
+    {
+      "dataset_sha256": "8eefe56296eb85bbb97665791705aa65f578d02649430e45e8365f44a3650292",
+      "queries": 48,
+      "seed": 20261005,
+      "success_rate": 1.0,
+      "successes": 48
+    },
+    {
+      "dataset_sha256": "b3670e160f1ab50d0dcdf46771a13a71ba6e97eb6aefcb232c4ff8b7f9833a69",
+      "queries": 48,
+      "seed": 20261006,
+      "success_rate": 1.0,
+      "successes": 48
+    },
+    {
+      "dataset_sha256": "4ec635cb0b867a9b1b29baaefcf1d4d34dd0098d1c67324cea5c1a7cc72fa6de",
+      "queries": 48,
+      "seed": 20261007,
+      "success_rate": 1.0,
+      "successes": 48
+    },
+    {
+      "dataset_sha256": "9f5aebd0bdb36274a4e137f9a6ee193346cbae398e70aabffd078b3752223dfd",
+      "queries": 48,
+      "seed": 20261008,
+      "success_rate": 1.0,
+      "successes": 48
+    },
+    {
+      "dataset_sha256": "1a6e4f5c04f55e2dbdb949fd6b8895b8493ed399eb962d406f15cfddcbd6e63a",
+      "queries": 48,
+      "seed": 20261009,
+      "success_rate": 1.0,
+      "successes": 48
+    }
+  ],
+  "policy": "B if inferred feature index is even, otherwise A",
+  "pooled_queries": 384,
+  "pooled_success_rate": 1.0,
+  "pooled_successes": 384,
+  "status": "FAIL"
+}

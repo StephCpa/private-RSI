@@ -3,7 +3,7 @@
 **Project:** Learning to Improve from Private Experience: Differentially Private Recursive Agent Evolution (DP-RAE)  
 **Local workspace:** the project root containing this report  
 **Report date:** 2026-10-03 (Asia/Shanghai)  
-**Upstream snapshot:** `StephCpa/private-RSI`, branch `claude/private-recursive-agent-evolution-384c6h`, upstream commit `0e670e0bd2a561673df7a8ee2e4da2a82d1d71fd`  
+**Upstream snapshot:** `StephCpa/private-RSI`, branch `claude/private-recursive-agent-evolution-384c6h`, upstream commit `1d25cd2`
 **Latest experimental-code commit:** `1ce1c1c`
 
 ## Executive status
@@ -22,7 +22,7 @@ The current work follows the early gates in `docs/02_research_plan.md`:
 
 | Gate | Planned requirement | Current status |
 |---|---|---|
-| G0 contract validity | Five MT-Ops v1 checks under the exact LLM contract | **Partial**; scripted checks pass and the exploratory true-table usability check passes, but transfer and sandbox evidence remain open |
+| G0 contract validity | Five MT-Ops v1 checks under the exact LLM contract | **Blocked for the current v1 contract**; scripted checks pass, but the feature-only procedure channel prevents a clean transfer interpretation |
 | G0 full gate | Contract validity plus sandbox information-flow tests | **Partial**; the in-process contract audit passes, while OS/container isolation, full side-channel closure and full-transcript provenance integration remain open |
 | G1 non-DP meta gain | At least 5 percentage points with a confidence interval excluding zero | **Not passed**; pooled three-seed interactive estimate is +0.17 pp, interval includes zero |
 | G1 mechanism retention | At least one mechanism retains at least 50% of a reliable non-DP gain at ε ≤ 4 and n ≤ 2,000 | **Not started**; the non-DP gain gate is not established |
@@ -82,6 +82,36 @@ MT-Ops v1 implements the corrected contract in `benchmarks/mtops/v1.py`. Its fou
 Evidence: [`results/mtops_v1_checks.md`](results/mtops_v1_checks.md) and [`docs/05_review_of_wp0_progress.md`](docs/05_review_of_wp0_progress.md).
 
 Historical v0 evidence: [`results/mtops_g0.md`](results/mtops_g0.md), [`results/mtops_g0.json`](results/mtops_g0.json), and [`results/mtops_validity_sweep.json`](results/mtops_validity_sweep.json).
+
+### 2.1 Exact executor headroom and feature leakage audit
+
+Before changing the v1 generator, I audited the frozen v4 artifacts under the
+same deterministic precedence implied by the executor: current-tenant support
+first, then the strategy table, then `FALLBACK|A`. Across the eight v4 seeds
+and 384 held-out queries, 95 queries (24.74%) were support-covered, 96 (25.00%)
+were public-table-covered, 95 (24.74%) were private-only but already answered
+by the private fallback, and **98 (25.52%) were private-only with a non-fallback
+label**. Under this exact lookup contract, the public policy scores 0% and the
+private policy 100% on that last group. Therefore the v4 null cannot be
+explained by a 1–3% transfer fraction or by `FALLBACK|A` alone.
+
+The same audit found a more serious contract flaw. The current generator maps
+each rule index deterministically to the five visible feature fields, and then
+sets the hidden procedure from that same index parity. A feature-only scripted
+policy with no support observations, table, tenant ID, rule ID or canary reaches
+**384/384 = 100%** across all eight frozen seeds. This makes the current v1
+feature encoding a direct procedure-label channel. The frozen v4 LLM numbers
+remain valid as recorded calibration outputs, but they cannot be interpreted
+as clean evidence that private experience caused the observed performance.
+
+Evidence: [`results/mtops_v1_exact_headroom_audit.md`](results/mtops_v1_exact_headroom_audit.md), [`analysis/mtops_v1_headroom_audit.py`](analysis/mtops_v1_headroom_audit.py), [`results/mtops_v1_structure_leakage_audit.md`](results/mtops_v1_structure_leakage_audit.md), and [`analysis/mtops_v1_structure_leakage_audit.py`](analysis/mtops_v1_structure_leakage_audit.py).
+
+The next v1.1 benchmark revision must randomize feature assignment independently
+of procedure labels, randomize or deliberately balance the public rule pool,
+and include a format-matched placebo. A separate procedure-transfer track
+should rename or permute rule content so that only the way support evidence is
+converted into a local policy can transfer. No new LLM run should be treated as
+confirmatory until these checks pass.
 
 ## 3. Minimal privacy kernel
 
@@ -249,15 +279,15 @@ classified in [`results/mtops_v1_strategy_distillation_protocol_audit.md`](resul
 
 ## 5. Verification status
 
-The latest local verification covered 59 tests:
+The latest local verification covered 61 tests:
 
 | Suite | Result |
 |---|---:|
 | DP kernel, runtime, provenance and process sandbox | 18/18 passed |
 | Kernel × MT-Ops smoke | 1/1 passed |
-| Calibration and replay | 26/26 passed |
+| Calibration, replay and v1 audits | 28/28 passed |
 | MT-Ops v0 and v1 | 11/11 passed |
-| **Total** | **59/59 passed** |
+| **Total** | **61/61 passed** |
 
 The experimental code and kernel-boundary audit are recorded at commit `1ce1c1c`. The remote v1 usability,
 corrected permuted-content and corrected full-experience strategy-distillation
@@ -285,13 +315,14 @@ The project cannot currently claim:
 5. That the corrected replay mechanism ranking predicts recursive agent evolution.
 6. That the current kernel provides the complete DP-RAE privacy guarantee.
 7. That any reported pilot number is a DP result; all real-agent calibration runs were non-DP.
+8. That the current v1 feature encoding provides a clean private-experience transfer test; the feature-only leakage audit fails.
 
 ## 7. Next experimental sequence
 
 The next work should preserve the corrected evidence boundary and proceed in this order:
 
-1. **Diagnose and refine the strategy contract before scaling.** Audit strategy artifacts for mapping coverage, fallback behavior and content errors; keep the seed-level G1 criterion unchanged.
-2. **Complete the remaining G0 information-flow evidence.** The in-process `KernelRuntime` contract audit now passes fixed-shape output, default-on-error, canary/tenant-ID absence, hidden cohort metadata, no caller-injected RNG and a seven-check provenance boundary. The process audit covers a killable worker, scalar output, error suppression, Python-level network denial and minimum-runtime padding. The local canary scanner reports no matches in 89 serialized artifacts. Add OS/container confinement, complete side-channel controls and remote/full-transcript canary coverage before calling the full G0 gate.
+1. **Repair and re-audit the v1.1 benchmark contract before scaling.** Randomize feature assignment independently of procedure labels, randomize or balance the public rule pool, add a format-matched placebo, and retain the exact headroom and feature-only leakage audits. Do not start a confirmatory LLM rerun until the feature-only policy is below the predeclared ceiling.
+2. **Complete the remaining G0 information-flow evidence after the benchmark repair.** The in-process `KernelRuntime` contract audit now passes fixed-shape output, default-on-error, canary/tenant-ID absence, hidden cohort metadata, no caller-injected RNG and a seven-check provenance boundary. The process audit covers a killable worker, scalar output, error suppression, Python-level network denial and minimum-runtime padding. The local canary scanner reports no matches in 89 serialized artifacts. Add OS/container confinement, complete side-channel controls and remote/full-transcript canary coverage before calling the full G0 gate.
 3. **Extend the kernel only after a reliable non-DP target exists.** Add an audited SVT implementation, explicit Poisson/add-remove accounting and a production RDP/PLD cross-check. Do not apply subsampling amplification to a reused cohort without a matching joint analysis.
 4. **Start DP-RAE experiments only if a corrected non-DP pilot establishes a meaningful gain.** The first DP study should be a small matched-budget pilot, with the ledger covering every private release, restart, diagnostic and selection event.
 
@@ -307,6 +338,8 @@ python -m unittest discover -s benchmarks/mtops -v
 python -m analysis.kernel_information_flow_audit
 python -m analysis.sandbox_process_audit
 python -m analysis.canary_scan
+python -m analysis.mtops_v1_headroom_audit
+python -m analysis.mtops_v1_structure_leakage_audit
 python -m experiments.kernel_mtops_smoke
 python benchmarks/mtops/run_g0.py
 python benchmarks/mtops/run_validity_sweep.py
