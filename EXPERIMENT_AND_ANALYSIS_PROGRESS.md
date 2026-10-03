@@ -178,6 +178,23 @@ replace G1.
 
 Evidence: [`results/mtops_v1_1_permuted_8seed_summary.md`](results/mtops_v1_1_permuted_8seed_summary.md) and [`analysis/summarize_mtops_v1_1_permuted.py`](analysis/summarize_mtops_v1_1_permuted.py).
 
+### 2.6 Opaque-content procedure-transfer contract
+
+The separate procedure-transfer track now has a frozen content transformation
+and a passing eight-seed no-LLM audit. Public, private and test splits use
+independent opaque feature vocabularies with zero pairwise overlap, while
+support and query tasks within each test tenant retain the same mapping. The
+track uses `transfer_fraction=0.50` to provide local support headroom. Pooled
+support-only success exceeds the better constant baseline by 14.06 pp, and
+public/private global tables have identical test success because neither can
+match test content.
+
+This establishes the contract needed for a later instruction-level procedure
+artifact. It does not establish that an LLM can learn the procedure, and it is
+not merged into the primary v1.1 estimand.
+
+Evidence: [`results/procedure_transfer_contract_audit.md`](results/procedure_transfer_contract_audit.md), [`docs/procedure_transfer_preregistered_contract.md`](docs/procedure_transfer_preregistered_contract.md), and [`analysis/procedure_transfer_contract_audit.py`](analysis/procedure_transfer_contract_audit.py).
+
 ## 3. Minimal privacy kernel
 
 `dprae/kernel/` implements a gamma=1 prototype under add/remove adjacency and basic composition. The production-style path is `KernelRuntime`, which keeps tenant payloads, cohort sampling and mechanism randomness inside the kernel. The arithmetic functions remain compatibility primitives for synthetic replay and unit tests. The kernel currently provides:
@@ -350,9 +367,9 @@ The latest local verification covered 61 tests:
 |---|---:|
 | DP kernel, runtime, provenance and process sandbox | 18/18 passed |
 | Kernel × MT-Ops smoke | 1/1 passed |
-| Calibration, replay and v1 audits | 28/28 passed |
+| Calibration, replay, audits and contract tests | 38/38 passed |
 | MT-Ops v0 and v1 | 11/11 passed |
-| **Total** | **61/61 passed** |
+| **Total** | **68/68 passed** |
 
 The experimental code and kernel-boundary audit are recorded at commit `93a8c6c`. The remote v1 usability,
 corrected permuted-content and corrected full-experience strategy-distillation
@@ -386,7 +403,7 @@ The project cannot currently claim:
 
 The next work should preserve the corrected evidence boundary and proceed in this order:
 
-1. **Freeze the v1.1 calibration boundary and complete the procedure-transfer track.** The direct-table, strategy-distillation and format-matched placebo ledgers are now frozen; design the opaque-content procedure-transfer condition and predeclare its contrast before any further scaling. The v1.1 strategy result remains below the G1 threshold.
+1. **Implement and pre-register the instruction-level procedure-transfer artifact.** The opaque-content contract passes, but the row-by-row lookup artifact is unsuitable for this estimand. Define a bounded strategy language, parser, and executor audit before running an LLM procedure-transfer pilot.
 2. **Complete the remaining G0 information-flow evidence after the contract study.** The in-process `KernelRuntime` contract audit now passes fixed-shape output, default-on-error, canary/tenant-ID absence, hidden cohort metadata, no caller-injected RNG and a seven-check provenance boundary. The process audit covers a killable worker, scalar output, error suppression, Python-level network denial and minimum-runtime padding. The local canary scanner reports no matches in 89 serialized artifacts. Add OS/container confinement, complete side-channel controls and remote/full-transcript canary coverage before calling the full G0 gate.
 3. **Extend the kernel only after a reliable non-DP target exists.** Add an audited SVT implementation, explicit Poisson/add-remove accounting and a production RDP/PLD cross-check. Do not apply subsampling amplification to a reused cohort without a matching joint analysis.
 4. **Start DP-RAE experiments only if a corrected non-DP pilot establishes a meaningful gain.** The first DP study should be a small matched-budget pilot, with the ledger covering every private release, restart, diagnostic and selection event.
@@ -405,6 +422,8 @@ python -m analysis.sandbox_process_audit
 python -m analysis.canary_scan
 python -m analysis.mtops_v1_headroom_audit
 python -m analysis.mtops_v1_structure_leakage_audit
+python -m analysis.mtops_v1_1_contract_audit
+python -m analysis.procedure_transfer_contract_audit
 python -m experiments.kernel_mtops_smoke
 python benchmarks/mtops/run_g0.py
 python benchmarks/mtops/run_validity_sweep.py

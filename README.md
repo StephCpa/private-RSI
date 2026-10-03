@@ -69,6 +69,8 @@ procedure that improves it.
 | [results/mtops_v1_1_transfer_8seed_summary.md](results/mtops_v1_1_transfer_8seed_summary.md) | Eight-seed v1.1 direct-table calibration summary; parse failures retained |
 | [results/mtops_v1_1_strategy_distillation_all_8seed_summary.md](results/mtops_v1_1_strategy_distillation_all_8seed_summary.md) | Eight-seed v1.1 full-experience strategy-distillation calibration |
 | [results/mtops_v1_1_permuted_8seed_summary.md](results/mtops_v1_1_permuted_8seed_summary.md) | Eight-seed v1.1 format-matched permuted-content negative control |
+| [docs/procedure_transfer_preregistered_contract.md](docs/procedure_transfer_preregistered_contract.md) | Opaque-content procedure-transfer estimand and gates |
+| [results/procedure_transfer_contract_audit.md](results/procedure_transfer_contract_audit.md) | Eight-seed no-LLM procedure-transfer contract audit |
 
 ## Key findings so far (analytical, no LLM calls)
 

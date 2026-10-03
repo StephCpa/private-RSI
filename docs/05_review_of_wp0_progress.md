@@ -248,6 +248,16 @@ reported separately and does not alter the unpassed G1 result.
 
 Evidence: [`results/mtops_v1_1_permuted_8seed_summary.md`](../results/mtops_v1_1_permuted_8seed_summary.md).
 
+The separate opaque-content procedure-transfer contract now passes its
+eight-seed audit. Public, private and test feature vocabularies are pairwise
+disjoint, while support/query mappings within each test tenant are preserved.
+With `transfer_fraction=0.50`, pooled support-only headroom over the better
+constant baseline is 14.06 pp, and public/private global tables have identical
+test success. This is a contract result only; an instruction-level artifact
+and executor still need to be specified before an LLM pilot.
+
+Evidence: [`results/procedure_transfer_contract_audit.md`](../results/procedure_transfer_contract_audit.md) and [`docs/procedure_transfer_preregistered_contract.md`](procedure_transfer_preregistered_contract.md).
+
 ## Recommended next steps
 
 1. **Run the small v1.1 non-DP calibration.** Use the isolated v1.1 strategy

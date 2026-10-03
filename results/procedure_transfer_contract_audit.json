@@ -1,0 +1,3539 @@
+{
+  "audit": "MT-Ops v1.1 opaque-content procedure-transfer contract",
+  "checks": {
+    "private_test_disjoint": true,
+    "public_private_disjoint": true,
+    "public_test_disjoint": true,
+    "support_has_headroom": true,
+    "table_cannot_transfer": true
+  },
+  "per_seed": [
+    {
+      "checks": {
+        "private_test_disjoint": true,
+        "public_private_disjoint": true,
+        "public_test_disjoint": true,
+        "support_has_headroom": false,
+        "table_cannot_transfer": true
+      },
+      "dataset_sha256": "01568231c9ed1bf28e941e16cd86d78941b8c3f42509dc1049cc217a1893d705",
+      "feature_counts": {
+        "private": 40,
+        "public": 12,
+        "test": 22
+      },
+      "overlaps": {
+        "private_test": 0,
+        "public_private": 0,
+        "public_test": 0
+      },
+      "scores": {
+        "always_A": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.3958333333333333,
+          "successes": 19,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "always_B": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.6041666666666666,
+          "successes": 29,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "oracle": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 1.0,
+          "successes": 48,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "private_table": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.3958333333333333,
+          "successes": 19,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "public_table": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.3958333333333333,
+          "successes": 19,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "support_only": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.6666666666666666,
+          "successes": 32,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        }
+      },
+      "seed": 20261002,
+      "status": "FAIL"
+    },
+    {
+      "checks": {
+        "private_test_disjoint": true,
+        "public_private_disjoint": true,
+        "public_test_disjoint": true,
+        "support_has_headroom": true,
+        "table_cannot_transfer": true
+      },
+      "dataset_sha256": "912df4a384e53e9a9297b0400f983c980c9c2b36f4dc52205184949a942ddcb0",
+      "feature_counts": {
+        "private": 40,
+        "public": 12,
+        "test": 24
+      },
+      "overlaps": {
+        "private_test": 0,
+        "public_private": 0,
+        "public_test": 0
+      },
+      "scores": {
+        "always_A": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.7083333333333334,
+          "successes": 34,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "always_B": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.2916666666666667,
+          "successes": 14,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "oracle": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 1.0,
+          "successes": 48,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "private_table": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.7083333333333334,
+          "successes": 34,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "public_table": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.7083333333333334,
+          "successes": 34,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "support_only": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.8125,
+          "successes": 39,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        }
+      },
+      "seed": 20261003,
+      "status": "PASS"
+    },
+    {
+      "checks": {
+        "private_test_disjoint": true,
+        "public_private_disjoint": true,
+        "public_test_disjoint": true,
+        "support_has_headroom": true,
+        "table_cannot_transfer": true
+      },
+      "dataset_sha256": "7fb648e9cc850870fab737b251dba26214cd4b5d492bf605f23b386b7e53ff5a",
+      "feature_counts": {
+        "private": 40,
+        "public": 12,
+        "test": 24
+      },
+      "overlaps": {
+        "private_test": 0,
+        "public_private": 0,
+        "public_test": 0
+      },
+      "scores": {
+        "always_A": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.4375,
+          "successes": 21,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "always_B": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.5625,
+          "successes": 27,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "oracle": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 1.0,
+          "successes": 48,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "private_table": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.4375,
+          "successes": 21,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "public_table": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.4375,
+          "successes": 21,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "support_only": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.8333333333333334,
+          "successes": 40,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        }
+      },
+      "seed": 20261004,
+      "status": "PASS"
+    },
+    {
+      "checks": {
+        "private_test_disjoint": true,
+        "public_private_disjoint": true,
+        "public_test_disjoint": true,
+        "support_has_headroom": true,
+        "table_cannot_transfer": true
+      },
+      "dataset_sha256": "ef9625ef0e96ff5a3720e20f31cfb3b88fd6529e492df575b1fd97fd793ac56f",
+      "feature_counts": {
+        "private": 40,
+        "public": 12,
+        "test": 24
+      },
+      "overlaps": {
+        "private_test": 0,
+        "public_private": 0,
+        "public_test": 0
+      },
+      "scores": {
+        "always_A": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.7291666666666666,
+          "successes": 35,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "always_B": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.2708333333333333,
+          "successes": 13,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "oracle": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 1.0,
+          "successes": 48,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "private_table": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.7291666666666666,
+          "successes": 35,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "public_table": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.7291666666666666,
+          "successes": 35,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "support_only": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.8333333333333334,
+          "successes": 40,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        }
+      },
+      "seed": 20261005,
+      "status": "PASS"
+    },
+    {
+      "checks": {
+        "private_test_disjoint": true,
+        "public_private_disjoint": true,
+        "public_test_disjoint": true,
+        "support_has_headroom": true,
+        "table_cannot_transfer": true
+      },
+      "dataset_sha256": "611359cd6a05117152c20a6b680acf47a706a78fe522ba3a346d971ada8bf286",
+      "feature_counts": {
+        "private": 40,
+        "public": 12,
+        "test": 24
+      },
+      "overlaps": {
+        "private_test": 0,
+        "public_private": 0,
+        "public_test": 0
+      },
+      "scores": {
+        "always_A": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.5416666666666666,
+          "successes": 26,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "always_B": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.4583333333333333,
+          "successes": 22,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "oracle": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 1.0,
+          "successes": 48,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "private_table": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.5416666666666666,
+          "successes": 26,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "public_table": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.5416666666666666,
+          "successes": 26,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "support_only": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.6666666666666666,
+          "successes": 32,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        }
+      },
+      "seed": 20261006,
+      "status": "PASS"
+    },
+    {
+      "checks": {
+        "private_test_disjoint": true,
+        "public_private_disjoint": true,
+        "public_test_disjoint": true,
+        "support_has_headroom": true,
+        "table_cannot_transfer": true
+      },
+      "dataset_sha256": "adbb8c3627f43a2794d3ef5f0bbe6917075fe7794fc5a99a271a5dd81c37923d",
+      "feature_counts": {
+        "private": 40,
+        "public": 12,
+        "test": 20
+      },
+      "overlaps": {
+        "private_test": 0,
+        "public_private": 0,
+        "public_test": 0
+      },
+      "scores": {
+        "always_A": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.4166666666666667,
+          "successes": 20,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "always_B": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.5833333333333334,
+          "successes": 28,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "oracle": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 1.0,
+          "successes": 48,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "private_table": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.4166666666666667,
+          "successes": 20,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "public_table": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.4166666666666667,
+          "successes": 20,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "support_only": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.7708333333333334,
+          "successes": 37,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        }
+      },
+      "seed": 20261007,
+      "status": "PASS"
+    },
+    {
+      "checks": {
+        "private_test_disjoint": true,
+        "public_private_disjoint": true,
+        "public_test_disjoint": true,
+        "support_has_headroom": false,
+        "table_cannot_transfer": true
+      },
+      "dataset_sha256": "0f8139989905173375816f7e71591944e2ac67d5e6bf418500bc311ff44cb136",
+      "feature_counts": {
+        "private": 40,
+        "public": 12,
+        "test": 23
+      },
+      "overlaps": {
+        "private_test": 0,
+        "public_private": 0,
+        "public_test": 0
+      },
+      "scores": {
+        "always_A": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.75,
+          "successes": 36,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "always_B": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.25,
+          "successes": 12,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 0,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "oracle": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 1.0,
+          "successes": 48,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "private_table": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.75,
+          "successes": 36,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "public_table": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.75,
+          "successes": 36,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "support_only": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.8333333333333334,
+          "successes": 40,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        }
+      },
+      "seed": 20261008,
+      "status": "FAIL"
+    },
+    {
+      "checks": {
+        "private_test_disjoint": true,
+        "public_private_disjoint": true,
+        "public_test_disjoint": true,
+        "support_has_headroom": true,
+        "table_cannot_transfer": true
+      },
+      "dataset_sha256": "7ebaa6d6fe6e26987641a1d9f3df6900174de33922201886be9412f9645acfb5",
+      "feature_counts": {
+        "private": 40,
+        "public": 12,
+        "test": 17
+      },
+      "overlaps": {
+        "private_test": 0,
+        "public_private": 0,
+        "public_test": 0
+      },
+      "scores": {
+        "always_A": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.4583333333333333,
+          "successes": 22,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "always_B": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.5416666666666666,
+          "successes": 26,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "oracle": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 1.0,
+          "successes": 48,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "private_table": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.4583333333333333,
+          "successes": 22,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "public_table": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.4583333333333333,
+          "successes": 22,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 1,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        },
+        "support_only": {
+          "queries": 48,
+          "split": "test",
+          "success_rate": 0.7291666666666666,
+          "successes": 35,
+          "tenant_rows": [
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00600"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00601"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00602"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00603"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00604"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00605"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00606"
+            },
+            {
+              "queries": 4,
+              "successes": 4,
+              "tenant_id": "test-00607"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00608"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00609"
+            },
+            {
+              "queries": 4,
+              "successes": 3,
+              "tenant_id": "test-00610"
+            },
+            {
+              "queries": 4,
+              "successes": 2,
+              "tenant_id": "test-00611"
+            }
+          ],
+          "tenants": 12
+        }
+      },
+      "seed": 20261009,
+      "status": "PASS"
+    }
+  ],
+  "pooled_support_headroom": {
+    "constant_baseline_successes": 241,
+    "difference": 0.140625,
+    "queries": 384,
+    "support_successes": 295
+  },
+  "scope": [
+    "No LLM calls and no DP release.",
+    "Public, private and test feature vocabularies are independently opaque and disjoint.",
+    "Support and query tasks within a tenant retain the same opaque mapping.",
+    "The track tests procedure transfer; it is not merged into the primary v1.1 estimand."
+  ],
+  "seeds": [
+    20261002,
+    20261003,
+    20261004,
+    20261005,
+    20261006,
+    20261007,
+    20261008,
+    20261009
+  ],
+  "status": "PASS"
+}
