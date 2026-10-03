@@ -16,6 +16,9 @@ class KernelMTopsSmokeTest(unittest.TestCase):
         self.assertEqual(len(payload["gaussian_ledger"]["events"]), 2)
         self.assertEqual(len(payload["selection_ledger"]["events"]), 1)
         self.assertNotIn("tenant_rows", json.dumps(payload["gaussian_ledger"]))
+        public = json.dumps(payload, sort_keys=True)
+        self.assertNotIn("test-", public)
+        self.assertNotIn("-secret-", public)
 
 
 if __name__ == "__main__":

@@ -14,7 +14,7 @@
           "candidate_id": "public_only",
           "cohort_rate": 1.0
         },
-        "timestamp_utc": "2026-10-02T14:59:04.136125+00:00"
+        "timestamp_utc": "2026-10-03T06:30:40.834881+00:00"
       },
       {
         "delta": 5e-06,
@@ -25,7 +25,7 @@
           "candidate_id": "local_adaptation",
           "cohort_rate": 1.0
         },
-        "timestamp_utc": "2026-10-02T14:59:04.136152+00:00"
+        "timestamp_utc": "2026-10-03T06:30:40.834920+00:00"
       }
     ],
     "plan": {
@@ -39,18 +39,15 @@
     "spent_epsilon": 1.0
   },
   "gaussian_noisy_sums": {
-    "local_adaptation": -13.33071774078303,
-    "public_only": -497.0771052162423
+    "local_adaptation": 3.5850274688350794,
+    "public_only": -516.769050310077
   },
   "notes": [
     "Synthetic agents only: public_only and local_adaptation from MT-Ops v0.",
+    "Tenant payloads and cohort sampling stay inside KernelRuntime.",
     "No LLM calls, no model weights, and no claim about DP-RAE utility.",
     "The oracle is intentionally excluded from the candidate pool."
   ],
-  "raw_mean_contributions": {
-    "local_adaptation": -0.036,
-    "public_only": -1.0
-  },
   "selection_ledger": {
     "events": [
       {
@@ -61,7 +58,7 @@
         "metadata": {
           "candidate_count": 2
         },
-        "timestamp_utc": "2026-10-02T14:59:04.136414+00:00"
+        "timestamp_utc": "2026-10-03T06:30:40.941029+00:00"
       }
     ],
     "plan": {

@@ -1,10 +1,15 @@
 """Minimal fixed-plan mechanisms for bounded add/remove sums.
 
-Inputs are already per-tenant scalar contributions. The kernel sanitises them
-again, maps malformed values to 0, and never exposes the cohort or RNG to
-candidate code. The Gaussian helper uses the standard conservative sufficient
-bound for epsilon <= 1 and is intentionally separate from the production RDP/
-PLD accountant planned for later releases.
+The public execution path is :mod:`dprae.kernel.runtime`.  The functions in
+this module are arithmetic primitives: they accept an already materialised
+contribution batch and are kept for synthetic replay and unit tests.  They do
+not define the data boundary.  In particular, production callers must not
+construct contribution batches themselves; ``KernelRuntime`` collects them in
+the kernel-owned tenant sandboxes.
+
+The Gaussian helper uses the standard conservative sufficient bound for
+epsilon <= 1 and is intentionally separate from the production RDP/PLD
+accountant planned for later releases.
 """
 
 from __future__ import annotations
@@ -31,12 +36,6 @@ def sanitize_contributions(values: Sequence[object]) -> tuple[float, ...]:
     return tuple(sanitize_contribution(value) for value in values)
 
 
-def _rng_or_system(rng: random.Random | None) -> random.Random:
-    # SystemRandom draws from OS entropy. A test-only injected RNG never crosses
-    # into candidate code because mechanisms accept only scalar contributions.
-    return rng if rng is not None else secrets.SystemRandom()
-
-
 def gaussian_sigma_for_eps_delta(epsilon: float, delta: float, sensitivity: float = 1.0) -> float:
     if not 0.0 < epsilon <= 1.0:
         raise ValueError("the conservative Gaussian bound requires 0 < epsilon <= 1")
@@ -47,14 +46,14 @@ def gaussian_sigma_for_eps_delta(epsilon: float, delta: float, sensitivity: floa
     return sensitivity * math.sqrt(2.0 * math.log(1.25 / delta)) / epsilon
 
 
-def gaussian_release_all(
+def _gaussian_release_all(
     contributions: Mapping[str, Sequence[object]],
     ledger: PrivacyLedger,
     *,
     epsilon: float,
     delta: float,
     event_prefix: str,
-    rng: random.Random | None = None,
+    rng: random.Random,
 ) -> dict[str, float]:
     """Release one noisy sum per candidate under basic composition.
 
@@ -84,20 +83,44 @@ def gaussian_release_all(
         for candidate_id in contributions
     ]
     ledger.reserve_many(requests)
-    noise = _rng_or_system(rng)
+    noise = rng
     return {
         candidate_id: sum(sanitize_contributions(values)) + noise.gauss(0.0, sigma)
         for candidate_id, values in contributions.items()
     }
 
 
-def exponential_winner(
+def gaussian_release_all(
+    contributions: Mapping[str, Sequence[object]],
+    ledger: PrivacyLedger,
+    *,
+    epsilon: float,
+    delta: float,
+    event_prefix: str,
+) -> dict[str, float]:
+    """Arithmetic-only Gaussian release using kernel-owned OS entropy.
+
+    This compatibility entry point deliberately has no ``rng`` argument.  A
+    deterministic test must use ``KernelRuntime.for_testing`` instead of
+    injecting randomness into a mechanism call.
+    """
+    return _gaussian_release_all(
+        contributions,
+        ledger,
+        epsilon=epsilon,
+        delta=delta,
+        event_prefix=event_prefix,
+        rng=secrets.SystemRandom(),
+    )
+
+
+def _exponential_winner(
     contributions: Mapping[str, Sequence[object]],
     ledger: PrivacyLedger,
     *,
     epsilon: float,
     event_id: str,
-    rng: random.Random | None = None,
+    rng: random.Random,
 ) -> str:
     """Return only an exponential-mechanism winner id.
 
@@ -116,10 +139,32 @@ def exponential_winner(
     max_log_weight = max(epsilon * score / 2.0 for score in scores.values())
     weights = {candidate_id: math.exp(epsilon * score / 2.0 - max_log_weight) for candidate_id, score in scores.items()}
     total = sum(weights.values())
-    draw = _rng_or_system(rng).random() * total
+    draw = rng.random() * total
     cumulative = 0.0
     for candidate_id, weight in weights.items():
         cumulative += weight
         if draw <= cumulative:
             return candidate_id
     return next(reversed(scores))
+
+
+def exponential_winner(
+    contributions: Mapping[str, Sequence[object]],
+    ledger: PrivacyLedger,
+    *,
+    epsilon: float,
+    event_id: str,
+) -> str:
+    """Arithmetic-only winner selection using kernel-owned OS entropy.
+
+    This compatibility entry point deliberately has no ``rng`` argument.  A
+    deterministic test must use ``KernelRuntime.for_testing`` instead of
+    injecting randomness into a mechanism call.
+    """
+    return _exponential_winner(
+        contributions,
+        ledger,
+        epsilon=epsilon,
+        event_id=event_id,
+        rng=secrets.SystemRandom(),
+    )

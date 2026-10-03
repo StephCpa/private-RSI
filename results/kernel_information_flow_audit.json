@@ -1,0 +1,22 @@
+{
+  "audit": "kernel information-flow contract",
+  "checks": {
+    "caller_rng_not_in_arithmetic_api": true,
+    "canary_absent_from_public_release": true,
+    "cohort_membership_absent_from_ledger": true,
+    "default_on_exception_and_malformed": true,
+    "fixed_shape_and_finite_release": true,
+    "public_provenance_stops_at_dp_boundary": true,
+    "tenant_ids_absent_from_public_release": true
+  },
+  "notes": [
+    "The production constructor uses OS entropy; deterministic seeds are available only through the explicit test constructor.",
+    "The callback is a stand-in for a sandbox executor; network, filesystem, timing and resource isolation remain deployment work."
+  ],
+  "runtime": "in-process KernelRuntime.for_testing",
+  "scope": [
+    "Contract-level data-flow evidence for K2, K3 error sanitisation, K4 API boundary, K6 provenance and K8 hidden cohorts.",
+    "Not an OS/container isolation proof and not a DP utility or G0 validity result."
+  ],
+  "status": "PASS"
+}

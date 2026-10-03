@@ -35,8 +35,8 @@ threshold. The plan has been amended accordingly (§5.1, §11, Appendix C).
 | F4 | high | `run_g0.py`, `_known_rules` | G0's 100 pp gap is definitional. Scripted evaluators succeed exactly when a rule is in a predefined set; `public_only` is *told* `public_rules` rather than learning them from public tenants. G0 was not measured under the LLM contract | code | plan amended (G0 = five contract-level checks) |
 | F5 | high | `analysis/summarize_interactive_calibration.py` | The pooled tenant bootstrap ignores between-strategy variance. With the seed as the unit: mean +0.17 pp, t-interval **[−6.5, +6.8] pp**. 85 % of tenants tie. A plug-in learner fitted on 24 vs 24 exchangeable tenants already shows ±4.9 pp (one-shot) and ±7.1 pp (interactive) swings across seeds, so the first pilot's +10.4 / −6.3 pp are noise | audit §4–5 | reported by the audit; the original script is unchanged |
 | F6 | high | `analysis/replay.py` | Two bugs. **Private selection** chose its final winner among group winners using *true* means (oracle information), giving 1.000 ranking accuracy. **SVT** compared each candidate with fixed M₀ instead of the incumbent, returned the last acceptance, and had no threshold noise, giving 0.001 | code; regression tests | **fixed in this commit**; the mechanism ranking is withdrawn (release-all ≈ SVT > private selection on this synthetic matrix) |
-| F7 | medium | `dprae/kernel/mechanisms.py` API | Mechanisms take per-tenant contributions computed by the *caller*. Raw private values therefore live outside the kernel, and the caller chooses the cohort. That contradicts K1/K8, and G0's information-flow tests cannot pass with this shape | code | proposed: the kernel receives a candidate id, runs the sandboxes and samples the cohort itself |
-| F8 | medium | same file, `rng=` keyword | Any caller can pass a seeded RNG and know the noise (K4) | code | proposed: inject test randomness only through a test-only kernel constructor |
+| F7 | medium | `dprae/kernel/mechanisms.py` API | The former arithmetic API took per-tenant contributions computed by the caller, which contradicted K1/K8 | code; follow-up audit | **runtime path implemented**: `KernelRuntime` receives candidate IDs, evaluates kernel-held tenant payloads and samples the cohort internally; arithmetic primitives remain compatibility-only |
+| F8 | medium | same file, `rng=` keyword | The former API allowed a caller to inject a seeded RNG and know the noise (K4) | code; follow-up audit | **runtime path implemented**: production constructor uses OS entropy, `for_testing` is explicit, and public arithmetic entry points have no `rng` parameter |
 | F9 | low | `generate_dataset` | One RNG stream for all splits: changing `n_public` changes the test tenants, so comparisons across configurations are not paired | code | proposed: derive each tenant's seed from (seed, split, index) |
 | F10 | low | `_tenant_rules` | Uniform prevalence of about 5 % (max 6.7 %) is below the H5 detectability threshold (about 0.15), so nothing shared is learnable even without DP at n = 24 | audit §1 | proposed (v1: Zipf prevalence) |
 | F11 | low | `support_trace` | Traces for A-tasks say "after correction, A succeeded directly" although no correction happened | code | proposed |
@@ -44,6 +44,24 @@ threshold. The plan has been amended accordingly (§5.1, §11, Appendix C).
 Kernel arithmetic checks out. The Gaussian release uses the classical bound
 with per-event ε ≤ 1 and sum sensitivity 1. The exponential mechanism uses
 exp(ε·score/2) on monotone, sensitivity-1 sums.
+
+## Follow-up: kernel boundary audit (2026-10-03)
+
+`dprae/kernel/runtime.py` adds the minimum kernel-owned execution path needed
+for the next G0 audit. The runtime stores private tenant payloads, samples a
+hidden cohort, invokes one tenant at a time, clips malformed results and
+swallows sandbox exceptions before calling the arithmetic primitive. Public
+releases contain only fixed-shape mechanism values and scalar ledger metadata;
+tenant IDs, canaries, error text and cohort membership are not released. The
+public arithmetic entry points no longer accept a caller `rng`; deterministic
+replay uses the explicit `KernelRuntime.for_testing` constructor.
+
+The seven contract checks in
+[`results/kernel_information_flow_audit.md`](../results/kernel_information_flow_audit.md)
+pass, and the kernel/runtime suite passes 10/10 tests. This is in-process
+evidence only. The callback stands in for a sandbox executor, so OS/container
+network and filesystem confinement, timing/token padding, provenance checks and
+full-transcript canary scans remain required before the full G0 gate can pass.
 
 ## Changes made in this commit
 
@@ -156,5 +174,7 @@ Evidence: [`results/mtops_v1_strategy_distillation_all_v4_8seed_summary.md`](../
    coverage, fallback behavior and strategy-content errors while retaining the
    seed-level G1 criterion.
 3. **Run E0 (DP-ES ε = 0 control)** in parallel. It is independent of MT-Ops.
-4. **Restructure the kernel API (F7, F8)** before the G0 information-flow
-   tests; it is a prerequisite for them.
+4. **Complete the remaining G0 information-flow tests.** The runtime contract
+   audit now covers the in-process boundary; add OS/container confinement,
+   timing/token padding, provenance checks and full-transcript canary scans
+   before declaring G0 passed.
