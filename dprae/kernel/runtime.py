@@ -7,10 +7,11 @@ or a random-number generator.  Tenant payloads, cohort sampling and mechanism
 randomness remain inside the runtime.  Only fixed-shape mechanism releases and
 the public ledger snapshot leave it.
 
-This module is an in-process contract harness.  Production deployment still
+The default executor is an in-process contract harness for cheap synthetic
+tests.  Pass :class:`ProcessSandbox` when a killable worker and the
+best-effort network deny list are required.  Production deployment still
 needs an OS/container sandbox to enforce network, filesystem, CPU and timing
-isolation (K1/K3/K7).  The tests here therefore document and verify the data
-boundary without claiming a process-level isolation proof.
+isolation (K1/K3/K7).
 """
 
 from __future__ import annotations
@@ -18,7 +19,7 @@ from __future__ import annotations
 import copy
 import random
 import secrets
-from typing import Callable, Mapping, Sequence
+from typing import Mapping, Sequence
 
 from .ledger import KernelPlan, PrivacyLedger
 from .mechanisms import (
@@ -26,9 +27,7 @@ from .mechanisms import (
     _gaussian_release_all,
     sanitize_contribution,
 )
-
-
-SandboxEvaluator = Callable[[str, object], object]
+from .sandbox import InProcessSandbox, SandboxEvaluator
 
 
 class KernelRuntime:
@@ -42,8 +41,8 @@ class KernelRuntime:
     default ``0``.
     """
 
-    def __init__(self, plan: KernelPlan, tenants: Mapping[str, object]) -> None:
-        self._initialize(plan, tenants, secrets.SystemRandom())
+    def __init__(self, plan: KernelPlan, tenants: Mapping[str, object], *, sandbox=None) -> None:
+        self._initialize(plan, tenants, secrets.SystemRandom(), sandbox=sandbox)
 
     @classmethod
     def for_testing(
@@ -52,6 +51,7 @@ class KernelRuntime:
         tenants: Mapping[str, object],
         *,
         seed: int,
+        sandbox=None,
     ) -> "KernelRuntime":
         """Create a deterministic runtime for synthetic tests only.
 
@@ -59,10 +59,10 @@ class KernelRuntime:
         passed to candidate code or recorded in the public ledger.
         """
         runtime = cls.__new__(cls)
-        runtime._initialize(plan, tenants, random.Random(seed))
+        runtime._initialize(plan, tenants, random.Random(seed), sandbox=sandbox)
         return runtime
 
-    def _initialize(self, plan: KernelPlan, tenants: Mapping[str, object], rng: random.Random) -> None:
+    def _initialize(self, plan: KernelPlan, tenants: Mapping[str, object], rng: random.Random, *, sandbox=None) -> None:
         if not tenants:
             raise ValueError("at least one private tenant is required")
         if any(not isinstance(tenant_id, str) or not tenant_id for tenant_id in tenants):
@@ -71,6 +71,7 @@ class KernelRuntime:
         self._private_payloads = tuple(copy.deepcopy(tenants[tenant_id]) for tenant_id in self._tenant_ids)
         self._ledger = PrivacyLedger(plan)
         self._rng = rng
+        self._sandbox = sandbox or InProcessSandbox()
 
     @property
     def ledger_snapshot(self) -> dict:
@@ -86,14 +87,9 @@ class KernelRuntime:
                 selected.append(payload)
         return tuple(selected)
 
-    @staticmethod
-    def _safe_evaluate(evaluator: SandboxEvaluator, candidate_id: str, payload: object) -> float:
-        try:
-            private_copy = copy.deepcopy(payload)
-            value = evaluator(candidate_id, private_copy)
-        except Exception:
-            return 0.0
-        return sanitize_contribution(value)
+    def _safe_evaluate(self, evaluator: SandboxEvaluator, candidate_id: str, payload: object) -> float:
+        outcome = self._sandbox.evaluate(evaluator, candidate_id, copy.deepcopy(payload))
+        return sanitize_contribution(outcome.value)
 
     def _contribution_batch(
         self,

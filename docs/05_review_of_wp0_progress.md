@@ -58,10 +58,16 @@ replay uses the explicit `KernelRuntime.for_testing` constructor.
 
 The seven contract checks in
 [`results/kernel_information_flow_audit.md`](../results/kernel_information_flow_audit.md)
-pass, and the kernel/runtime suite passes 10/10 tests. This is in-process
+pass, and the kernel/runtime/provenance/process suite passes 18/18 tests. This is in-process
 evidence only. The callback stands in for a sandbox executor, so OS/container
 network and filesystem confinement, timing/token padding, provenance checks and
 full-transcript canary scans remain required before the full G0 gate can pass.
+
+The follow-up [`results/sandbox_process_audit.md`](../results/sandbox_process_audit.md)
+also passes its five host-level contract checks: bounded scalar output,
+error/stdout suppression, a Python-level network guard, killable timeout and
+minimum-runtime padding. This process worker remains an engineering prototype;
+it does not establish container, firewall or filesystem isolation.
 
 ## Changes made in this commit
 

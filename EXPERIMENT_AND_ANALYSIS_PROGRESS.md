@@ -8,11 +8,11 @@
 
 ## Executive status
 
-The project has progressed from a written research plan to a reproducible MT-Ops v0 benchmark, a corrected MT-Ops v1 contract, a minimal fixed-plan privacy kernel, and small real-agent calibration runs on an RTX A6000 server. The v0 pilot was structurally blind to the intended transfer effect; the v1 scripted checks now pass, and a separate three-seed Qwen usability check confirms that the model can use a supplied rule table. A new in-process `KernelRuntime` audit now covers the minimum data-flow contract, while process-level sandbox isolation remains open. The evidence still does not support a DP-RAE performance claim.
+The project has progressed from a written research plan to a reproducible MT-Ops v0 benchmark, a corrected MT-Ops v1 contract, a minimal fixed-plan privacy kernel, and small real-agent calibration runs on an RTX A6000 server. The v0 pilot was structurally blind to the intended transfer effect; the v1 scripted checks now pass, and a separate three-seed Qwen usability check confirms that the model can use a supplied rule table. A new `KernelRuntime` boundary audit and a killable process-sandbox contract audit now cover the minimum data-flow path, while OS/container isolation remains open. The evidence still does not support a DP-RAE performance claim.
 
 The original v0 real-agent result remains descriptive only: after correcting its one-shot/interactive mismatch and running three independent n=48 seeds, the pooled private-minus-public difference was **+0.17 percentage points**, with a tenant-level paired bootstrap 95% interval of **[-1.74, +2.08] percentage points**. The headroom audit shows that v0 could not reveal a private-transfer gain by construction. The research plan's G1 requirement is a non-DP meta gain of at least 5 percentage points with a confidence interval excluding zero. **G1 is therefore not passed.**
 
-The MT-Ops v1 scripted checks pass, and the exploratory Qwen usability check exceeds the 15 percentage-point true-table criterion on all three seeds. The in-process information-flow contract audit passes, but the full G0 gate is still open because OS/container confinement, side-channel padding, full-transcript canary checks and the exact transfer contract have not been completed. The project should remain in calibration and protocol-correction work before any full DP-RAE experiment.
+The MT-Ops v1 scripted checks pass, and the exploratory Qwen usability check exceeds the 15 percentage-point true-table criterion on all three seeds. The in-process information-flow contract audit passes, but the full G0 gate is still open because OS/container confinement, full side-channel closure, full-transcript canary checks and the exact transfer contract have not been completed. The project should remain in calibration and protocol-correction work before any full DP-RAE experiment.
 
 ## Research question and planned gates
 
@@ -23,7 +23,7 @@ The current work follows the early gates in `docs/02_research_plan.md`:
 | Gate | Planned requirement | Current status |
 |---|---|---|
 | G0 contract validity | Five MT-Ops v1 checks under the exact LLM contract | **Partial**; scripted checks pass and the exploratory true-table usability check passes, but transfer and sandbox evidence remain open |
-| G0 full gate | Contract validity plus sandbox information-flow tests | **Partial**; the in-process contract audit passes, while OS/container isolation, side-channel and full-transcript provenance integration remain open |
+| G0 full gate | Contract validity plus sandbox information-flow tests | **Partial**; the in-process contract audit passes, while OS/container isolation, full side-channel closure and full-transcript provenance integration remain open |
 | G1 non-DP meta gain | At least 5 percentage points with a confidence interval excluding zero | **Not passed**; pooled three-seed interactive estimate is +0.17 pp, interval includes zero |
 | G1 mechanism retention | At least one mechanism retains at least 50% of a reliable non-DP gain at ε ≤ 4 and n ≤ 2,000 | **Not started**; the non-DP gain gate is not established |
 | G2 prototype gate | Kernel audit, red team and baseline reproduction | **Not passed**; the current kernel is a minimal prototype |
@@ -94,9 +94,9 @@ Historical v0 evidence: [`results/mtops_g0.md`](results/mtops_g0.md), [`results/
 - exponential winner-only selection that returns only a candidate ID;
 - OS-backed randomness by default; deterministic randomness is available only through the explicit `KernelRuntime.for_testing` constructor, and the public arithmetic entry points have no `rng` parameter.
 
-The kernel-specific suite passes 13/13 tests. The MT-Ops × kernel synthetic smoke also passes and now evaluates tenant payloads through `KernelRuntime` rather than constructing a contribution vector in the caller. The contract-level information-flow audit passes all seven checks: fixed-shape finite release, default-on-error and malformed values, canary and tenant-ID absence from public output, hidden cohort membership, no caller-injected RNG and a provenance graph that stops at a DP boundary. Evidence: [`results/kernel_information_flow_audit.md`](results/kernel_information_flow_audit.md) and [`analysis/kernel_information_flow_audit.py`](analysis/kernel_information_flow_audit.py).
+The kernel-specific suite passes 18/18 tests. The MT-Ops × kernel synthetic smoke also passes and now evaluates tenant payloads through `KernelRuntime` rather than constructing a contribution vector in the caller. The contract-level information-flow audit passes all seven checks, including the provenance boundary. The separate process sandbox audit passes five checks: bounded scalar output, error/stdout suppression, a Python-level network guard, killable timeout and minimum-runtime padding. Evidence: [`results/kernel_information_flow_audit.md`](results/kernel_information_flow_audit.md), [`results/sandbox_process_audit.md`](results/sandbox_process_audit.md), [`analysis/kernel_information_flow_audit.py`](analysis/kernel_information_flow_audit.py) and [`analysis/sandbox_process_audit.py`](analysis/sandbox_process_audit.py).
 
-The kernel is not yet a production privacy implementation. The in-process callback is only a sandbox stand-in; the code does not yet cover SVT, Poisson subsampling amplification, production RDP/PLD accounting, OS/network isolation, timing/token padding, execution-log provenance integration, full-transcript canary scans or adversarial-improver red teaming. See [`results/kernel_minimal_audit.md`](results/kernel_minimal_audit.md) and the new contract audit above.
+The kernel is not yet a production privacy implementation. The in-process callback remains a cheap synthetic executor, and the process executor is a contract prototype rather than a production isolation proof. The code does not yet cover SVT, Poisson subsampling amplification, production RDP/PLD accounting, OS/container network and filesystem isolation, full side-channel closure, execution-log provenance integration, full-transcript canary scans or adversarial-improver red teaming. See [`results/kernel_minimal_audit.md`](results/kernel_minimal_audit.md) and the new contract audit above.
 
 ## 4. Real-agent Mode L calibration
 
@@ -249,15 +249,15 @@ classified in [`results/mtops_v1_strategy_distillation_protocol_audit.md`](resul
 
 ## 5. Verification status
 
-The latest local verification covered 48 tests:
+The latest local verification covered 57 tests:
 
 | Suite | Result |
 |---|---:|
-| DP kernel, runtime and provenance boundary | 13/13 passed |
+| DP kernel, runtime, provenance and process sandbox | 18/18 passed |
 | Kernel × MT-Ops smoke | 1/1 passed |
 | Calibration and replay | 26/26 passed |
 | MT-Ops v0 and v1 | 11/11 passed |
-| **Total** | **51/51 passed** |
+| **Total** | **57/57 passed** |
 
 The experimental code and kernel-boundary audit are recorded at commit `002b18a`. The remote v1 usability,
 corrected permuted-content and corrected full-experience strategy-distillation
@@ -291,7 +291,7 @@ The project cannot currently claim:
 The next work should preserve the corrected evidence boundary and proceed in this order:
 
 1. **Diagnose and refine the strategy contract before scaling.** Audit strategy artifacts for mapping coverage, fallback behavior and content errors; keep the seed-level G1 criterion unchanged.
-2. **Complete the remaining G0 information-flow evidence.** The in-process `KernelRuntime` contract audit now passes fixed-shape output, default-on-error, canary/tenant-ID absence, hidden cohort metadata, no caller-injected RNG and a seven-check provenance boundary. Add OS/container sandbox confinement, timing/token padding, full-transcript canary scans and no-network checks before calling the full G0 gate.
+2. **Complete the remaining G0 information-flow evidence.** The in-process `KernelRuntime` contract audit now passes fixed-shape output, default-on-error, canary/tenant-ID absence, hidden cohort metadata, no caller-injected RNG and a seven-check provenance boundary. The process audit covers a killable worker, scalar output, error suppression, Python-level network denial and minimum-runtime padding. Add OS/container confinement, complete side-channel controls and full-transcript canary scans before calling the full G0 gate.
 3. **Extend the kernel only after a reliable non-DP target exists.** Add an audited SVT implementation, explicit Poisson/add-remove accounting and a production RDP/PLD cross-check. Do not apply subsampling amplification to a reused cohort without a matching joint analysis.
 4. **Start DP-RAE experiments only if a corrected non-DP pilot establishes a meaningful gain.** The first DP study should be a small matched-budget pilot, with the ledger covering every private release, restart, diagnostic and selection event.
 

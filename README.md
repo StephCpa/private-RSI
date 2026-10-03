@@ -25,7 +25,8 @@ procedure that improves it.
 > crossing zero. G1 remains unpassed. The new in-process kernel information-
 > flow audit passes its seven in-process contract checks, while OS/container
 > isolation and side-channel padding remain open; there are still no
-> DP-RAE results.
+> DP-RAE results. A separate process-sandbox audit passes its host-level
+> contract checks, but it is not a container or firewall proof.
 
 ## Read in this order
 
@@ -46,6 +47,7 @@ procedure that improves it.
 | [results/mtops_v1_strategy_distillation_all_v4_8seed_summary.md](results/mtops_v1_strategy_distillation_all_v4_8seed_summary.md) | Corrected full-experience eight-seed strategy-distillation pilot |
 | [results/mtops_v1_strategy_distillation_protocol_audit.md](results/mtops_v1_strategy_distillation_protocol_audit.md) | Frozen intermediate protocol audit and superseded-run boundaries |
 | [results/kernel_information_flow_audit.md](results/kernel_information_flow_audit.md) | In-process kernel data-flow audit; explicitly not an OS sandbox or G0 pass |
+| [results/sandbox_process_audit.md](results/sandbox_process_audit.md) | Killable process sandbox contract audit; Python-level network guard only |
 
 ## Key findings so far (analytical, no LLM calls)
 

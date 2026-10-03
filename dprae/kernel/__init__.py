@@ -10,6 +10,7 @@ from .ledger import BudgetExceeded, DuplicateEvent, KernelPlan, PrivacyLedger
 from .mechanisms import exponential_winner, gaussian_release_all, sanitize_contributions
 from .provenance import ProvenanceError, ProvenanceNode, check_public_artifacts
 from .runtime import KernelRuntime
+from .sandbox import InProcessSandbox, ProcessSandbox, SandboxLimits, SandboxOutcome
 
 __all__ = [
     "BudgetExceeded",
@@ -17,6 +18,10 @@ __all__ = [
     "KernelPlan",
     "PrivacyLedger",
     "KernelRuntime",
+    "InProcessSandbox",
+    "ProcessSandbox",
+    "SandboxLimits",
+    "SandboxOutcome",
     "ProvenanceError",
     "ProvenanceNode",
     "check_public_artifacts",
