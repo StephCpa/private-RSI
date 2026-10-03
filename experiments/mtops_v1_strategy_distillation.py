@@ -61,7 +61,7 @@ def aggregate_training_observations(
             observed = "AMBIGUOUS"
         else:
             observed = "A" if labels["A"] else "B"
-        rows.append(f"- {feature_text(feature)} -> observed procedure {observed}; experience_count={total}")
+        rows.append("|".join((*feature, observed)))
     return "\n".join(rows)
 
 
@@ -80,11 +80,12 @@ def distill_strategy(runner: QwenRunner, observations: str, split: str) -> str:
         "Create a reusable, tenant-neutral operations strategy from the feature-level observations below. "
         "The strategy will be given to another assistant that must choose procedure A or B for a new query. "
         f"There are exactly {expected_rows} observed feature rows. Return exactly {expected_rows} mapping lines plus one final fallback line. "
-        "Each mapping line must use this compact format with no extra words: family|amount|tier|region|channel|A or B. "
+        "Each mapping line must use this compact format with no extra words: value_for_family|value_for_amount|value_for_tier|value_for_region|value_for_channel|A_or_B. "
+        "For example, a valid line is account|high|standard|north|web|A; do not write family|account|high|standard|north|web. "
         "The final line must be FALLBACK|A. Do not add a preamble, explanation, markdown or analysis. "
         "Do not copy identifiers, secrets or records.\n\n"
         f"Training split: {split}\n"
-        "Aggregated training-experience observations:\n"
+        "Canonical training-experience rows (copy the rows and procedure labels exactly):\n"
         f"{observations}"
     )
     return clean_strategy(
