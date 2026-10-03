@@ -94,4 +94,3 @@ if __name__ == "__main__":
     evidence = run(root / "results" / "sandbox_process_audit.json")
     write_markdown(evidence, root / "results" / "sandbox_process_audit.md")
     print(json.dumps({"audit": evidence["audit"], "status": evidence["status"]}, indent=2))
-
